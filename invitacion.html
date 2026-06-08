@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda Laura & Felipe - Invitación</title>
+    <title>Laura & Felipe - Nuestra Boda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,30 +13,37 @@
         }
 
         :root {
-            --sage: #6B8E7F;
-            --sage-light: #A8C5B8;
-            --mint: #D4E8E0;
-            --gold: #C9A87D;
-            --cream: #FAF8F6;
-            --dark: #3D4A44;
+            --sage: #9db4a0;
+            --mint: #c5ddd5;
+            --cream: #faf7f2;
+            --gold: #d4af6a;
+            --dark: #3d3d3d;
+            --text: #5a5a5a;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--mint) 0%, var(--cream) 100%);
-            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--cream) 0%, #f5f0e8 100%);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 680px;
             margin: 0 auto;
-            padding: 0;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
+        /* HEADER WITH IMAGE */
         .hero {
             position: relative;
-            height: 450px;
-            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%);
+            height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35)), url('IMG_8452.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -43,10 +51,11 @@
         }
 
         .hero-image {
+            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6;
+            z-index: 1;
         }
 
         .hero-overlay {
@@ -55,57 +64,84 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(180deg, rgba(107, 142, 127, 0.7) 0%, rgba(107, 142, 127, 0.85) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 2rem;
+            z-index: 2;
         }
 
         .hero-title {
-            font-size: 48px;
-            font-weight: 500;
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
             color: white;
-            margin-bottom: 1rem;
-            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-group {
-            font-size: 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
             color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .quote-box {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            max-width: 500px;
-        }
-
-        .quote-text {
-            font-size: 15px;
-            color: white;
             font-style: italic;
-            line-height: 1.6;
+            letter-spacing: 2px;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .content {
-            padding: 2rem 1rem;
+            padding: 50px 40px;
         }
 
         .security-notice {
-            background: linear-gradient(135deg, rgba(107, 142, 127, 0.1) 0%, rgba(212, 232, 224, 0.5) 100%);
-            border-radius: 12px;
-            border: 0.5px solid rgba(107, 142, 127, 0.3);
+            background: linear-gradient(135deg, rgba(157, 180, 160, 0.1) 0%, rgba(197, 221, 213, 0.2) 100%);
+            border-radius: 8px;
+            border-left: 4px solid var(--sage);
             padding: 1.25rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
             gap: 0.75rem;
+            animation: slideIn 0.6s ease-out 0.3s backwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .security-icon {
@@ -126,146 +162,152 @@
         }
 
         .countdown-section {
-            background: white;
-            border-radius: 16px;
-            border: 0.5px solid rgba(107, 142, 127, 0.15);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 50px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(107, 142, 127, 0.08);
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out 0.4s backwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .countdown-label {
-            font-size: 13px;
-            color: var(--sage);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 15px;
         }
 
         .countdown-item {
-            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);
-            padding: 1rem;
-            border-radius: 12px;
-            border: 0.5px solid rgba(107, 142, 127, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .countdown-number {
-            font-size: 28px;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
             color: var(--sage);
-            margin-bottom: 0.25rem;
+            margin-bottom: 5px;
+            display: block;
         }
 
         .countdown-label-item {
             font-size: 11px;
-            color: var(--sage);
+            color: var(--text);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 500;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .section-card {
             background: white;
-            border-radius: 16px;
-            border: 0.5px solid rgba(107, 142, 127, 0.15);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(107, 142, 127, 0.08);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(157, 180, 160, 0.15);
+            animation: fadeInSection 0.6s ease-out forwards;
+        }
+
+        .section-card:nth-child(2) { animation-delay: 0.5s; }
+        .section-card:nth-child(3) { animation-delay: 0.6s; }
+        .section-card:nth-child(4) { animation-delay: 0.7s; }
+
+        @keyframes fadeInSection {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
             color: var(--dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             text-align: center;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--mint);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, var(--mint), var(--gold), var(--mint));
+            border-radius: 1px;
         }
 
         .members-list {
-            display: grid;
-            gap: 0.75rem;
-            margin-bottom: 0;
+            background: linear-gradient(135deg, rgba(197, 221, 213, 0.15), rgba(212, 175, 106, 0.08));
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 2rem;
         }
 
         .member {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem;
-            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.3) 100%);
-            border-radius: 8px;
-            border: 0.5px solid rgba(107, 142, 127, 0.2);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(157, 180, 160, 0.2);
             font-size: 14px;
             color: var(--dark);
         }
 
+        .member:last-child {
+            border-bottom: none;
+        }
+
         .member::before {
-            content: "✓";
+            content: '✓ ';
             color: var(--sage);
             font-weight: 600;
-            margin-right: 0.75rem;
-            font-size: 16px;
+            margin-right: 8px;
         }
 
-        .event-detail {
-            margin-bottom: 1.5rem;
-        }
-
-        .event-detail:last-child {
-            margin-bottom: 0;
-        }
-
-        .event-detail-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--sage);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .event-detail-content {
-            font-size: 15px;
-            color: var(--dark);
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .gallery-item {
-            aspect-ratio: 1;
-            background: var(--mint);
-            border-radius: 12px;
-            border: 1px solid rgba(107, 142, 127, 0.2);
-            overflow: hidden;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .info-box {
+            background: linear-gradient(135deg, rgba(212, 175, 106, 0.15), rgba(197, 221, 213, 0.15));
+            border-left: 4px solid var(--gold);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-size: 13px;
+            color: var(--text);
         }
 
         .form-title {
-            font-size: 20px;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
             color: var(--dark);
+            margin-bottom: 2rem;
             text-align: center;
-            margin-bottom: 1.5rem;
         }
 
         .form-group {
@@ -274,198 +316,162 @@
 
         .form-group label {
             display: block;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
-            color: var(--sage);
-            margin-bottom: 0.75rem;
+            color: var(--dark);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         .form-group select {
             width: 100%;
-            padding: 0.875rem;
+            padding: 12px 15px;
+            border: 1px solid var(--mint);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 14px;
-            border: 1px solid rgba(107, 142, 127, 0.2);
-            border-radius: 8px;
-            background: white;
             color: var(--dark);
-            font-family: inherit;
+            background: white;
+            transition: all 0.3s ease;
         }
 
         .form-group select:focus {
             outline: none;
             border-color: var(--sage);
-            background: var(--mint);
+            box-shadow: 0 0 0 3px rgba(157, 180, 160, 0.1);
         }
 
         .button {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%);
+            padding: 14px;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            cursor: pointer;
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 1px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(107, 142, 127, 0.2);
+            box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
         }
 
-        .message {
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            font-size: 13px;
-            text-align: center;
+        .success-message {
             display: none;
+            background: var(--sage);
+            color: white;
+            padding: 16px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 14px;
+            animation: slideUp 0.4s ease-out;
         }
 
-        .message.show {
+        .success-message.show {
             display: block;
         }
 
-        .message.success {
-            background: linear-gradient(135deg, rgba(212, 232, 224, 0.8) 0%, rgba(107, 142, 127, 0.1) 100%);
-            color: var(--sage);
-            border: 1px solid rgba(107, 142, 127, 0.3);
-        }
-
-        .info-box {
-            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);
-            border-radius: 12px;
-            border: 0.5px solid rgba(107, 142, 127, 0.2);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            font-size: 13px;
-            color: var(--sage);
-        }
-
         .footer {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            color: white;
             text-align: center;
-            padding: 2rem 1rem;
-            color: var(--sage);
-            font-size: 13px;
+            padding: 40px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
         .heart {
-            color: var(--gold);
-            margin: 0 4px;
+            color: #ff6b9d;
         }
 
-        .gallery-subtitle {
-            font-size: 13px;
-            color: var(--sage);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-style: italic;
+        @media (max-width: 600px) {
+            .hero {
+                height: 400px;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .section-card {
+                padding: 25px;
+            }
+
+            .countdown {
+                gap: 10px;
+            }
+
+            .countdown-number {
+                font-size: 26px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- HERO SECTION -->
         <div class="hero">
-            <img src="IMG_3598.jpg" alt="Laura & Felipe" class="hero-image">
+            <img src="IMG_8452.jpg" alt="Laura & Felipe" class="hero-image">
             <div class="hero-overlay">
                 <h1 class="hero-title">Laura & Felipe</h1>
-                <p class="hero-group" id="groupName">Bienvenidos al grupo</p>
-                <div class="quote-box">
-                    <p class="quote-text">"El amor es la única realidad, el único acto creador que puede traer la verdad al mundo. Nuestro viaje juntos apenas comienza..."</p>
-                </div>
+                <div class="hero-group" id="groupName">Bienvenidos</div>
             </div>
         </div>
 
         <div class="content">
+            <!-- SECURITY NOTICE -->
             <div class="security-notice">
-                <div class="security-icon">🔐</div>
-                <div class="security-text">
-                    <strong>Invitación personalizada</strong><br>
-                    Esta invitación es válida únicamente para las personas mencionadas en la lista a continuación. Por favor, verifica que tu nombre aparezca entre los miembros de tu grupo.
-                </div>
+                <span class="security-icon">🔒</span>
+                <span class="security-text"><strong>Esta invitación es personal.</strong> Los datos que veas aquí son privados y específicos para tu grupo.</span>
             </div>
 
-            <div class="message success" id="successMessage">
-                <span id="successText">✓ ¡Gracias por confirmar!</span>
-            </div>
-
+            <!-- COUNTDOWN -->
             <div class="countdown-section">
-                <div class="countdown-label">Faltan para nuestro gran día</div>
+                <div class="countdown-label">FALTAN</div>
                 <div class="countdown">
                     <div class="countdown-item">
-                        <div class="countdown-number" id="days">157</div>
-                        <div class="countdown-label-item">Días</div>
+                        <span class="countdown-number" id="days">0</span>
+                        <span class="countdown-label-item">Días</span>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-number" id="hours">12</div>
-                        <div class="countdown-label-item">Horas</div>
+                        <span class="countdown-number" id="hours">0</span>
+                        <span class="countdown-label-item">Horas</span>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-number" id="minutes">34</div>
-                        <div class="countdown-label-item">Min</div>
+                        <span class="countdown-number" id="minutes">0</span>
+                        <span class="countdown-label-item">Minutos</span>
                     </div>
                     <div class="countdown-item">
-                        <div class="countdown-number" id="seconds">28</div>
-                        <div class="countdown-label-item">Seg</div>
+                        <span class="countdown-number" id="seconds">0</span>
+                        <span class="countdown-label-item">Segundos</span>
                     </div>
                 </div>
             </div>
 
+            <!-- MEMBERS SECTION -->
             <div class="section-card">
-                <div class="section-title">Miembros de tu Grupo</div>
-                <div class="members-list" id="membersList"></div>
-            </div>
-
-            <div class="section-card">
-                <div class="section-title">La Celebración</div>
-                <div class="event-detail">
-                    <div class="event-detail-label">Día y Hora</div>
-                    <div class="event-detail-content">Sábado, 12 de Diciembre • 6:00 PM</div>
+                <h2 class="section-title">Ustedes</h2>
+                <div class="members-list" id="membersList">
+                    <!-- Se llena dinámicamente -->
                 </div>
-                <div class="event-detail">
-                    <div class="event-detail-label">Ubicación</div>
-                    <div class="event-detail-content">
-                        Club Campestre Palmira<br>
-                        Salón Fundadores<br>
-                        Palmira, Valle del Cauca
-                    </div>
-                </div>
-                <div class="event-detail">
-                    <div class="event-detail-label">Dress Code</div>
-                    <div class="event-detail-content">Formal</div>
-                </div>
-                <div class="event-detail">
-                    <div class="event-detail-label">Experiencia</div>
-                    <div class="event-detail-content">Te invitamos a una cena en celebración de nuestra unión</div>
+                <div class="info-box">
+                    💝 Cada persona en esta lista está especialmente invitada a nuestro gran día
                 </div>
             </div>
 
-            <div class="section-card">
-                <h2 class="section-title">Retratos de Nuestro Amor</h2>
-                <p class="gallery-subtitle">Momentos que quedan en la eternidad</p>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="IMG_8452.jpg" alt="Momento 1">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="IMG_3520.jpg" alt="Momento 2">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="IMG_3598.jpg" alt="Momento 3">
-                    </div>
-                    <div class="gallery-item" style="background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);"></div>
-                    <div class="gallery-item" style="background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);"></div>
-                </div>
-            </div>
-
+            <!-- CONFIRMATION SECTION -->
             <div class="section-card">
                 <h2 class="form-title">Confirma tu Asistencia</h2>
                 <div class="info-box">
@@ -482,8 +488,12 @@
                     </div>
                     <button type="submit" class="button">Registrar Confirmación</button>
                 </form>
+                <div class="success-message" id="successMessage">
+                    <span id="successText"></span>
+                </div>
             </div>
 
+            <!-- FOOTER -->
             <div class="footer">
                 Hecho con <span class="heart">♥</span> para Laura & Felipe
             </div>
