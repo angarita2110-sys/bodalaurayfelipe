@@ -9,293 +9,506 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --sage: #9db4a0;
-            --mint: #c5ddd5;
-            --cream: #faf7f2;
-            --gold: #d4af6a;
-            --dark: #3d3d3d;
-            --text: #5a5a5a;
+            --mint: #dbece6;
+            --mint-deep: #bed7ce;
+            --cream: #fbf5ee;
+            --paper: #fffaf5;
+            --gold: #c9a15d;
+            --gold-soft: #eadbc3;
+            --charcoal: #4f4f4f;
+            --dark: #2f2f2f;
+            --text: #68625c;
         }
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, var(--cream) 0%, #f5f0e8 100%);
+            background: linear-gradient(135deg, var(--cream) 0%, #f3ece3 100%);
+            color: var(--text);
         }
         .container {
             max-width: 680px;
             margin: 0 auto;
-            background: white;
+            background: var(--paper);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         .hero {
-            height: 500px;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('IMG_8452.jpg');
+            position: relative;
+            min-height: 560px;
+            background: linear-gradient(rgba(35,35,35,0.42), rgba(35,35,35,0.50)), url('IMG_8452.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 70px 28px 150px;
+        }
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 60% 40% 58% 42%;
+            pointer-events: none;
+        }
+        .hero::before { top: -70px; left: -70px; transform: rotate(24deg); }
+        .hero::after { right: -90px; bottom: 70px; transform: rotate(-18deg); }
+        .hero-inner { position: relative; z-index: 2; color: white; max-width: 520px; }
+        .date-line {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            letter-spacing: 0.08em;
+        }
+        .date-line::before,
+        .date-line::after {
+            content: "";
+            height: 1px;
+            width: 78px;
+            background: rgba(255,255,255,0.7);
         }
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 56px;
+            font-size: 58px;
             color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            line-height: 1;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.35);
         }
-        .content { padding: 50px 40px; }
+        .hero-quote {
+            margin-top: 28px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.92);
+            font-weight: 400;
+        }
+        .wave-top {
+            position: relative;
+            height: 98px;
+            margin-top: -98px;
+            z-index: 4;
+            background:
+                radial-gradient(80% 95px at 10% 115%, var(--mint) 0 62%, transparent 63%),
+                radial-gradient(95% 115px at 70% 108%, var(--paper) 0 62%, transparent 63%);
+        }
+        .content {
+            position: relative;
+            padding: 0 34px 46px;
+            background: var(--paper);
+        }
+        .content::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.28;
+            background-image:
+                linear-gradient(120deg, transparent 0 45%, rgba(201,161,93,0.22) 46%, transparent 47%),
+                radial-gradient(circle at 12% 24%, rgba(157,180,160,0.18), transparent 18%),
+                radial-gradient(circle at 90% 62%, rgba(201,161,93,0.14), transparent 22%);
+            pointer-events: none;
+        }
+        .security-notice,
+        .countdown-section,
+        .section,
+        .footer { position: relative; z-index: 2; }
         .security-notice {
-            background: rgba(157, 180, 160, 0.15);
-            border-left: 4px solid var(--sage);
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 30px;
-            font-size: 13px;
+            background: rgba(255,255,255,0.72);
+            border: 1px solid rgba(201,161,93,0.22);
+            border-left: 4px solid var(--gold);
+            padding: 14px 16px;
+            border-radius: 999px;
+            margin: 0 auto 28px;
+            max-width: 560px;
+            font-size: 12px;
             color: var(--text);
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(88, 76, 65, 0.06);
         }
         .countdown-section {
-            background: linear-gradient(135deg, var(--sage), var(--mint));
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 50px;
+            width: 176px;
+            height: 176px;
+            margin: -56px auto 42px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.86);
+            border: 1px solid rgba(201,161,93,0.32);
+            box-shadow:
+                0 0 0 8px rgba(255,255,255,0.55),
+                0 0 0 11px rgba(201,161,93,0.22),
+                0 0 0 16px rgba(201,161,93,0.08),
+                0 22px 42px rgba(95, 79, 55, 0.12);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 22px;
         }
         .countdown-label {
             font-family: 'Playfair Display', serif;
-            color: white;
-            margin-bottom: 30px;
+            color: var(--gold);
             font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1;
         }
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 6px;
+            width: 100%;
         }
-        .countdown-item {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
+        .countdown-item { background: transparent; padding: 0; border-radius: 0; }
         .countdown-number {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 700;
-            color: var(--sage);
+            color: var(--dark);
+            line-height: 1;
         }
         .countdown-text {
-            font-size: 11px;
-            color: var(--text);
-            text-transform: uppercase;
+            font-size: 8px;
+            color: var(--gold);
+            text-transform: lowercase;
             margin-top: 5px;
         }
         .section {
-            background: white;
-            border: 1px solid rgba(157, 180, 160, 0.15);
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 40px;
+            background: rgba(255,255,255,0.72);
+            border: 1px solid rgba(201,161,93,0.20);
+            border-radius: 28px;
+            padding: 38px 34px;
+            margin-bottom: 34px;
+            box-shadow: 0 18px 45px rgba(88, 76, 65, 0.07);
+            overflow: hidden;
+        }
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 7px;
+            background: linear-gradient(90deg, transparent, rgba(201,161,93,0.45), transparent);
         }
         .section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 28px;
             color: var(--dark);
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             text-align: center;
-            border-bottom: 2px solid var(--mint);
-            padding-bottom: 15px;
+            border: none;
+            padding-bottom: 0;
+            line-height: 1.15;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--gold);
+            font-size: 12px;
+            margin-bottom: 30px;
+            letter-spacing: 0.02em;
+        }
+        .guest-title {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 180px;
+            padding: 8px 18px;
+            margin: 0 auto 18px;
+            border-radius: 999px;
+            background: var(--charcoal);
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+        }
+        .guest-wrap { text-align: center; margin-bottom: 22px; }
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 26px;
         }
         .event-detail {
-            margin-bottom: 20px;
+            background: rgba(251,245,238,0.85);
+            border: 1px solid rgba(201,161,93,0.18);
+            border-radius: 18px;
+            padding: 18px 14px;
+            margin-bottom: 0;
+            text-align: center;
+        }
+        .event-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid rgba(201,161,93,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: var(--gold);
+            font-size: 22px;
+            background: #fff;
         }
         .event-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: var(--sage);
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            text-transform: none;
+            color: var(--dark);
+            font-weight: 700;
             margin-bottom: 8px;
         }
         .event-content {
-            font-size: 15px;
-            color: var(--dark);
+            font-size: 12px;
+            color: var(--text);
             font-weight: 500;
+            line-height: 1.55;
+        }
+        .love-note {
+            margin-top: 26px;
+            padding: 22px 24px;
+            border-top: 1px solid rgba(201,161,93,0.22);
+            border-bottom: 1px solid rgba(201,161,93,0.22);
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.9;
+            text-align: center;
+            font-style: italic;
+        }
+        .map-box {
+            margin-top: 28px;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 10px solid rgba(255,255,255,0.78);
+            box-shadow: 0 15px 38px rgba(88,76,65,0.12);
+        }
+        .rsvp-deadline {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text);
+            margin-bottom: 22px;
         }
         .member {
-            background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
-            border: 1px solid rgba(157, 180, 160, 0.2);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
+            position: relative;
+            background: linear-gradient(135deg, #fff 0%, rgba(219,236,230,0.45) 100%);
+            border: 1px solid rgba(201,161,93,0.20);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 12px 28px rgba(88,76,65,0.06);
         }
         .member-name {
-            font-size: 15px;
-            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 19px;
+            font-weight: 700;
             color: var(--dark);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            text-align: center;
         }
-        .member-buttons {
-            display: flex;
-            gap: 10px;
-        }
+        .member-buttons { display: flex; gap: 10px; }
         .member-btn {
             flex: 1;
-            padding: 10px;
-            border: 2px solid var(--sage);
-            background: white;
+            padding: 12px 10px;
+            border: 1px solid rgba(157,180,160,0.55);
+            background: #fff;
             color: var(--sage);
-            border-radius: 6px;
+            border-radius: 999px;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s ease;
             text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
-        .member-btn.active {
-            background: var(--sage);
-            color: white;
-        }
+        .member-btn.active,
         .member-btn:hover {
             background: var(--sage);
             color: white;
+            box-shadow: 0 8px 18px rgba(157,180,160,0.28);
+        }
+        .member-btn:nth-child(2).active,
+        .member-btn:nth-child(2):hover {
+            background: var(--charcoal);
+            border-color: var(--charcoal);
         }
         .btn-submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--sage), var(--mint));
+            padding: 15px;
+            background: linear-gradient(135deg, var(--gold), #b98b45);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 999px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             margin-top: 20px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            box-shadow: 0 14px 26px rgba(201,161,93,0.25);
+            transition: all 0.25s ease;
         }
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 18px 30px rgba(201,161,93,0.32); }
+        .success {
+            display: none;
+            background: var(--sage);
+            color: white;
+            padding: 15px;
+            border-radius: 999px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
         }
-        .success { display: none; background: var(--sage); color: white; padding: 15px; border-radius: 6px; text-align: center; margin-top: 20px; }
         .success.show { display: block; }
         .footer {
-            background: linear-gradient(135deg, var(--sage), var(--mint));
+            background: var(--charcoal);
             color: white;
             text-align: center;
-            padding: 40px;
-            font-size: 14px;
+            padding: 48px 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            border-radius: 34px 34px 0 0;
+            margin-top: 18px;
+        }
+        .footer span {
+            display: block;
+            margin-top: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            color: rgba(255,255,255,0.72);
+            font-weight: 400;
         }
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.55);
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
         .modal.show { display: flex; }
         .modal-box {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
+            background: var(--paper);
+            padding: 36px;
+            border-radius: 26px;
             text-align: center;
             max-width: 500px;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.24);
+            border: 1px solid rgba(201,161,93,0.22);
         }
         .modal-title {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 14px;
             color: var(--dark);
         }
-        .modal-text {
-            color: var(--text);
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        .modal-buttons {
-            display: flex;
-            gap: 15px;
-        }
+        .modal-text { color: var(--text); margin-bottom: 28px; font-size: 14px; line-height: 1.7; }
+        .modal-buttons { display: flex; gap: 12px; }
         .modal-btn {
             flex: 1;
-            padding: 12px;
+            padding: 13px;
             border: none;
-            border-radius: 6px;
+            border-radius: 999px;
             font-weight: 600;
             cursor: pointer;
         }
-        .modal-btn.cancel {
-            background: white;
-            border: 2px solid var(--sage);
-            color: var(--sage);
-        }
-        .modal-btn.confirm {
-            background: var(--sage);
-            color: white;
-        }
+        .modal-btn.cancel { background: white; border: 1px solid var(--sage); color: var(--sage); }
+        .modal-btn.confirm { background: var(--sage); color: white; }
         @media (max-width: 600px) {
-            .hero h1 { font-size: 42px; }
-            .content { padding: 30px 20px; }
-            .countdown { grid-template-columns: repeat(2, 1fr); }
+            .container { width: 100%; }
+            .hero { min-height: 520px; padding-bottom: 140px; }
+            .hero h1 { font-size: 44px; }
+            .date-line::before, .date-line::after { width: 50px; }
+            .content { padding: 0 18px 34px; }
+            .security-notice { border-radius: 18px; }
+            .countdown-section { width: 164px; height: 164px; margin-top: -48px; }
+            .section { padding: 32px 20px; border-radius: 24px; }
+            .detail-grid { grid-template-columns: 1fr; }
+            .member-buttons { flex-direction: column; }
+            .modal-buttons { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="hero">
-            <h1>Laura & Felipe</h1>
+            <div class="hero-inner">
+                <div class="date-line">12.12.2026</div>
+                <h1>Laura & Felipe</h1>
+                <div class="hero-quote">“El amor no se mira, se celebra.<br>Y queremos celebrarlo contigo.”</div>
+            </div>
         </div>
+        <div class="wave-top"></div>
 
         <div class="content">
+            <div class="countdown-section">
+                <div class="countdown-label">Faltan</div>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">0</div>
+                        <div class="countdown-text">días</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">0</div>
+                        <div class="countdown-text">hrs</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">0</div>
+                        <div class="countdown-text">min</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">0</div>
+                        <div class="countdown-text">seg</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="security-notice">
                 ⚠️ <strong>Esta invitación es solo para los miembros de este grupo.</strong> No compartas este link con otras personas.
             </div>
 
-            <div class="countdown-section">
-                <div class="countdown-label">FALTAN PARA NUESTRO GRAN DÍA</div>
-                <div class="countdown">
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="days">0</div>
-                        <div class="countdown-text">Días</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="hours">0</div>
-                        <div class="countdown-text">Horas</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="minutes">0</div>
-                        <div class="countdown-text">Min</div>
-                    </div>
-                    <div class="countdown-item">
-                        <div class="countdown-number" id="seconds">0</div>
-                        <div class="countdown-text">Seg</div>
-                    </div>
+            <div class="section invite-section">
+                <div class="guest-wrap">
+                    <div class="guest-title" id="guestTitle">Invitación</div>
                 </div>
-            </div>
+                <h2>Tenemos una cita especial</h2>
+                <div class="section-subtitle">Nos hará muy felices compartir este día contigo</div>
 
-            <div class="section">
-                <h2>La Celebración</h2>
-                <div class="event-detail">
-                    <div class="event-label">Día y Hora</div>
-                    <div class="event-content">Sábado, 12 de Diciembre • 6:00 PM</div>
-                </div>
-                <div class="event-detail">
-                    <div class="event-label">Ubicación</div>
-                    <div class="event-content">Club Campestre Palmira - Salón Fundadores<br>Palmira, Valle del Cauca</div>
-                </div>
-                <div class="event-detail">
-                    <div class="event-label">Atuendo</div>
-                    <div class="event-content">Formal</div>
-                </div>
-                <div class="event-detail" style="margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(157, 180, 160, 0.2);">
-                    <div style="font-size: 14px; line-height: 1.8; color: var(--text); font-style: italic;">
-                        Te invitamos a celebrar el inicio de esta hermosa etapa junto a las personas que amamos. Tu presencia hará que este día sea verdaderamente especial.
+                <div class="detail-grid">
+                    <div class="event-detail">
+                        <div class="event-icon">♡</div>
+                        <div class="event-label">Día</div>
+                        <div class="event-content">Sábado, 12 de Diciembre<br>6:00 PM</div>
+                    </div>
+                    <div class="event-detail">
+                        <div class="event-icon">⌖</div>
+                        <div class="event-label">Lugar</div>
+                        <div class="event-content">Club Campestre Palmira<br>Salón Fundadores</div>
+                    </div>
+                    <div class="event-detail">
+                        <div class="event-icon">✧</div>
+                        <div class="event-label">Atuendo</div>
+                        <div class="event-content">Formal<br>Palmira, Valle del Cauca</div>
                     </div>
                 </div>
-                <div style="margin-top: 30px; border-radius: 8px; overflow: hidden;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.218581168781!2d-76.28343662502706!3d3.5369536964373065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3a04c846a8043f%3A0x947d327a739b2f80!2sClub%20Campestre%20de%20Palmira!5e0!3m2!1ses-419!2sco!4v1780956269694!5m2!1ses-419!2sco" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                <div class="love-note">
+                    Te invitamos a celebrar el inicio de esta hermosa etapa junto a las personas que amamos. Tu presencia hará que este día sea verdaderamente especial.
+                </div>
+
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.218581168781!2d-76.28343662502706!3d3.5369536964373065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3a04c846a8043f%3A0x947d327a739b2f80!2sClub%20Campestre%20de%20Palmira!5e0!3m2!1ses-419!2sco!4v1780956269694!5m2!1ses-419!2sco" width="100%" height="360" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
             <div class="section">
                 <h2>Confirma tu Asistencia</h2>
-                <div style="font-size: 13px; color: var(--text); margin-bottom: 20px;">⏰ Plazo límite: 12 de Noviembre, 2026</div>
+                <div class="section-subtitle">Por favor confirma antes del 12 de Noviembre, 2026</div>
+                <div class="rsvp-deadline">Selecciona quiénes asistirán para reservar su lugar.</div>
                 
                 <div id="members"></div>
 
@@ -304,7 +517,8 @@
             </div>
 
             <div class="footer">
-                Hecho con ♥ para Laura & Felipe
+                Laura & Felipe
+                <span>Hecho con amor para celebrar contigo</span>
             </div>
         </div>
     </div>
@@ -367,11 +581,13 @@
         function renderizarGrupo() {
             grupoActual = obtenerGrupo();
             if (!grupoActual) {
-                document.getElementById('members').innerHTML = '<p>Grupo no encontrado</p>';
+                document.getElementById('members').innerHTML = '<p style="text-align:center; color: var(--text);">Grupo no encontrado</p>';
+                document.getElementById('guestTitle').textContent = 'Invitación';
                 return;
             }
 
-            document.querySelector('.hero h1').textContent = `Bienvenidos, ${grupoActual.name}`;
+            document.getElementById('guestTitle').textContent = `Invitación para ${grupoActual.name}`;
+            selecciones = {};
             
             let html = '';
             grupoActual.members.forEach((miembro, i) => {
@@ -379,8 +595,8 @@
                     <div class="member">
                         <div class="member-name">${miembro}</div>
                         <div class="member-buttons">
-                            <button type="button" class="member-btn active" onclick="seleccionar('${miembro}', true, this)">✓ ASISTIRÉ</button>
-                            <button type="button" class="member-btn" onclick="seleccionar('${miembro}', false, this)">✗ NO ASISTIRÉ</button>
+                            <button type="button" class="member-btn active" onclick="seleccionar('${miembro}', true, this)">✓ Asistiré</button>
+                            <button type="button" class="member-btn" onclick="seleccionar('${miembro}', false, this)">✕ No asistiré</button>
                         </div>
                     </div>
                 `;
