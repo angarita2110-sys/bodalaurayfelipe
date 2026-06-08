@@ -247,41 +247,84 @@
         .event-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-            margin: 20px 0 25px;
+            gap: 16px;
+            margin: 22px 0 28px;
+            position: relative;
+        }
+        .event-grid::before {
+            content: "";
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            top: 34px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,160,97,.35), transparent);
+            z-index: 0;
         }
         .event-detail {
-            background: var(--cream-2);
-            border: 1px solid rgba(200,160,97,.14);
-            border-radius: 18px;
-            padding: 20px 14px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(255,253,249,.98), rgba(255,250,244,.88));
+            border: 1px solid rgba(200,160,97,.22);
+            border-radius: 22px;
+            padding: 22px 14px 20px;
             text-align: center;
+            box-shadow: 0 12px 30px rgba(70,70,70,.055);
+            min-height: 178px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .event-detail::after {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border: 1px solid rgba(159,184,173,.16);
+            border-radius: 17px;
+            pointer-events: none;
         }
         .event-icon {
-            width: 46px;
-            height: 46px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            margin: 0 auto 12px;
+            margin: 0 auto 14px;
             display: grid;
             place-items: center;
             color: var(--gold);
-            border: 1px solid rgba(200,160,97,.28);
-            background: white;
-            font-size: 20px;
+            border: 1px solid rgba(200,160,97,.34);
+            background: radial-gradient(circle, #fffdf9 0%, #fff8ef 100%);
+            box-shadow: 0 8px 22px rgba(200,160,97,.12);
+        }
+        .event-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         .event-label {
             font-size: 10px;
             text-transform: uppercase;
             color: var(--gold);
             font-weight: 600;
-            margin-bottom: 8px;
-            letter-spacing: 1.3px;
+            margin-bottom: 9px;
+            letter-spacing: 1.45px;
         }
         .event-content {
             font-size: 13px;
             color: var(--charcoal);
             font-weight: 500;
             line-height: 1.55;
+        }
+        .event-content small {
+            display: block;
+            color: var(--text);
+            font-size: 11px;
+            font-weight: 400;
+            margin-top: 3px;
         }
         .love-note {
             margin: 26px auto 0;
@@ -462,6 +505,8 @@
             .security-notice { border-radius: 18px; line-height: 1.5; }
             .section { padding: 34px 20px; border-radius: 24px; }
             .event-grid { grid-template-columns: 1fr; }
+            .event-grid::before { display: none; }
+            .event-detail { min-height: auto; }
             .countdown-section { margin-top: -76px; width: min(300px, 88%); }
             .countdown-number { font-size: 24px; }
             .member-buttons, .modal-buttons { grid-template-columns: 1fr; display: grid; }
@@ -513,19 +558,35 @@
                 <h2>La Celebración</h2>
                 <div class="event-grid">
                     <div class="event-detail">
-                        <div class="event-icon">◷</div>
+                        <div class="event-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="8.5"></circle>
+                                <path d="M12 7.5v5l3.2 1.9"></path>
+                            </svg>
+                        </div>
                         <div class="event-label">Día y Hora</div>
                         <div class="event-content">Sábado, 12 de Diciembre<br>6:00 PM</div>
                     </div>
                     <div class="event-detail">
-                        <div class="event-icon">⌂</div>
+                        <div class="event-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21s6-5.2 6-11a6 6 0 0 0-12 0c0 5.8 6 11 6 11z"></path>
+                                <circle cx="12" cy="10" r="2.2"></circle>
+                            </svg>
+                        </div>
                         <div class="event-label">Ubicación</div>
-                        <div class="event-content">Club Campestre Palmira<br>Salón Fundadores</div>
+                        <div class="event-content">Club Campestre Palmira<br>Salón Fundadores<small>Palmira, Valle del Cauca</small></div>
                     </div>
                     <div class="event-detail">
-                        <div class="event-icon">◇</div>
+                        <div class="event-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4.5 8.2v7.6l6-3.8-6-3.8z"></path>
+                                <path d="M19.5 8.2v7.6l-6-3.8 6-3.8z"></path>
+                                <rect x="10.2" y="9.6" width="3.6" height="4.8" rx="1"></rect>
+                            </svg>
+                        </div>
                         <div class="event-label">Atuendo</div>
-                        <div class="event-content">Formal<br>Palmira, Valle del Cauca</div>
+                        <div class="event-content">Traje formal<br><small>Elegante y de celebración</small></div>
                     </div>
                 </div>
                 <div class="love-note">
