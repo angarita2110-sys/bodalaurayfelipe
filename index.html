@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Boda Laura & Felipe</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --sage: #6B8E7F;
+            --mint: #D4E8E0;
+            --gold: #C9A87D;
+            --cream: #FAF8F6;
+            --dark: #3D4A44;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--mint) 0%, var(--cream) 100%);
+            color: var(--dark);
+            padding: 2rem 1rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(107, 142, 127, 0.08);
+            border: 0.5px solid rgba(107, 142, 127, 0.15);
+        }
+        .title { font-size: 28px; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+        .subtitle { font-size: 13px; color: var(--sage); margin-bottom: 1.5rem; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 0.5px solid rgba(107, 142, 127, 0.2);
+        }
+        .stat-number { font-size: 28px; font-weight: 600; color: var(--sage); margin-bottom: 0.25rem; }
+        .stat-label { font-size: 11px; color: var(--sage); text-transform: uppercase; letter-spacing: 0.1em; }
+        .tabs {
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid rgba(107, 142, 127, 0.1);
+            padding-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 0.75rem 1.25rem;
+            background: transparent;
+            border: none;
+            color: var(--sage);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            color: var(--dark);
+            border-bottom-color: var(--sage);
+        }
+        .tab-content { display: none; margin-top: 1.5rem; }
+        .tab-content.active { display: block; }
+        .group-card {
+            background: white;
+            border-radius: 12px;
+            border: 0.5px solid rgba(107, 142, 127, 0.15);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(107, 142, 127, 0.05);
+        }
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(107, 142, 127, 0.1);
+        }
+        .group-name { font-size: 16px; font-weight: 600; color: var(--dark); }
+        .group-count {
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--sage);
+            font-weight: 600;
+        }
+        .members-list { margin-bottom: 1rem; }
+        .member { font-size: 13px; color: var(--sage); padding: 0.4rem 0; }
+        .member::before { content: "•"; color: var(--gold); margin-right: 0.5rem; }
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-copy { background: var(--sage); color: white; }
+        .btn-copy:hover { background: #5a7a6f; }
+        .btn-edit { background: #B8956A; color: white; }
+        .btn-edit:hover { background: #A58058; }
+        .btn-delete { background: #D85A30; color: white; }
+        .btn-delete:hover { background: #C04820; }
+        .btn-save { background: var(--sage); color: white; }
+        .btn-cancel { background: #888; color: white; }
+        .add-form {
+            background: white;
+            border-radius: 12px;
+            border: 0.5px solid rgba(107, 142, 127, 0.15);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 0.5px solid rgba(107, 142, 127, 0.2);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .search-box { margin-bottom: 1.5rem; }
+        .search-box input { width: 100%; padding: 0.875rem; border: 0.5px solid rgba(107, 142, 127, 0.2); border-radius: 8px; font-size: 14px; }
+        .message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 13px;
+            text-align: center;
+            display: none;
+        }
+        .message.show { display: block; }
+        .message.success {
+            background: linear-gradient(135deg, rgba(212, 232, 224, 0.8) 0%, rgba(107, 142, 127, 0.1) 100%);
+            color: var(--sage);
+            border: 1px solid rgba(107, 142, 127, 0.3);
+        }
+        .download-section {
+            background: white;
+            border-radius: 12px;
+            border: 0.5px solid rgba(107, 142, 127, 0.15);
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .download-btns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+        .btn-download {
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--sage) 0%, #A8C5B8 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .edit-mode { background: rgba(212, 232, 224, 0.3); border: 1px dashed rgba(107, 142, 127, 0.3); }
+        .edit-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(107, 142, 127, 0.1); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">👰 Panel Admin - Boda Laura & Felipe</h1>
+            <p class="subtitle">Gestiona invitaciones, grupos y confirmaciones</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalGroups">0</div>
+                    <div class="stat-label">Total Grupos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPeople">0</div>
+                    <div class="stat-label">Total Personas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="confirmedCount">0</div>
+                    <div class="stat-label">Confirmados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="pendingCount">0</div>
+                    <div class="stat-label">Pendientes</div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(this, 'groups')">Grupos</button>
+                <button class="tab-btn" onclick="switchTab(this, 'addgroup')">+ Nuevo Grupo</button>
+                <button class="tab-btn" onclick="switchTab(this, 'confirmations')">Confirmaciones</button>
+            </div>
+        </div>
+
+        <div id="groupsTab" class="tab-content active">
+            <div id="message" class="message"></div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar grupo..." onkeyup="filterGroups()">
+            </div>
+            <div id="groupsContainer"></div>
+        </div>
+
+        <div id="addgroupTab" class="tab-content">
+            <div class="add-form">
+                <h2 style="margin-bottom: 1.5rem; font-size: 18px;">Crear Nuevo Grupo</h2>
+                <div class="form-group">
+                    <label>Nombre del Grupo</label>
+                    <input type="text" id="newGroupName" placeholder="Ej: Alberto Calle">
+                </div>
+                <div class="form-group">
+                    <label>Miembros (uno por línea)</label>
+                    <textarea id="newGroupMembers" placeholder="Nombre 1&#10;Nombre 2&#10;Nombre 3"></textarea>
+                </div>
+                <button class="btn btn-save" style="width: 100%; padding: 1rem;" onclick="addNewGroup()">Crear Grupo</button>
+            </div>
+        </div>
+
+        <div id="confirmationsTab" class="tab-content">
+            <div class="download-section">
+                <h3 style="margin-bottom: 1rem;">Descargar Reporte</h3>
+                <div class="download-btns">
+                    <button class="btn-download" onclick="downloadCSV()">📊 Descargar CSV</button>
+                    <button class="btn-download" onclick="downloadJSON()">📋 Descargar JSON</button>
+                </div>
+            </div>
+            <div id="confirmationsContainer"></div>
+        </div>
+    </div>
+
+    <input type="file" id="importFile" style="display: none;" accept=".json" onchange="handleImport()">
+
+    <script>
+        const defaultGroups = [
+            { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
+            { id: 2, name: "Rodolfo Calle", members: ["Rodolfo Calle", "Esposa Rodolfo Calle", "Rodolfo Calle JR"] },
+            { id: 3, name: "Veronica Calle", members: ["Veronica Calle", "Esposo Veronica Calle"] },
+            { id: 4, name: "Arturo Calle", members: ["Arturo Calle", "Esposa Arturo Calle", "Esteban Calle", "Camila Cano"] },
+            { id: 5, name: "Uriel Calle", members: ["Uriel Calle", "Esposa Uriel Calle", "Hijo Uriel Calle"] },
+            { id: 6, name: "Jose Antonio Calle", members: ["Jose Antonio Calle", "Ligia Martinez", "Pablo de Santiago", "Alejandra Calle"] },
+            { id: 7, name: "Rosalba Martinez", members: ["Rosalba Martinez", "Cosme", "Gustavo hijo de rosalba"] },
+            { id: 8, name: "Juan Carlos", members: ["Juan Carlos hijo de rosalba", "Esposa Juan Carlos"] },
+            { id: 9, name: "Juan Pablo", members: ["Juanbra", "Acompañante Juan bra"] },
+            { id: 10, name: "Doris Martinez", members: ["Doris Martinez", "Acompañante Doris Martinez"] },
+            { id: 11, name: "Lina Amiga Lau", members: ["Lina Amiga Lau", "Angelica"] },
+            { id: 12, name: "Jen", members: ["Jen"] },
+            { id: 13, name: "Leydi Di", members: ["Leydi Di"] },
+            { id: 14, name: "Diana Isabel", members: ["Diana Isabel"] },
+            { id: 15, name: "Juliana H", members: ["Juliana H", "Esposo Juliana H"] },
+            { id: 16, name: "Laura y Felipe", members: ["Laura Calle (esposa)", "Felipe Angarita (esposo)"] },
+            { id: 17, name: "Andres Zuluaga", members: ["Andres Zuluaga"] },
+            { id: 18, name: "Juan Pablo Ayala", members: ["Juan Pablo Ayala", "Acompañante Juan Pablo Ayala"] },
+            { id: 19, name: "Americo Ortega", members: ["Americo Ortega", "Acompañante Americo Ortega"] },
+            { id: 20, name: "Scheinder", members: ["Scheinder"] },
+            { id: 21, name: "Liliana Laverde", members: ["Liliana Laverde", "Jorge Duque", "Natalia Angarita", "Oscar Giraldo"] },
+            { id: 22, name: "Ana Morales", members: ["Ana Morales"] },
+            { id: 23, name: "Gilberto Laverde", members: ["Gilberto Laverde"] },
+            { id: 24, name: "Sebastian Laverde", members: ["Sebastian Laverde", "Jose Daniel"] },
+            { id: 25, name: "Margie Laverde", members: ["Margie Laverde", "Acompañante Margie"] },
+            { id: 26, name: "Juliana Laverde", members: ["Juliana Laverde", "Acompañante Juliana"] },
+            { id: 27, name: "Maria Laverde", members: ["Maria Laverde", "Silvio Echeverri", "Karen Echeverri", "Laura Echeverri", "Mauricio Amaya", "John Yama"] },
+            { id: 28, name: "Amanda Laverde", members: ["Amanda Laverde"] },
+            { id: 29, name: "Leonardo Rodriguez", members: ["Leonardo Rodriguez"] },
+            { id: 30, name: "Lorena", members: ["Lorena"] },
+            { id: 31, name: "Margarita Laverde", members: ["Margarita Laverde", "Gabriel Diaz", "Angela Diaz", "Luisa Diaz"] },
+            { id: 32, name: "Gloria Angarita", members: ["Gloria Angarita", "Cesar Angarita", "Daniela Montoya", "Olga Montoya", "Bernardo Angarita", "Argenis Salazar", "Miguel Angarita", "Juan Camilo Angarita"] },
+            { id: 33, name: "Liliana Cortes", members: ["Liliana Cortes", "Acompañante Liliana Cortes"] },
+            { id: 34, name: "Claudia Cortes", members: ["Claudia Cortes", "Acompañante Claudia Cortes"] },
+            { id: 35, name: "Juliana Roldan", members: ["Juliana Roldan", "Juanfer esposo Juliana"] },
+            { id: 36, name: "Sebastian Garcia", members: ["Sebastian Garcia", "Acompañanate Sebastian Garcia"] },
+            { id: 37, name: "Juan Guillermo Ceron", members: ["Juan Guillermo Ceron", "Acompañante Ceron"] },
+            { id: 38, name: "Felipe Sepulveda", members: ["Felipe Sepulveda", "Aura Esposa Sepulveda"] },
+            { id: 39, name: "Andres Horrillo", members: ["Andres Horrillo", "Catalina Franco"] },
+            { id: 40, name: "Daniel Bujato", members: ["Daniel Bujato", "Stefania Marcano"] },
+            { id: 41, name: "Guillermo Giraldo", members: ["Guillermo Giraldo", "Acompañanate Guillermo"] },
+            { id: 42, name: "Isabel Londoño", members: ["Isabel Londoño"] },
+            { id: 43, name: "Juan Pablo Galvis", members: ["Juan Pablo Galvis"] },
+            { id: 44, name: "Diego Duque", members: ["Diego Duque", "Karen Duque", "Elene Duque", "Steve", "Margoth Duque", "Carlos Quiceno"] }
+        ];
+
+        let groups = [];
+
+        function loadGroups() {
+            const saved = localStorage.getItem('boda-grupos');
+            groups = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultGroups));
+            if (!saved) saveGroups();
+            updateStats();
+            renderGroups();
+        }
+
+        function saveGroups() {
+            localStorage.setItem('boda-grupos', JSON.stringify(groups));
+        }
+
+        function generateHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            }
+            return Math.abs(hash).toString(36).substring(0, 8);
+        }
+
+        function getBaseURL() {
+            return window.location.href.replace('index.html', '').replace(/\/$/, '');
+        }
+
+        function updateStats() {
+            document.getElementById('totalGroups').textContent = groups.length;
+            document.getElementById('totalPeople').textContent = groups.reduce((s, g) => s + g.members.length, 0);
+            const confirmations = JSON.parse(localStorage.getItem('laura-felipe-confirmations') || '[]');
+            const confirmed = confirmations.filter(c => c.status === 'confirmed').length;
+            document.getElementById('confirmedCount').textContent = confirmed;
+            document.getElementById('pendingCount').textContent = groups.length - confirmations.length;
+        }
+
+        function renderGroups(groupList = groups) {
+            const container = document.getElementById('groupsContainer');
+            const baseURL = getBaseURL();
+            if (groupList.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--sage);">No hay grupos</div>';
+                return;
+            }
+            container.innerHTML = groupList.map(group => {
+                const hash = generateHash(group.id + group.name);
+                const link = baseURL + '/invitacion.html?group=' + hash;
+                return `
+                    <div class="group-card" id="group-${group.id}">
+                        <div class="group-header">
+                            <div><div class="group-name">${group.name}</div></div>
+                            <div class="group-count">${group.members.length} personas</div>
+                        </div>
+                        <div class="members-list">
+                            ${group.members.map(m => '<div class="member">' + m + '</div>').join('')}
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-copy" onclick="copyLink('${link}', '${group.name}')">📋 Link</button>
+                            <button class="btn btn-edit" onclick="editGroup(${group.id})">✏️ Editar</button>
+                            <button class="btn btn-delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function copyLink(link, name) {
+            navigator.clipboard.writeText(link).then(() => {
+                showMessage('✅ Link de ' + name + ' copiado');
+            });
+        }
+
+        function editGroup(id) {
+            const group = groups.find(g => g.id === id);
+            if (!group) return;
+            const card = document.getElementById('group-' + id);
+            const form = card.querySelector('.edit-form');
+            if (form) {
+                form.remove();
+                card.classList.remove('edit-mode');
+            } else {
+                card.classList.add('edit-mode');
+                const div = document.createElement('div');
+                div.className = 'edit-form';
+                div.innerHTML = `
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" id="name-${id}" value="${group.name}">
+                    </div>
+                    <div class="form-group">
+                        <label>Miembros (uno por línea)</label>
+                        <textarea id="members-${id}">${group.members.join('\n')}</textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-save" onclick="saveEdit(${id})">Guardar</button>
+                        <button class="btn btn-cancel" onclick="editGroup(${id})">Cancelar</button>
+                    </div>
+                `;
+                card.appendChild(div);
+            }
+        }
+
+        function saveEdit(id) {
+            const group = groups.find(g => g.id === id);
+            const name = document.getElementById('name-' + id).value.trim();
+            const members = document.getElementById('members-' + id).value.split('\n').map(m => m.trim()).filter(m => m);
+            if (!name || !members.length) {
+                showMessage('❌ Grupo debe tener nombre y miembros', 'error');
+                return;
+            }
+            group.name = name;
+            group.members = members;
+            saveGroups();
+            editGroup(id);
+            renderGroups();
+            updateStats();
+            showMessage('✅ Grupo actualizado');
+        }
+
+        function deleteGroup(id) {
+            if (confirm('¿Eliminar este grupo?')) {
+                groups = groups.filter(g => g.id !== id);
+                saveGroups();
+                updateStats();
+                renderGroups();
+                showMessage('✅ Grupo eliminado');
+            }
+        }
+
+        function addNewGroup() {
+            const name = document.getElementById('newGroupName').value.trim();
+            const members = document.getElementById('newGroupMembers').value.split('\n').map(m => m.trim()).filter(m => m);
+            if (!name || !members.length) {
+                showMessage('❌ Grupo debe tener nombre y miembros', 'error');
+                return;
+            }
+            const id = Math.max(...groups.map(g => g.id), 0) + 1;
+            groups.push({ id, name, members });
+            saveGroups();
+            updateStats();
+            renderGroups();
+            document.getElementById('newGroupName').value = '';
+            document.getElementById('newGroupMembers').value = '';
+            switchTab(document.querySelectorAll('.tab-btn')[0], 'groups');
+            showMessage('✅ Grupo creado');
+        }
+
+        function filterGroups() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = groups.filter(g => g.name.toLowerCase().includes(term) || g.members.some(m => m.toLowerCase().includes(term)));
+            renderGroups(filtered);
+        }
+
+        function switchTab(btn, tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab + 'Tab').classList.add('active');
+            btn.classList.add('active');
+            if (tab === 'confirmations') loadConfirmations();
+        }
+
+        function loadConfirmations() {
+            const confirmations = JSON.parse(localStorage.getItem('laura-felipe-confirmations') || '[]');
+            const container = document.getElementById('confirmationsContainer');
+            if (!confirmations.length) {
+                container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--sage);">Sin confirmaciones</div>';
+                return;
+            }
+            container.innerHTML = confirmations.map(conf => {
+                const group = groups.find(g => g.id === conf.groupId);
+                if (!group) return '';
+                const status = conf.status === 'confirmed' ? '✓ Confirmó' : '✗ Rechazó';
+                return `
+                    <div class="group-card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div><strong>${group.name}</strong><br><small style="color: var(--sage);">${group.members.length} personas</small></div>
+                            <div style="text-align: right;"><strong>${status}</strong><br><small style="color: var(--sage);">${new Date(conf.timestamp).toLocaleDateString()}</small></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function downloadCSV() {
+            const confirmations = JSON.parse(localStorage.getItem('laura-felipe-confirmations') || '[]');
+            let csv = 'Grupo,Personas,Respuesta,Fecha\n';
+            confirmations.forEach(conf => {
+                const group = groups.find(g => g.id === conf.groupId);
+                if (group) csv += `"${group.name}","${group.members.length}","${conf.status}","${new Date(conf.timestamp).toLocaleDateString()}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'confirmaciones-boda.csv';
+            a.click();
+        }
+
+        function downloadJSON() {
+            const confirmations = JSON.parse(localStorage.getItem('laura-felipe-confirmations') || '[]');
+            const blob = new Blob([JSON.stringify(confirmations, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'confirmaciones-boda.json';
+            a.click();
+        }
+
+        function showMessage(text) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message success show';
+            setTimeout(() => msg.classList.remove('show'), 3000);
+        }
+
+        function handleImport() {
+            const file = document.getElementById('importFile').files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported) && imported.every(g => g.name && Array.isArray(g.members))) {
+                        groups = imported;
+                        saveGroups();
+                        updateStats();
+                        renderGroups();
+                        showMessage('✅ Grupos importados');
+                    } else {
+                        showMessage('❌ Formato inválido');
+                    }
+                } catch (error) {
+                    showMessage('❌ Error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        loadGroups();
+    </script>
+</body>
+</html>
