@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Laura & Felipe</title>
+    <title>Admin - Laura & Felipe</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,6 +25,7 @@
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, var(--cream) 0%, #f5f0e8 100%);
             min-height: 100vh;
+            padding: 20px;
         }
 
         /* LOGIN */
@@ -33,7 +34,6 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px;
         }
 
         .login-container.hidden {
@@ -53,14 +53,8 @@
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             color: var(--dark);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .login-card p {
-            text-align: center;
-            color: var(--text);
             margin-bottom: 30px;
+            text-align: center;
         }
 
         .form-group {
@@ -73,44 +67,72 @@
             font-weight: 600;
             color: var(--dark);
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 8px;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, textarea {
             width: 100%;
-            padding: 12px 15px;
+            padding: 12px;
             border: 1px solid var(--mint);
             border-radius: 6px;
             font-size: 14px;
-            color: var(--dark);
             font-family: 'Montserrat', sans-serif;
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, textarea:focus {
             outline: none;
             border-color: var(--sage);
             box-shadow: 0 0 0 3px rgba(157, 180, 160, 0.1);
         }
 
-        .btn-login {
-            width: 100%;
-            padding: 14px;
+        .btn {
+            padding: 12px 24px;
             background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
             color: white;
             border: none;
             border-radius: 6px;
             font-weight: 600;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-login:hover {
+        .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+
+        .btn-copy {
+            background: var(--sage);
+            font-size: 12px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-copy.copied {
+            background: #27ae60;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            padding: 6px 12px;
+            font-size: 11px;
+        }
+
+        .btn-delete:hover {
+            background: #c0392b;
+        }
+
+        .btn-logout {
+            background: #e74c3c;
+            padding: 8px 15px;
+            font-size: 12px;
         }
 
         .error-message {
@@ -128,8 +150,8 @@
         /* DASHBOARD */
         .dashboard {
             display: none;
-            min-height: 100vh;
-            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .dashboard.active {
@@ -138,10 +160,10 @@
 
         .header {
             background: white;
-            padding: 30px 40px;
-            margin-bottom: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -153,41 +175,26 @@
             color: var(--dark);
         }
 
-        .user-info {
+        .header-right {
             text-align: right;
         }
 
-        .user-info p {
+        .header-right p {
             color: var(--text);
-            margin-bottom: 5px;
             font-size: 13px;
-        }
-
-        .btn-logout {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .btn-logout:hover {
-            background: #c0392b;
+            margin-bottom: 10px;
         }
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
         .stat-card {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             text-align: center;
@@ -195,91 +202,94 @@
 
         .stat-number {
             font-family: 'Playfair Display', serif;
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 900;
             color: var(--sage);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .stat-label {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text);
             text-transform: uppercase;
-            letter-spacing: 1px;
             font-weight: 600;
         }
 
-        .container-main {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
+        /* MAIN CONTENT */
+        .main-content {
             background: white;
-            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            flex-wrap: wrap;
+            padding: 30px;
         }
 
-        .tab-btn {
-            padding: 10px 20px;
-            border: none;
-            background: transparent;
-            color: var(--text);
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            color: var(--sage);
-            border-bottom-color: var(--sage);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* GRUPOS */
-        .grupos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .grupo-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--sage);
-        }
-
-        .grupo-name {
+        .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 18px;
+            font-size: 24px;
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--mint);
+        }
+
+        .form-section {
+            background: linear-gradient(135deg, rgba(197, 221, 213, 0.1) 0%, rgba(212, 175, 106, 0.05) 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(157, 180, 160, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        /* GRUPOS LIST */
+        .grupos-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .grupo-item {
+            background: linear-gradient(135deg, rgba(157, 180, 160, 0.08) 0%, rgba(197, 221, 213, 0.08) 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--sage);
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .grupo-info h3 {
+            font-size: 16px;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .grupo-members {
+            font-size: 12px;
+            color: var(--text);
+            max-height: 40px;
+            overflow: hidden;
         }
 
         .grupo-status {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            padding: 4px 10px;
+            padding: 6px 10px;
             border-radius: 4px;
             text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 15px;
+            text-align: center;
+            min-width: 100px;
         }
 
         .status-pending {
@@ -297,181 +307,90 @@
             color: white;
         }
 
-        .miembros {
-            background: linear-gradient(135deg, rgba(197, 221, 213, 0.15), rgba(212, 175, 106, 0.08));
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            font-size: 12px;
-            max-height: 100px;
-            overflow-y: auto;
+        .grupo-actions {
+            display: flex;
+            gap: 5px;
         }
 
-        .miembro {
-            padding: 4px 0;
-            color: var(--text);
-        }
-
-        .miembro::before {
-            content: "• ";
-            color: var(--sage);
-            font-weight: 600;
-            margin-right: 5px;
-        }
-
-        .btn-copy {
-            width: 100%;
-            padding: 10px;
-            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 8px;
-        }
-
-        .btn-copy:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(157, 180, 160, 0.3);
-        }
-
-        .btn-copy.copied {
-            background: #27ae60;
-        }
-
-        .btn-small {
-            padding: 6px 12px;
-            background: #3498db;
+        .btn-action {
+            padding: 6px 10px;
+            font-size: 11px;
+            background: var(--sage);
             color: white;
             border: none;
             border-radius: 4px;
-            font-size: 11px;
-            cursor: pointer;
-            margin-right: 5px;
-            font-weight: 600;
-        }
-
-        .btn-small.delete {
-            background: #e74c3c;
-        }
-
-        .btn-small:hover {
-            opacity: 0.8;
-        }
-
-        /* ADMIN FORM */
-        .admin-section {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-        }
-
-        .admin-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--dark);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--mint);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-row.full {
-            grid-template-columns: 1fr;
-        }
-
-        .btn-submit {
-            padding: 14px 30px;
-            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
+        .btn-action:hover {
+            background: var(--mint);
         }
 
-        /* CONFIRMACIONES */
-        .confirmation-list {
-            display: grid;
-            gap: 15px;
+        .btn-action.delete {
+            background: #e74c3c;
         }
 
-        .confirmation-item {
-            display: flex;
-            justify-content: space-between;
+        .btn-action.delete:hover {
+            background: #c0392b;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
             align-items: center;
-            padding: 15px;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
             background: white;
-            border-radius: 8px;
-            border-left: 4px solid var(--sage);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
-        .confirmation-item.confirmed {
-            border-left-color: #27ae60;
-        }
-
-        .confirmation-item.rejected {
-            border-left-color: #e74c3c;
-        }
-
-        .confirmation-info h3 {
-            font-size: 15px;
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
             color: var(--dark);
-            margin-bottom: 5px;
+            margin-bottom: 25px;
         }
 
-        .confirmation-info p {
-            font-size: 12px;
+        .close-modal {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
             color: var(--text);
         }
 
-        .confirmation-status {
-            font-weight: 600;
-            font-size: 13px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            text-transform: uppercase;
+        .close-modal:hover {
+            color: var(--dark);
         }
 
-        .status-conf {
-            background: #27ae60;
-            color: white;
-        }
-
-        .status-rej {
-            background: #e74c3c;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 20px;
+        @media (max-width: 900px) {
+            .grupo-item {
+                grid-template-columns: 1fr;
             }
 
-            .grupos-grid {
-                grid-template-columns: 1fr;
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
             }
 
             .form-row {
@@ -485,17 +404,16 @@
     <div class="login-container" id="loginContainer">
         <div class="login-card">
             <h1>Laura & Felipe</h1>
-            <p>Panel de Administración</p>
             <form id="loginForm">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" required placeholder="tu@email.com">
+                    <input type="email" id="email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" required placeholder="••••••••">
+                    <input type="password" id="password" required>
                 </div>
-                <button type="submit" class="btn-login">Ingresar</button>
+                <button type="submit" class="btn" style="width: 100%;">Ingresar</button>
                 <div class="error-message" id="errorMessage"></div>
             </form>
         </div>
@@ -505,89 +423,89 @@
     <div class="dashboard" id="dashboard">
         <div class="header">
             <h1>Panel de Control</h1>
-            <div class="user-info">
+            <div class="header-right">
                 <p>Usuario: <strong id="userEmail"></strong></p>
-                <button class="btn-logout" id="logoutBtn">Cerrar Sesión</button>
+                <button class="btn btn-logout" id="logoutBtn">Cerrar Sesión</button>
             </div>
         </div>
 
-        <div class="container-main">
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalConfirmed">0</div>
-                    <div class="stat-label">Confirmados</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalRejected">0</div>
-                    <div class="stat-label">No Pueden Asistir</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalPending">0</div>
-                    <div class="stat-label">Pendientes</div>
-                </div>
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalGroups">0</div>
+                <div class="stat-label">Total de Grupos</div>
             </div>
-
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="grupos">Grupos & Links</button>
-                <button class="tab-btn" data-tab="administracion">Administración</button>
-                <button class="tab-btn" data-tab="confirmaciones">Confirmaciones</button>
+            <div class="stat-card">
+                <div class="stat-number" id="totalConfirmed">0</div>
+                <div class="stat-label">Confirmados</div>
             </div>
-
-            <!-- TAB: GRUPOS -->
-            <div id="grupos" class="tab-content active">
-                <div class="grupos-grid" id="gruposGrid">
-                    <!-- Se llena dinámicamente -->
-                </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalRejected">0</div>
+                <div class="stat-label">No Asisten</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPending">0</div>
+                <div class="stat-label">Pendientes</div>
+            </div>
+        </div>
 
-            <!-- TAB: ADMINISTRACIÓN -->
-            <div id="administracion" class="tab-content">
-                <div class="admin-section">
-                    <div class="admin-title">Importar Grupos Predeterminados</div>
-                    <p style="margin-bottom: 20px; color: var(--text);">Restaura los 44 grupos originales si los eliminaste accidentalmente:</p>
-                    <button type="button" class="btn-submit" onclick="importDefault44Groups()">📥 Importar 44 Grupos</button>
-                </div>
-
-                <div class="admin-section">
-                    <div class="admin-title">Crear Nuevo Grupo</div>
-                    <form id="newGroupForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="groupName">Nombre del Grupo</label>
-                                <input type="text" id="groupName" required placeholder="Ej: Alberto Calle">
-                            </div>
+        <div class="main-content">
+            <!-- CREAR GRUPO -->
+            <div class="section-title">Crear Nuevo Grupo</div>
+            <div class="form-section">
+                <form id="newGroupForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre del Grupo</label>
+                            <input type="text" id="groupName" required placeholder="Ej: Alberto Calle">
                         </div>
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="groupMembers">Miembros (uno por línea)</label>
-                                <textarea id="groupMembers" required placeholder="Alberto Calle&#10;Esposa Alberto&#10;Hijo Alberto" rows="5"></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="submit" class="btn" style="width: 100%; margin-top: 5px;">➕ Crear Grupo</button>
                         </div>
-                        <button type="submit" class="btn-submit">Crear Grupo</button>
-                    </form>
-                </div>
-
-                <div class="admin-section">
-                    <div class="admin-title">Editar Grupos Existentes</div>
-                    <div id="editGroupsList">
-                        <p style="color: var(--text); text-align: center;">Cargando grupos...</p>
                     </div>
-                </div>
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Miembros (uno por línea)</label>
+                            <textarea id="groupMembers" required placeholder="Alberto Calle&#10;Esposa Alberto&#10;Hijo Alberto" rows="4"></textarea>
+                        </div>
+                    </div>
+                </form>
             </div>
 
-            <!-- TAB: CONFIRMACIONES -->
-            <div id="confirmaciones" class="tab-content">
-                <div class="confirmation-list" id="confirmationList">
-                    <p style="text-align: center; color: var(--text);">Sin confirmaciones aún</p>
-                </div>
+            <!-- IMPORTAR 44 GRUPOS -->
+            <button class="btn" onclick="importDefault44Groups()" style="margin-bottom: 30px; background: #3498db;">📥 Importar 44 Grupos Originales</button>
+
+            <!-- LISTA DE GRUPOS -->
+            <div class="section-title">Tus Grupos</div>
+            <div class="grupos-list" id="gruposList">
+                <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeEditModal()">&times;</span>
+            <div class="modal-title">Editar Grupo</div>
+            <form id="editGroupForm">
+                <div class="form-group">
+                    <label>Nombre del Grupo</label>
+                    <input type="text" id="editGroupName" required>
+                </div>
+                <div class="form-group">
+                    <label>Miembros (uno por línea)</label>
+                    <textarea id="editGroupMembers" required rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Guardar Cambios</button>
+            </form>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-        import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set, remove } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
@@ -606,7 +524,7 @@
 
         let groups = {};
         let confirmations = {};
-        let nextGroupId = 1;
+        let editingGroupId = null;
 
         function generateHash(str) {
             let hash = 0;
@@ -618,42 +536,23 @@
             return Math.abs(hash).toString(36).substring(0, 8);
         }
 
-        function getGroupHash(groupId, groupName) {
-            return generateHash(groupId + groupName);
-        }
-
-        // DOM Elements
+        // DOM
         const loginContainer = document.getElementById('loginContainer');
         const dashboard = document.getElementById('dashboard');
         const loginForm = document.getElementById('loginForm');
         const errorMessage = document.getElementById('errorMessage');
         const userEmail = document.getElementById('userEmail');
         const logoutBtn = document.getElementById('logoutBtn');
-        const gruposGrid = document.getElementById('gruposGrid');
-        const confirmationList = document.getElementById('confirmationList');
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
         const newGroupForm = document.getElementById('newGroupForm');
-        const editGroupsList = document.getElementById('editGroupsList');
+        const gruposList = document.getElementById('gruposList');
+        const editModal = document.getElementById('editModal');
+        const editGroupForm = document.getElementById('editGroupForm');
 
-        // Tabs
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
-
-        // Login
+        // LOGIN
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
             try {
-                await signInWithEmailAndPassword(auth, email, password);
+                await signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value);
                 errorMessage.classList.remove('show');
             } catch (error) {
                 errorMessage.textContent = 'Email o contraseña incorrectos';
@@ -661,35 +560,12 @@
             }
         });
 
-        // Logout
+        // LOGOUT
         logoutBtn.addEventListener('click', async () => {
             await signOut(auth);
         });
 
-        // Crear grupo
-        newGroupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('groupName').value;
-            const membersText = document.getElementById('groupMembers').value;
-            const members = membersText.split('\n').map(m => m.trim()).filter(m => m);
-
-            const newId = Math.max(...Object.keys(groups).map(k => parseInt(groups[k].id) || 0), 0) + 1;
-
-            try {
-                await set(ref(database, `groups/${newId}`), {
-                    id: newId,
-                    name: name,
-                    members: members
-                });
-
-                newGroupForm.reset();
-                alert('Grupo creado exitosamente');
-            } catch (error) {
-                alert('Error: ' + error.message);
-            }
-        });
-
-        // Auth State
+        // AUTH STATE
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 loginContainer.classList.add('hidden');
@@ -702,136 +578,137 @@
             }
         });
 
+        // CREAR GRUPO
+        newGroupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('groupName').value;
+            const members = document.getElementById('groupMembers').value.split('\n').map(m => m.trim()).filter(m => m);
+            const id = Math.max(...Object.keys(groups).map(k => parseInt(k) || 0), 0) + 1;
+
+            try {
+                await set(ref(database, `groups/${id}`), { id, name, members });
+                newGroupForm.reset();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+        // EDITAR GRUPO
+        editGroupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('editGroupName').value;
+            const members = document.getElementById('editGroupMembers').value.split('\n').map(m => m.trim()).filter(m => m);
+
+            try {
+                await set(ref(database, `groups/${editingGroupId}`), { id: editingGroupId, name, members });
+                closeEditModal();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+        // CARGAR DATOS
         function loadData() {
-            const groupsRef = ref(database, 'groups');
-            onValue(groupsRef, (snapshot) => {
+            onValue(ref(database, 'groups'), (snapshot) => {
                 groups = {};
-                const data = snapshot.val() || {};
-                Object.values(data).forEach(group => {
-                    groups[group.id] = group;
-                    nextGroupId = Math.max(nextGroupId, group.id + 1);
+                (snapshot.val() || {});
+                Object.entries(snapshot.val() || {}).forEach(([key, value]) => {
+                    groups[value.id] = value;
                 });
-                loadGrupos();
-                renderEditGroups();
+                renderGroups();
+                updateStats();
             });
 
-            const confRef = ref(database, 'confirmations');
-            onValue(confRef, (snapshot) => {
+            onValue(ref(database, 'confirmations'), (snapshot) => {
                 confirmations = snapshot.val() || {};
-                displayConfirmations();
                 updateStats();
             });
         }
 
-        function loadGrupos() {
-            gruposGrid.innerHTML = Object.values(groups).map(group => {
-                const hash = getGroupHash(group.id, group.name);
-                const status = confirmations[group.id];
-                let statusClass = 'status-pending';
-                let statusText = 'Pendiente';
-
-                if (status) {
-                    if (status.status === 'confirmed') {
-                        statusClass = 'status-confirmed';
-                        statusText = 'Confirmado';
-                    } else {
-                        statusClass = 'status-rejected';
-                        statusText = 'No asiste';
-                    }
-                }
-
-                const link = `${window.location.origin}/invitacion.html?group=${hash}`;
-
-                return `
-                    <div class="grupo-card">
-                        <div class="grupo-name">${group.name}</div>
-                        <span class="grupo-status ${statusClass}">${statusText}</span>
-                        <div class="miembros">
-                            ${group.members.map(m => `<div class="miembro">${m}</div>`).join('')}
-                        </div>
-                        <button class="btn-copy" onclick="copyToClipboard('${link}', this)">📋 Copiar Link</button>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function renderEditGroups() {
-            editGroupsList.innerHTML = Object.values(groups).map(group => `
-                <div class="grupo-card" style="margin-bottom: 20px;">
-                    <div class="grupo-name">${group.name}</div>
-                    <div class="miembros">
-                        ${group.members.map(m => `<div class="miembro">${m}</div>`).join('')}
-                    </div>
-                    <button class="btn-small delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
-                </div>
-            `).join('');
-        }
-
-        function displayConfirmations() {
-            if (Object.keys(confirmations).length === 0) {
-                confirmationList.innerHTML = '<p style="text-align: center; color: var(--text);">Sin confirmaciones aún</p>';
+        // RENDERIZAR GRUPOS
+        function renderGroups() {
+            if (Object.keys(groups).length === 0) {
+                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos. Crea uno o importa los 44 originales.</p>';
                 return;
             }
 
-            const items = Object.values(confirmations)
-                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-                .map(conf => {
-                    const date = new Date(conf.timestamp).toLocaleString('es-CO');
-                    const status = conf.status === 'confirmed' ? 'Confirmado' : 'No asiste';
-                    const statusClass = conf.status === 'confirmed' ? 'status-conf' : 'status-rej';
-                    
+            gruposList.innerHTML = Object.values(groups)
+                .sort((a, b) => a.id - b.id)
+                .map(group => {
+                    const hash = generateHash(group.id + group.name);
+                    const conf = confirmations[group.id];
+                    let statusClass = 'status-pending';
+                    let statusText = 'Pendiente';
+
+                    if (conf) {
+                        if (conf.status === 'confirmed') {
+                            statusClass = 'status-confirmed';
+                            statusText = 'Confirmado';
+                        } else {
+                            statusClass = 'status-rejected';
+                            statusText = 'No Asiste';
+                        }
+                    }
+
+                    const link = `${window.location.origin}/invitacion.html?group=${hash}`;
+
                     return `
-                        <div class="confirmation-item ${conf.status}">
-                            <div class="confirmation-info">
-                                <h3>${conf.groupName}</h3>
-                                <p>${date}</p>
+                        <div class="grupo-item">
+                            <div class="grupo-info">
+                                <h3>${group.name}</h3>
+                                <div class="grupo-members">${group.members.join(', ')}</div>
                             </div>
-                            <div class="confirmation-status ${statusClass}">${status}</div>
+                            <div class="grupo-status ${statusClass}">${statusText}</div>
+                            <button type="button" class="btn-action" onclick="copyLink('${link}')">📋 Copiar</button>
+                            <div class="grupo-actions">
+                                <button type="button" class="btn-action" onclick="openEditModal(${group.id})">✏️ Editar</button>
+                                <button type="button" class="btn-action delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
+                            </div>
                         </div>
                     `;
                 })
                 .join('');
-
-            confirmationList.innerHTML = items;
         }
 
+        // STATS
         function updateStats() {
+            document.getElementById('totalGroups').textContent = Object.keys(groups).length;
             const confs = Object.values(confirmations);
-            const confirmed = confs.filter(c => c.status === 'confirmed').length;
-            const rejected = confs.filter(c => c.status === 'rejected').length;
-            const pending = Object.keys(groups).length - confirmed - rejected;
-
-            document.getElementById('totalConfirmed').textContent = confirmed;
-            document.getElementById('totalRejected').textContent = rejected;
-            document.getElementById('totalPending').textContent = pending;
+            document.getElementById('totalConfirmed').textContent = confs.filter(c => c.status === 'confirmed').length;
+            document.getElementById('totalRejected').textContent = confs.filter(c => c.status === 'rejected').length;
+            document.getElementById('totalPending').textContent = Object.keys(groups).length - confs.length;
         }
 
-        window.copyToClipboard = function(text, btn) {
-            navigator.clipboard.writeText(text).then(() => {
-                const original = btn.textContent;
-                btn.textContent = '✓ Copiado';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = original;
-                    btn.classList.remove('copied');
-                }, 2000);
-            });
+        // FUNCIONES GLOBALES
+        window.copyLink = function(link) {
+            navigator.clipboard.writeText(link);
+            alert('Link copiado al portapapeles');
+        };
+
+        window.openEditModal = function(groupId) {
+            editingGroupId = groupId;
+            const group = groups[groupId];
+            document.getElementById('editGroupName').value = group.name;
+            document.getElementById('editGroupMembers').value = group.members.join('\n');
+            editModal.classList.add('show');
+        };
+
+        window.closeEditModal = function() {
+            editModal.classList.remove('show');
+            editingGroupId = null;
         };
 
         window.deleteGroup = async function(groupId) {
-            if (confirm('¿Eliminar este grupo?')) {
-                try {
-                    await remove(ref(database, `groups/${groupId}`));
-                } catch (error) {
-                    alert('Error: ' + error.message);
-                }
+            if (!confirm('¿Eliminar este grupo?')) return;
+            try {
+                await remove(ref(database, `groups/${groupId}`));
+            } catch (error) {
+                alert('Error: ' + error.message);
             }
         };
 
         window.importDefault44Groups = async function() {
-            if (!confirm('¿Importar los 44 grupos originales?')) {
-                return;
-            }
+            if (!confirm('¿Importar los 44 grupos originales?')) return;
 
             const defaultGroups = [
                 { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
@@ -884,7 +761,7 @@
                 for (let group of defaultGroups) {
                     await set(ref(database, `groups/${group.id}`), group);
                 }
-                alert('✅ Los 44 grupos se importaron correctamente');
+                alert('✅ 44 grupos importados correctamente');
             } catch (error) {
                 alert('Error: ' + error.message);
             }
