@@ -37,7 +37,6 @@
             overflow: hidden;
         }
 
-        /* HEADER WITH IMAGE */
         .hero {
             position: relative;
             height: 500px;
@@ -99,7 +98,7 @@
 
         .hero-group {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 18px;
             color: rgba(255, 255, 255, 0.95);
             font-style: italic;
             letter-spacing: 2px;
@@ -185,7 +184,7 @@
 
         .countdown-label {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 20px;
             color: white;
             margin-bottom: 30px;
             letter-spacing: 2px;
@@ -233,6 +232,7 @@
         .section-card:nth-child(2) { animation-delay: 0.5s; }
         .section-card:nth-child(3) { animation-delay: 0.6s; }
         .section-card:nth-child(4) { animation-delay: 0.7s; }
+        .section-card:nth-child(5) { animation-delay: 0.8s; }
 
         @keyframes fadeInSection {
             from {
@@ -247,7 +247,7 @@
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 28px;
+            font-size: 24px;
             color: var(--dark);
             margin-bottom: 2rem;
             text-align: center;
@@ -268,38 +268,52 @@
         }
 
         .members-list {
-            background: linear-gradient(135deg, rgba(197, 221, 213, 0.15), rgba(212, 175, 106, 0.08));
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 2rem;
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 0;
         }
 
         .member {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(157, 180, 160, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
+            border-radius: 8px;
+            border: 1px solid rgba(157, 180, 160, 0.2);
             font-size: 14px;
             color: var(--dark);
         }
 
-        .member:last-child {
-            border-bottom: none;
-        }
-
         .member::before {
-            content: '✓ ';
+            content: "✓";
             color: var(--sage);
             font-weight: 600;
-            margin-right: 8px;
+            margin-right: 0.75rem;
+            font-size: 16px;
         }
 
-        .info-box {
-            background: linear-gradient(135deg, rgba(212, 175, 106, 0.15), rgba(197, 221, 213, 0.15));
-            border-left: 4px solid var(--gold);
-            padding: 1rem;
-            border-radius: 6px;
+        .event-detail {
             margin-bottom: 2rem;
-            font-size: 13px;
-            color: var(--text);
+        }
+
+        .event-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-detail-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sage);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .event-detail-content {
+            font-size: 15px;
+            color: var(--dark);
+            line-height: 1.6;
+            font-weight: 500;
         }
 
         .form-title {
@@ -379,6 +393,16 @@
             display: block;
         }
 
+        .info-box {
+            background: linear-gradient(135deg, rgba(212, 175, 106, 0.15), rgba(197, 221, 213, 0.15));
+            border-left: 4px solid var(--gold);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            font-size: 13px;
+            color: var(--text);
+        }
+
         .footer {
             background: linear-gradient(135deg, var(--sage), var(--mint));
             color: white;
@@ -421,7 +445,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- HERO SECTION -->
         <div class="hero">
             <img src="IMG_8452.jpg" alt="Laura & Felipe" class="hero-image">
             <div class="hero-overlay">
@@ -431,15 +454,13 @@
         </div>
 
         <div class="content">
-            <!-- SECURITY NOTICE -->
             <div class="security-notice">
                 <span class="security-icon">🔒</span>
-                <span class="security-text"><strong>Esta invitación es personal.</strong> Los datos que veas aquí son privados y específicos para tu grupo.</span>
+                <span class="security-text"><strong>Esta invitación es personal.</strong> Los datos que ves aquí son privados y específicos para tu grupo.</span>
             </div>
 
-            <!-- COUNTDOWN -->
             <div class="countdown-section">
-                <div class="countdown-label">FALTAN</div>
+                <div class="countdown-label">FALTAN PARA NUESTRO GRAN DÍA</div>
                 <div class="countdown">
                     <div class="countdown-item">
                         <span class="countdown-number" id="days">0</span>
@@ -451,27 +472,44 @@
                     </div>
                     <div class="countdown-item">
                         <span class="countdown-number" id="minutes">0</span>
-                        <span class="countdown-label-item">Minutos</span>
+                        <span class="countdown-label-item">Min</span>
                     </div>
                     <div class="countdown-item">
                         <span class="countdown-number" id="seconds">0</span>
-                        <span class="countdown-label-item">Segundos</span>
+                        <span class="countdown-label-item">Seg</span>
                     </div>
                 </div>
             </div>
 
-            <!-- MEMBERS SECTION -->
             <div class="section-card">
-                <h2 class="section-title">Ustedes</h2>
-                <div class="members-list" id="membersList">
-                    <!-- Se llena dinámicamente -->
+                <h2 class="section-title">Miembros de tu Grupo</h2>
+                <div class="members-list" id="membersList"></div>
+            </div>
+
+            <div class="section-card">
+                <h2 class="section-title">La Celebración</h2>
+                <div class="event-detail">
+                    <div class="event-detail-label">Día y Hora</div>
+                    <div class="event-detail-content">Sábado, 12 de Diciembre • 6:00 PM</div>
                 </div>
-                <div class="info-box">
-                    💝 Cada persona en esta lista está especialmente invitada a nuestro gran día
+                <div class="event-detail">
+                    <div class="event-detail-label">Ubicación</div>
+                    <div class="event-detail-content">
+                        Club Campestre Palmira<br>
+                        Salón Fundadores<br>
+                        Palmira, Valle del Cauca
+                    </div>
+                </div>
+                <div class="event-detail">
+                    <div class="event-detail-label">Dress Code</div>
+                    <div class="event-detail-content">Formal</div>
+                </div>
+                <div class="event-detail">
+                    <div class="event-detail-label">Experiencia</div>
+                    <div class="event-detail-content">Te invitamos a una cena en celebración de nuestra unión</div>
                 </div>
             </div>
 
-            <!-- CONFIRMATION SECTION -->
             <div class="section-card">
                 <h2 class="form-title">Confirma tu Asistencia</h2>
                 <div class="info-box">
@@ -493,7 +531,6 @@
                 </div>
             </div>
 
-            <!-- FOOTER -->
             <div class="footer">
                 Hecho con <span class="heart">♥</span> para Laura & Felipe
             </div>
