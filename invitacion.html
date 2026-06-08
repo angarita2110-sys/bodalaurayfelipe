@@ -4,353 +4,370 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laura & Felipe - Nuestra Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --sage: #9db4a0;
-            --mint: #dbece6;
-            --mint-deep: #bed7ce;
-            --cream: #fbf5ee;
-            --paper: #fffaf5;
-            --gold: #c9a15d;
-            --gold-soft: #eadbc3;
-            --charcoal: #4f4f4f;
-            --dark: #2f2f2f;
-            --text: #68625c;
+            --sage: #9fb8ad;
+            --sage-soft: #dcebe6;
+            --mint: #c5ddd5;
+            --cream: #fbf6ee;
+            --cream-2: #fffaf4;
+            --gold: #c8a061;
+            --gold-soft: rgba(200,160,97,.32);
+            --charcoal: #464646;
+            --text: #6c655f;
+            --white: #fffdf9;
         }
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, var(--cream) 0%, #f3ece3 100%);
+            background: #e9eee9;
             color: var(--text);
         }
         .container {
-            max-width: 680px;
+            max-width: 760px;
             margin: 0 auto;
-            background: var(--paper);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            background: var(--cream);
             overflow: hidden;
-        }
-        .hero {
+            box-shadow: 0 22px 70px rgba(68, 68, 68, 0.16);
             position: relative;
-            min-height: 560px;
-            background: linear-gradient(rgba(35,35,35,0.42), rgba(35,35,35,0.50)), url('IMG_8452.jpg');
+        }
+        .container::before, .container::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(200,160,97,.16);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .container::before { top: 560px; left: -150px; }
+        .container::after { top: 1040px; right: -170px; }
+        .hero {
+            height: 540px;
+            background:
+                linear-gradient(180deg, rgba(28,28,28,.28) 0%, rgba(28,28,28,.50) 100%),
+                url('IMG_8452.jpg');
             background-size: cover;
-            background-position: center;
+            background-position: center 40%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 70px 28px 150px;
+            position: relative;
+            isolation: isolate;
         }
-        .hero::before,
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 24px;
+            border: 1px solid rgba(255,255,255,.32);
+            border-radius: 22px;
+            z-index: -1;
+        }
         .hero::after {
             content: "";
             position: absolute;
-            width: 220px;
-            height: 220px;
-            border: 1px solid rgba(255,255,255,0.22);
-            border-radius: 60% 40% 58% 42%;
-            pointer-events: none;
+            left: -8%; right: -8%; bottom: -2px;
+            height: 112px;
+            background: var(--cream);
+            clip-path: ellipse(62% 48% at 50% 100%);
         }
-        .hero::before { top: -70px; left: -70px; transform: rotate(24deg); }
-        .hero::after { right: -90px; bottom: 70px; transform: rotate(-18deg); }
-        .hero-inner { position: relative; z-index: 2; color: white; max-width: 520px; }
-        .date-line {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            justify-content: center;
+        .hero-inner { padding: 0 34px; transform: translateY(-14px); }
+        .eyebrow {
+            color: rgba(255,255,255,.92);
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             margin-bottom: 18px;
-            font-family: 'Playfair Display', serif;
-            font-size: 14px;
-            letter-spacing: 0.08em;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
         }
-        .date-line::before,
-        .date-line::after {
+        .eyebrow::before, .eyebrow::after {
             content: "";
+            display: block;
+            width: 58px;
             height: 1px;
-            width: 78px;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,.55);
         }
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 58px;
+            font-size: clamp(44px, 9vw, 74px);
+            line-height: .95;
             color: white;
-            line-height: 1;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+            text-shadow: 0 6px 22px rgba(0,0,0,.32);
+            font-weight: 900;
         }
         .hero-quote {
-            margin-top: 28px;
-            font-size: 14px;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.92);
-            font-weight: 400;
-        }
-        .wave-top {
-            position: relative;
-            height: 98px;
-            margin-top: -98px;
-            z-index: 4;
-            background:
-                radial-gradient(80% 95px at 10% 115%, var(--mint) 0 62%, transparent 63%),
-                radial-gradient(95% 115px at 70% 108%, var(--paper) 0 62%, transparent 63%);
+            max-width: 470px;
+            margin: 24px auto 0;
+            color: rgba(255,255,255,.93);
+            font-size: 15px;
+            line-height: 1.65;
+            font-weight: 300;
         }
         .content {
+            padding: 0 42px 54px;
             position: relative;
-            padding: 0 34px 46px;
-            background: var(--paper);
+            z-index: 2;
         }
-        .content::before {
+        .ornament-line {
+            height: 58px;
+            position: relative;
+            margin: 0 -42px 4px;
+        }
+        .ornament-line::before,
+        .ornament-line::after {
             content: "";
             position: absolute;
-            inset: 0;
-            opacity: 0.28;
-            background-image:
-                linear-gradient(120deg, transparent 0 45%, rgba(201,161,93,0.22) 46%, transparent 47%),
-                radial-gradient(circle at 12% 24%, rgba(157,180,160,0.18), transparent 18%),
-                radial-gradient(circle at 90% 62%, rgba(201,161,93,0.14), transparent 22%);
-            pointer-events: none;
+            left: -7%; right: -7%; top: 22px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+            transform: rotate(-2deg);
         }
-        .security-notice,
-        .countdown-section,
-        .section,
-        .footer { position: relative; z-index: 2; }
-        .security-notice {
-            background: rgba(255,255,255,0.72);
-            border: 1px solid rgba(201,161,93,0.22);
-            border-left: 4px solid var(--gold);
-            padding: 14px 16px;
-            border-radius: 999px;
-            margin: 0 auto 28px;
-            max-width: 560px;
-            font-size: 12px;
-            color: var(--text);
-            text-align: center;
-            box-shadow: 0 12px 30px rgba(88, 76, 65, 0.06);
+        .ornament-line::after {
+            top: 34px;
+            background: linear-gradient(90deg, transparent, rgba(159,184,173,.45), transparent);
+            transform: rotate(2.2deg);
         }
         .countdown-section {
-            width: 176px;
-            height: 176px;
-            margin: -56px auto 42px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.86);
-            border: 1px solid rgba(201,161,93,0.32);
-            box-shadow:
-                0 0 0 8px rgba(255,255,255,0.55),
-                0 0 0 11px rgba(201,161,93,0.22),
-                0 0 0 16px rgba(201,161,93,0.08),
-                0 22px 42px rgba(95, 79, 55, 0.12);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            width: min(330px, 92%);
+            margin: -86px auto 34px;
+            background: rgba(255,253,249,.96);
+            border-radius: 999px;
+            padding: 22px 24px 26px;
             text-align: center;
-            padding: 22px;
+            position: relative;
+            box-shadow: 0 18px 46px rgba(72,72,72,.12);
+            border: 1px solid rgba(200,160,97,.22);
+        }
+        .countdown-section::before,
+        .countdown-section::after {
+            content: "";
+            position: absolute;
+            inset: -12px;
+            border-radius: 999px;
+            border: 1px solid rgba(200,160,97,.55);
+            pointer-events: none;
+        }
+        .countdown-section::after {
+            inset: -20px;
+            border-color: rgba(200,160,97,.23);
+            transform: rotate(9deg);
         }
         .countdown-label {
             font-family: 'Playfair Display', serif;
             color: var(--gold);
-            font-size: 18px;
-            margin-bottom: 10px;
-            line-height: 1;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 700;
         }
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            width: 100%;
+            gap: 7px;
         }
-        .countdown-item { background: transparent; padding: 0; border-radius: 0; }
+        .countdown-item {
+            background: transparent;
+            padding: 4px 3px;
+            border-right: 1px solid rgba(200,160,97,.22);
+        }
+        .countdown-item:last-child { border-right: 0; }
         .countdown-number {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--dark);
-            line-height: 1;
+            color: var(--charcoal);
         }
         .countdown-text {
-            font-size: 8px;
+            font-size: 9px;
             color: var(--gold);
             text-transform: lowercase;
-            margin-top: 5px;
+            margin-top: 2px;
+            letter-spacing: .4px;
+        }
+        .security-notice {
+            width: min(560px, 100%);
+            margin: 0 auto 34px;
+            background: rgba(255,253,249,.78);
+            border: 1px solid rgba(200,160,97,.18);
+            padding: 13px 18px;
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--text);
+            text-align: center;
+            box-shadow: 0 10px 28px rgba(70,70,70,.05);
         }
         .section {
-            background: rgba(255,255,255,0.72);
-            border: 1px solid rgba(201,161,93,0.20);
+            position: relative;
+            background: rgba(255,253,249,.76);
+            border: 1px solid rgba(200,160,97,.16);
             border-radius: 28px;
-            padding: 38px 34px;
+            padding: 42px 38px;
             margin-bottom: 34px;
-            box-shadow: 0 18px 45px rgba(88, 76, 65, 0.07);
+            box-shadow: 0 14px 42px rgba(66,66,66,.06);
             overflow: hidden;
         }
         .section::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 7px;
-            background: linear-gradient(90deg, transparent, rgba(201,161,93,0.45), transparent);
+            inset: 12px;
+            border: 1px solid rgba(159,184,173,.20);
+            border-radius: 22px;
+            pointer-events: none;
         }
         .section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: var(--dark);
+            font-size: 30px;
+            color: var(--charcoal);
             margin-bottom: 10px;
             text-align: center;
-            border: none;
-            padding-bottom: 0;
-            line-height: 1.15;
+            font-weight: 700;
+            position: relative;
+        }
+        .section h2::after {
+            content: "";
+            display: block;
+            width: 78px;
+            height: 1px;
+            background: var(--gold);
+            margin: 16px auto 28px;
+            opacity: .68;
         }
         .section-subtitle {
             text-align: center;
             color: var(--gold);
             font-size: 12px;
-            margin-bottom: 30px;
-            letter-spacing: 0.02em;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-bottom: 26px;
         }
-        .guest-title {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            min-width: 180px;
-            padding: 8px 18px;
-            margin: 0 auto 18px;
-            border-radius: 999px;
-            background: var(--charcoal);
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            box-shadow: 0 10px 22px rgba(0,0,0,0.10);
-        }
-        .guest-wrap { text-align: center; margin-bottom: 22px; }
-        .detail-grid {
+        .event-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 14px;
-            margin-bottom: 26px;
+            margin: 20px 0 25px;
         }
         .event-detail {
-            background: rgba(251,245,238,0.85);
-            border: 1px solid rgba(201,161,93,0.18);
+            background: var(--cream-2);
+            border: 1px solid rgba(200,160,97,.14);
             border-radius: 18px;
-            padding: 18px 14px;
-            margin-bottom: 0;
+            padding: 20px 14px;
             text-align: center;
         }
         .event-icon {
             width: 46px;
             height: 46px;
             border-radius: 50%;
-            border: 1px solid rgba(201,161,93,0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin: 0 auto 12px;
+            display: grid;
+            place-items: center;
             color: var(--gold);
-            font-size: 22px;
-            background: #fff;
+            border: 1px solid rgba(200,160,97,.28);
+            background: white;
+            font-size: 20px;
         }
         .event-label {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            text-transform: none;
-            color: var(--dark);
-            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
             margin-bottom: 8px;
+            letter-spacing: 1.3px;
         }
         .event-content {
-            font-size: 12px;
-            color: var(--text);
+            font-size: 13px;
+            color: var(--charcoal);
             font-weight: 500;
             line-height: 1.55;
         }
         .love-note {
-            margin-top: 26px;
-            padding: 22px 24px;
-            border-top: 1px solid rgba(201,161,93,0.22);
-            border-bottom: 1px solid rgba(201,161,93,0.22);
-            color: var(--text);
+            margin: 26px auto 0;
+            max-width: 500px;
             font-size: 14px;
             line-height: 1.9;
-            text-align: center;
+            color: var(--text);
             font-style: italic;
+            text-align: center;
         }
-        .map-box {
-            margin-top: 28px;
-            border-radius: 22px;
+        .map-frame {
+            margin-top: 30px;
+            border-radius: 24px;
             overflow: hidden;
-            border: 10px solid rgba(255,255,255,0.78);
-            box-shadow: 0 15px 38px rgba(88,76,65,0.12);
+            border: 8px solid var(--white);
+            box-shadow: 0 14px 36px rgba(70,70,70,.10);
         }
         .rsvp-deadline {
             text-align: center;
             font-size: 12px;
-            color: var(--text);
-            margin-bottom: 22px;
+            color: var(--gold);
+            margin: -10px 0 24px;
+            letter-spacing: .5px;
         }
         .member {
-            position: relative;
-            background: linear-gradient(135deg, #fff 0%, rgba(219,236,230,0.45) 100%);
-            border: 1px solid rgba(201,161,93,0.20);
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(220,235,230,.85), rgba(255,253,249,.95));
+            border: 1px solid rgba(159,184,173,.24);
+            border-radius: 18px;
             padding: 18px;
             margin-bottom: 14px;
-            box-shadow: 0 12px 28px rgba(88,76,65,0.06);
+            box-shadow: 0 8px 20px rgba(76,76,76,.04);
         }
         .member-name {
             font-family: 'Playfair Display', serif;
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 14px;
+            color: var(--charcoal);
+            margin-bottom: 13px;
             text-align: center;
         }
-        .member-buttons { display: flex; gap: 10px; }
+        .member-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
         .member-btn {
-            flex: 1;
             padding: 12px 10px;
-            border: 1px solid rgba(157,180,160,0.55);
-            background: #fff;
-            color: var(--sage);
+            border: 1px solid rgba(200,160,97,.38);
+            background: var(--white);
+            color: var(--gold);
             border-radius: 999px;
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all .25s ease;
             text-transform: uppercase;
-            letter-spacing: 0.02em;
+            letter-spacing: .4px;
         }
         .member-btn.active,
         .member-btn:hover {
             background: var(--sage);
+            border-color: var(--sage);
             color: white;
-            box-shadow: 0 8px 18px rgba(157,180,160,0.28);
-        }
-        .member-btn:nth-child(2).active,
-        .member-btn:nth-child(2):hover {
-            background: var(--charcoal);
-            border-color: var(--charcoal);
+            box-shadow: 0 8px 20px rgba(159,184,173,.28);
         }
         .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--gold), #b98b45);
+            width: min(330px, 100%);
+            display: block;
+            margin: 26px auto 0;
+            padding: 15px 20px;
+            background: var(--charcoal);
             color: white;
             border: none;
             border-radius: 999px;
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
-            margin-top: 20px;
-            letter-spacing: 0.06em;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 14px 26px rgba(201,161,93,0.25);
-            transition: all 0.25s ease;
+            box-shadow: 0 12px 28px rgba(70,70,70,.18);
+            transition: all .25s ease;
         }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 18px 30px rgba(201,161,93,0.32); }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            background: var(--gold);
+        }
         .success {
             display: none;
             background: var(--sage);
@@ -363,51 +380,59 @@
         }
         .success.show { display: block; }
         .footer {
-            background: var(--charcoal);
+            background: #969896;
             color: white;
             text-align: center;
-            padding: 48px 32px;
+            padding: 54px 30px;
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            border-radius: 34px 34px 0 0;
-            margin-top: 18px;
+            font-size: 21px;
+            margin: 0 -42px -54px;
+            position: relative;
         }
-        .footer span {
-            display: block;
-            margin-top: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            color: rgba(255,255,255,0.72);
-            font-weight: 400;
+        .footer::before {
+            content: "";
+            position: absolute;
+            left: -8%; right: -8%; top: -1px;
+            height: 70px;
+            background: var(--cream);
+            clip-path: ellipse(60% 55% at 50% 0%);
         }
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 18px;
         }
         .modal.show { display: flex; }
         .modal-box {
-            background: var(--paper);
-            padding: 36px;
-            border-radius: 26px;
+            background: var(--cream-2);
+            padding: 38px 34px;
+            border-radius: 24px;
             text-align: center;
             max-width: 500px;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.24);
-            border: 1px solid rgba(201,161,93,0.22);
+            border: 1px solid rgba(200,160,97,.25);
+            box-shadow: 0 24px 70px rgba(0,0,0,.20);
         }
         .modal-title {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
-            margin-bottom: 14px;
-            color: var(--dark);
+            margin-bottom: 16px;
+            color: var(--charcoal);
         }
-        .modal-text { color: var(--text); margin-bottom: 28px; font-size: 14px; line-height: 1.7; }
-        .modal-buttons { display: flex; gap: 12px; }
+        .modal-text {
+            color: var(--text);
+            margin-bottom: 26px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
         .modal-btn {
             flex: 1;
             padding: 13px;
@@ -415,21 +440,32 @@
             border-radius: 999px;
             font-weight: 600;
             cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: .8px;
         }
-        .modal-btn.cancel { background: white; border: 1px solid var(--sage); color: var(--sage); }
-        .modal-btn.confirm { background: var(--sage); color: white; }
-        @media (max-width: 600px) {
-            .container { width: 100%; }
-            .hero { min-height: 520px; padding-bottom: 140px; }
-            .hero h1 { font-size: 44px; }
-            .date-line::before, .date-line::after { width: 50px; }
-            .content { padding: 0 18px 34px; }
-            .security-notice { border-radius: 18px; }
-            .countdown-section { width: 164px; height: 164px; margin-top: -48px; }
-            .section { padding: 32px 20px; border-radius: 24px; }
-            .detail-grid { grid-template-columns: 1fr; }
-            .member-buttons { flex-direction: column; }
-            .modal-buttons { flex-direction: column; }
+        .modal-btn.cancel {
+            background: white;
+            border: 1px solid rgba(200,160,97,.44);
+            color: var(--gold);
+        }
+        .modal-btn.confirm {
+            background: var(--sage);
+            color: white;
+        }
+        @media (max-width: 640px) {
+            .container { max-width: 100%; }
+            .hero { height: 500px; }
+            .hero::before { inset: 16px; }
+            .hero-quote { font-size: 13px; }
+            .content { padding: 0 20px 48px; }
+            .security-notice { border-radius: 18px; line-height: 1.5; }
+            .section { padding: 34px 20px; border-radius: 24px; }
+            .event-grid { grid-template-columns: 1fr; }
+            .countdown-section { margin-top: -76px; width: min(300px, 88%); }
+            .countdown-number { font-size: 24px; }
+            .member-buttons, .modal-buttons { grid-template-columns: 1fr; display: grid; }
+            .footer { margin-left: -20px; margin-right: -20px; }
         }
     </style>
 </head>
@@ -437,12 +473,11 @@
     <div class="container">
         <div class="hero">
             <div class="hero-inner">
-                <div class="date-line">12.12.2026</div>
+                <div class="eyebrow">12.12.2026</div>
                 <h1>Laura & Felipe</h1>
-                <div class="hero-quote">“El amor no se mira, se celebra.<br>Y queremos celebrarlo contigo.”</div>
+                <div class="hero-quote">“Hay momentos que se vuelven eternos cuando se comparten con las personas correctas.”</div>
             </div>
         </div>
-        <div class="wave-top"></div>
 
         <div class="content">
             <div class="countdown-section">
@@ -471,44 +506,40 @@
                 ⚠️ <strong>Esta invitación es solo para los miembros de este grupo.</strong> No compartas este link con otras personas.
             </div>
 
-            <div class="section invite-section">
-                <div class="guest-wrap">
-                    <div class="guest-title" id="guestTitle">Invitación</div>
-                </div>
-                <h2>Tenemos una cita especial</h2>
-                <div class="section-subtitle">Nos hará muy felices compartir este día contigo</div>
+            <div class="ornament-line"></div>
 
-                <div class="detail-grid">
+            <div class="section invitation-section">
+                <div class="section-subtitle">Tenemos el honor de invitarte</div>
+                <h2>La Celebración</h2>
+                <div class="event-grid">
                     <div class="event-detail">
-                        <div class="event-icon">♡</div>
-                        <div class="event-label">Día</div>
+                        <div class="event-icon">◷</div>
+                        <div class="event-label">Día y Hora</div>
                         <div class="event-content">Sábado, 12 de Diciembre<br>6:00 PM</div>
                     </div>
                     <div class="event-detail">
-                        <div class="event-icon">⌖</div>
-                        <div class="event-label">Lugar</div>
+                        <div class="event-icon">⌂</div>
+                        <div class="event-label">Ubicación</div>
                         <div class="event-content">Club Campestre Palmira<br>Salón Fundadores</div>
                     </div>
                     <div class="event-detail">
-                        <div class="event-icon">✧</div>
+                        <div class="event-icon">◇</div>
                         <div class="event-label">Atuendo</div>
                         <div class="event-content">Formal<br>Palmira, Valle del Cauca</div>
                     </div>
                 </div>
-
                 <div class="love-note">
                     Te invitamos a celebrar el inicio de esta hermosa etapa junto a las personas que amamos. Tu presencia hará que este día sea verdaderamente especial.
                 </div>
-
-                <div class="map-box">
+                <div class="map-frame">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.218581168781!2d-76.28343662502706!3d3.5369536964373065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3a04c846a8043f%3A0x947d327a739b2f80!2sClub%20Campestre%20de%20Palmira!5e0!3m2!1ses-419!2sco!4v1780956269694!5m2!1ses-419!2sco" width="100%" height="360" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
-            <div class="section">
-                <h2>Confirma tu Asistencia</h2>
-                <div class="section-subtitle">Por favor confirma antes del 12 de Noviembre, 2026</div>
-                <div class="rsvp-deadline">Selecciona quiénes asistirán para reservar su lugar.</div>
+            <div class="section rsvp-section">
+                <div class="section-subtitle">Confirma tu lugar</div>
+                <h2>Confirmación de asistencia</h2>
+                <div class="rsvp-deadline">⏰ Plazo límite: 12 de Noviembre, 2026</div>
                 
                 <div id="members"></div>
 
@@ -517,8 +548,7 @@
             </div>
 
             <div class="footer">
-                Laura & Felipe
-                <span>Hecho con amor para celebrar contigo</span>
+                Hecho con ♥ para Laura & Felipe
             </div>
         </div>
     </div>
@@ -581,13 +611,11 @@
         function renderizarGrupo() {
             grupoActual = obtenerGrupo();
             if (!grupoActual) {
-                document.getElementById('members').innerHTML = '<p style="text-align:center; color: var(--text);">Grupo no encontrado</p>';
-                document.getElementById('guestTitle').textContent = 'Invitación';
+                document.getElementById('members').innerHTML = '<p>Grupo no encontrado</p>';
                 return;
             }
 
-            document.getElementById('guestTitle').textContent = `Invitación para ${grupoActual.name}`;
-            selecciones = {};
+            document.querySelector('.hero h1').textContent = `Bienvenidos, ${grupoActual.name}`;
             
             let html = '';
             grupoActual.members.forEach((miembro, i) => {
@@ -595,8 +623,8 @@
                     <div class="member">
                         <div class="member-name">${miembro}</div>
                         <div class="member-buttons">
-                            <button type="button" class="member-btn active" onclick="seleccionar('${miembro}', true, this)">✓ Asistiré</button>
-                            <button type="button" class="member-btn" onclick="seleccionar('${miembro}', false, this)">✕ No asistiré</button>
+                            <button type="button" class="member-btn active" onclick="seleccionar('${miembro}', true, this)">✓ ASISTIRÉ</button>
+                            <button type="button" class="member-btn" onclick="seleccionar('${miembro}', false, this)">✗ NO ASISTIRÉ</button>
                         </div>
                     </div>
                 `;
