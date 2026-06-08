@@ -536,6 +536,9 @@
                 </form>
             </div>
 
+            <!-- BOTÓN LIMPIAR FIREBASE (TESTING) -->
+            <button class="btn" onclick="clearAllConfirmations()" style="margin-bottom: 30px; background: #e74c3c;">🔄 Limpiar todas las confirmaciones (TESTING)</button>
+
             <!-- FILTROS COMO REPORTE (ARRIBA - VISIBLES) -->
             <div class="filter-report">
                 <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
@@ -803,9 +806,14 @@
                         const groupConfirmed = groupConfs.filter(c => c.status === 'confirmed').length;
                         const groupTotal = groupConfs.length;
 
-                        if (currentFilter === 'pending' && groupTotal > 0) return false;
-                        if (currentFilter === 'confirmed' && groupConfirmed !== groupTotal) return false;
-                        if (currentFilter === 'rejected' && groupConfirmed > 0) return false;
+                        if (currentFilter === 'pending' && groupTotal === 0) return true; // Mostrar solo si NO hay confirmaciones
+                        else if (currentFilter === 'pending') return false;
+                        
+                        if (currentFilter === 'confirmed' && groupConfirmed === groupTotal && groupTotal > 0) return true; // Mostrar solo si TODOS confirmaron
+                        else if (currentFilter === 'confirmed') return false;
+                        
+                        if (currentFilter === 'rejected' && groupConfirmed === 0 && groupTotal > 0) return true; // Mostrar solo si NADIE confirmó
+                        else if (currentFilter === 'rejected') return false;
                     }
 
                     return true;
@@ -935,6 +943,21 @@
                 await remove(ref(database, `groups/${groupId}`));
                 updateFilterNumbers();
                 renderGroups();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        };
+
+        window.clearAllConfirmations = async function() {
+            if (!confirm('⚠️ ¿BORRAR TODAS LAS CONFIRMACIONES? Esto no se puede deshacer.')) return;
+            if (!confirm('Confirma de nuevo: ¿Borrar TODO?')) return;
+            
+            try {
+                await remove(ref(database, 'confirmations'));
+                confirmations = {};
+                renderGroups();
+                updateFilterNumbers();
+                alert('✅ Todas las confirmaciones fueron borradas');
             } catch (error) {
                 alert('Error: ' + error.message);
             }
