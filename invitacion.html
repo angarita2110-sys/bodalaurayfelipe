@@ -769,6 +769,17 @@
                     });
                 }
 
+                // Bloquear los botones después de guardar
+                confirmados.forEach(miembro => {
+                    const memberDiv = Array.from(document.querySelectorAll('.member-name')).find(el => el.textContent === miembro);
+                    if (memberDiv) {
+                        const btns = memberDiv.parentElement.querySelectorAll('.member-btn');
+                        btns.forEach(btn => {
+                            btn.disabled = true;
+                        });
+                    }
+                });
+
                 const msg = confirmados.length === grupoActual.members.length
                     ? '✓ ¡Gracias! Todos asistirán 💚'
                     : `✓ ¡Gracias! Confirmamos ${confirmados.length} persona(s) 💚`;
