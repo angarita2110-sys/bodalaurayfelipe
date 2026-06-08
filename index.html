@@ -102,6 +102,25 @@
             box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
         }
 
+        .btn-filter {
+            padding: 8px 16px;
+            font-size: 12px;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--mint);
+            border-radius: 20px;
+        }
+
+        .btn-filter:hover {
+            background: rgba(197, 221, 213, 0.3);
+        }
+
+        .btn-filter.active {
+            background: var(--sage);
+            color: white;
+            border-color: var(--sage);
+        }
+
         .btn-small {
             padding: 6px 12px;
             font-size: 11px;
@@ -477,6 +496,23 @@
 
             <!-- LISTA DE GRUPOS -->
             <div class="section-title">Tus Grupos</div>
+            
+            <!-- BÚSQUEDA Y FILTROS -->
+            <div class="form-section" style="margin-bottom: 25px;">
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>🔍 Buscar por nombre</label>
+                        <input type="text" id="searchInput" placeholder="Escribe un nombre...">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-filter active" data-filter="todos">Todos (44)</button>
+                    <button type="button" class="btn btn-filter" data-filter="pending">⏳ Pendientes</button>
+                    <button type="button" class="btn btn-filter" data-filter="confirmed">✓ Confirmados</button>
+                    <button type="button" class="btn btn-filter" data-filter="rejected">✗ No Asisten</button>
+                </div>
+            </div>
+
             <div class="grupos-list" id="gruposList">
                 <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
             </div>
@@ -525,6 +561,8 @@
         let groups = {};
         let confirmations = {};
         let editingGroupId = null;
+        let currentFilter = 'todos';
+        let currentSearch = '';
 
         function generateHash(str) {
             let hash = 0;
@@ -547,6 +585,8 @@
         const gruposList = document.getElementById('gruposList');
         const editModal = document.getElementById('editModal');
         const editGroupForm = document.getElementById('editGroupForm');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.btn-filter');
 
         // LOGIN
         loginForm.addEventListener('submit', async (e) => {
@@ -607,6 +647,22 @@
             }
         });
 
+        // BÚSQUEDA
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            renderGroups();
+        });
+
+        // FILTROS
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderGroups();
+            });
+        });;;
+
         // CARGAR DATOS
         function loadData() {
             onValue(ref(database, 'groups'), (snapshot) => {
@@ -632,8 +688,31 @@
                 return;
             }
 
-            gruposList.innerHTML = Object.values(groups)
+            let gruposToShow = Object.values(groups)
                 .sort((a, b) => a.id - b.id)
+                .filter(group => {
+                    // FILTRO POR BÚSQUEDA
+                    if (currentSearch && !group.name.toLowerCase().includes(currentSearch)) {
+                        return false;
+                    }
+
+                    // FILTRO POR ESTADO
+                    if (currentFilter !== 'todos') {
+                        const conf = confirmations[group.id];
+                        if (currentFilter === 'pending' && conf) return false;
+                        if (currentFilter === 'confirmed' && (!conf || conf.status !== 'confirmed')) return false;
+                        if (currentFilter === 'rejected' && (!conf || conf.status !== 'rejected')) return false;
+                    }
+
+                    return true;
+                });
+
+            if (gruposToShow.length === 0) {
+                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos que coincidan con tu búsqueda.</p>';
+                return;
+            }
+
+            gruposList.innerHTML = gruposToShow
                 .map(group => {
                     const hash = generateHash(group.id + group.name);
                     const conf = confirmations[group.id];
