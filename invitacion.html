@@ -9,12 +9,19 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="¡Te invitamos a nuestra boda! 💚">
     <meta property="og:description" content="Con mucho amor queremos invitarte a compartir una cena muy especial para celebrar nuestra unión. Será una noche íntima, tranquila y llena de significado.">
-    <meta property="og:image" content="IMG_8452.jpg">
-    <meta property="og:url" content="">
+    <meta property="og:image" id="og-image" content="">
+    <meta property="og:url" id="og-url" content="">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="¡Te invitamos a nuestra boda! 💚">
     <meta name="twitter:description" content="Con mucho amor queremos invitarte a compartir una cena muy especial para celebrar nuestra unión.">
-    <meta name="twitter:image" content="IMG_8452.jpg">
+    <meta name="twitter:image" id="twitter-image" content="">
+    
+    <script>
+        // Configurar URLs absolutas para Open Graph
+        document.getElementById('og-image').setAttribute('content', window.location.origin + '/IMG_8452.jpg');
+        document.getElementById('og-url').setAttribute('content', window.location.href);
+        document.getElementById('twitter-image').setAttribute('content', window.location.origin + '/IMG_8452.jpg');
+    </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
