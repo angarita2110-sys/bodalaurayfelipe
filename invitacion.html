@@ -49,14 +49,6 @@
             overflow: hidden;
         }
 
-        .hero-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -82,12 +74,6 @@
             letter-spacing: 1px;
             line-height: 1.1;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-group {
@@ -96,13 +82,6 @@
             color: rgba(255, 255, 255, 0.95);
             font-style: italic;
             letter-spacing: 2px;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .content {
@@ -117,7 +96,6 @@
             margin-bottom: 2rem;
             display: flex;
             gap: 0.75rem;
-            animation: slideIn 0.6s ease-out 0.3s backwards;
         }
 
         .security-text {
@@ -137,7 +115,6 @@
             padding: 40px;
             margin-bottom: 50px;
             text-align: center;
-            animation: slideUp 0.8s ease-out 0.4s backwards;
         }
 
         .countdown-label {
@@ -205,29 +182,6 @@
             width: 40px;
             height: 2px;
             background: linear-gradient(to right, var(--mint), var(--gold), var(--mint));
-        }
-
-        .members-list {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .member {
-            display: flex;
-            padding: 0.75rem;
-            background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
-            border-radius: 8px;
-            border: 1px solid rgba(157, 180, 160, 0.2);
-            font-size: 14px;
-            color: var(--dark);
-        }
-
-        .member::before {
-            content: "✓";
-            color: var(--sage);
-            font-weight: 600;
-            margin-right: 0.75rem;
-            font-size: 16px;
         }
 
         .event-detail {
@@ -332,7 +286,6 @@
             text-align: center;
             margin-top: 1.5rem;
             font-size: 14px;
-            animation: slideUp 0.4s ease-out;
         }
 
         .success-message.show {
@@ -361,6 +314,72 @@
             color: #ff6b9d;
         }
 
+        /* MODAL CONFIRMACIÓN */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .modal-text {
+            color: var(--text);
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .modal-btn.cancel {
+            border: 2px solid var(--sage);
+            background: white;
+            color: var(--sage);
+        }
+
+        .modal-btn.confirm {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            color: white;
+        }
+
         @media (max-width: 600px) {
             .hero { height: 400px; }
             .hero-title { font-size: 42px; }
@@ -374,7 +393,6 @@
 <body>
     <div class="container">
         <div class="hero">
-            <img src="IMG_8452.jpg" alt="Laura & Felipe" class="hero-image">
             <div class="hero-overlay">
                 <h1 class="hero-title">Laura & Felipe</h1>
                 <div class="hero-group" id="groupName">Bienvenidos</div>
@@ -455,20 +473,20 @@
     </div>
 
     <!-- MODAL CONFIRMACIÓN -->
-    <div id="confirmModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; text-align: center;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #3d3d3d; margin-bottom: 20px;">¿Estás seguro?</h2>
-            <p style="color: #5a5a5a; margin-bottom: 30px; font-size: 14px; line-height: 1.6;">Por favor confirma que los datos son correctos antes de proceder. Esta acción no se puede deshacer.</p>
-            <div style="display: flex; gap: 15px; justify-content: center;">
-                <button id="cancelBtn" type="button" style="padding: 12px 30px; border: 2px solid #9db4a0; background: white; color: #9db4a0; border-radius: 6px; font-weight: 600; cursor: pointer;">Cancelar</button>
-                <button id="confirmBtn" type="button" style="padding: 12px 30px; background: linear-gradient(135deg, #9db4a0 0%, #c5ddd5 100%); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Confirmar</button>
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-title">¿Estás seguro?</div>
+            <div class="modal-text">Por favor confirma que los datos son correctos antes de proceder. Esta acción no se puede deshacer.</div>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" id="cancelBtn">Cancelar</button>
+                <button class="modal-btn confirm" id="confirmBtn">Confirmar</button>
             </div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
@@ -486,6 +504,7 @@
 
         let allGroups = {};
         let currentGroup = null;
+        let pendingConfirmation = null;
 
         function generateHash(str) {
             let hash = 0;
@@ -557,7 +576,6 @@
 
         // Cargar grupos de Firebase
         const groupsRef = ref(database, 'groups');
-        
         onValue(groupsRef, (snapshot) => {
             const data = snapshot.val() || {};
             allGroups = {};
@@ -575,7 +593,6 @@
                 return;
             }
 
-            // Obtener qué miembros confirmaron
             const checkboxes = document.querySelectorAll('input[name="members"]:checked');
             const confirmedMembers = Array.from(checkboxes).map(cb => cb.value);
 
@@ -584,21 +601,19 @@
                 return;
             }
 
-            // Mostrar modal de confirmación
-            document.getElementById('confirmModal').style.display = 'flex';
+            pendingConfirmation = { confirmedMembers };
+            document.getElementById('confirmModal').classList.add('show');
 
-            // Manejar click en Cancelar
             document.getElementById('cancelBtn').onclick = () => {
-                document.getElementById('confirmModal').style.display = 'none';
+                document.getElementById('confirmModal').classList.remove('show');
+                pendingConfirmation = null;
             };
 
-            // Manejar click en Confirmar
             document.getElementById('confirmBtn').onclick = async () => {
-                document.getElementById('confirmModal').style.display = 'none';
+                document.getElementById('confirmModal').classList.remove('show');
 
                 try {
-                    // Guardar por cada miembro confirmado
-                    for (let member of confirmedMembers) {
+                    for (let member of pendingConfirmation.confirmedMembers) {
                         const memberId = `${currentGroup.id}_${member}`;
                         await set(ref(database, `confirmations/${memberId}`), {
                             groupId: currentGroup.id,
@@ -609,24 +624,24 @@
                         });
                     }
 
-                    // Guardar resumen del grupo
                     await set(ref(database, `groups_confirmation/${currentGroup.id}`), {
                         groupId: currentGroup.id,
                         groupName: currentGroup.name,
                         totalMembers: currentGroup.members.length,
-                        confirmedCount: confirmedMembers.length,
+                        confirmedCount: pendingConfirmation.confirmedMembers.length,
                         timestamp: new Date().toISOString()
                     });
 
-                    const message = confirmedMembers.length === currentGroup.members.length
+                    const message = pendingConfirmation.confirmedMembers.length === currentGroup.members.length
                         ? '✓ ¡Gracias por confirmar! Todos asistirán 💚'
-                        : `✓ ¡Gracias! Confirmamos ${confirmedMembers.length} persona(s) de tu grupo 💚`;
+                        : `✓ ¡Gracias! Confirmamos ${pendingConfirmation.confirmedMembers.length} persona(s) de tu grupo 💚`;
 
                     document.getElementById('successText').textContent = message;
                     document.getElementById('successMessage').classList.add('show');
 
                     document.getElementById('rsvpForm').reset();
                     renderGroup();
+                    pendingConfirmation = null;
 
                     setTimeout(() => {
                         document.getElementById('successMessage').classList.remove('show');
