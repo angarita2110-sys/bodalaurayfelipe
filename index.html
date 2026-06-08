@@ -158,60 +158,6 @@
             margin-bottom: 10px;
         }
 
-        /* FILTROS COMO REPORTE */
-        .filter-report {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .filter-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--sage);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .filter-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .filter-card.active {
-            background: linear-gradient(135deg, var(--sage), var(--mint));
-            color: white;
-            border-left-color: white;
-        }
-
-        .filter-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 900;
-            margin-bottom: 10px;
-            color: var(--sage);
-        }
-
-        .filter-card.active .filter-number {
-            color: white;
-        }
-
-        .filter-label {
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text);
-        }
-
-        .filter-card.active .filter-label {
-            color: white;
-        }
-
         /* MAIN CONTENT */
         .main-content {
             background: white;
@@ -324,11 +270,40 @@
             color: white;
         }
 
+        .status-partial {
+            background: #3498db;
+            color: white;
+        }
+
         .grupo-actions {
             display: flex;
             gap: 5px;
         }
 
+        .btn-action {
+            padding: 6px 10px;
+            font-size: 11px;
+            background: var(--sage);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            background: var(--mint);
+        }
+
+        .btn-action.delete {
+            background: #e74c3c;
+        }
+
+        .btn-action.delete:hover {
+            background: #c0392b;
+        }
+
+        /* TABS */
         .tab-btn {
             padding: 12px 24px;
             border: none;
@@ -386,27 +361,57 @@
             color: var(--text);
         }
 
-        .btn-action {
-            padding: 6px 10px;
-            font-size: 11px;
-            background: var(--sage);
-            color: white;
-            border: none;
-            border-radius: 4px;
+        /* FILTROS COMO REPORTE (ABAJO) */
+        .filter-report {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .filter-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--sage);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-action:hover {
-            background: var(--mint);
+        .filter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
 
-        .btn-action.delete {
-            background: #e74c3c;
+        .filter-card.active {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            color: white;
+            border-left-color: white;
         }
 
-        .btn-action.delete:hover {
-            background: #c0392b;
+        .filter-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--sage);
+        }
+
+        .filter-card.active .filter-number {
+            color: white;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .filter-card.active .filter-label {
+            color: white;
         }
 
         /* MODAL */
@@ -507,28 +512,8 @@
             </div>
         </div>
 
-        <!-- FILTROS COMO REPORTE -->
-        <div class="filter-report">
-            <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
-                <div class="filter-number" id="filterTodos">0</div>
-                <div class="filter-label">📋 Todos</div>
-            </div>
-            <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
-                <div class="filter-number" id="filterPending">0</div>
-                <div class="filter-label">⏳ Pendientes</div>
-            </div>
-            <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
-                <div class="filter-number" id="filterConfirmed">0</div>
-                <div class="filter-label">✓ Confirmados</div>
-            </div>
-            <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
-                <div class="filter-number" id="filterRejected">0</div>
-                <div class="filter-label">✗ No Asisten</div>
-            </div>
-        </div>
-
         <div class="main-content">
-            <!-- CREAR GRUPO -->
+            <!-- CREAR GRUPO (ARRIBA) -->
             <div class="section-title">Crear Nuevo Grupo</div>
             <div class="form-section">
                 <form id="newGroupForm">
@@ -567,9 +552,9 @@
 
             <!-- TAB GRUPOS -->
             <div id="tabGrupos" class="tab-content active">
-            <div class="grupos-list" id="gruposList">
-                <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
-            </div>
+                <div class="grupos-list" id="gruposList">
+                    <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
+                </div>
             </div>
 
             <!-- TAB ASISTENTES -->
@@ -583,6 +568,26 @@
                 </div>
                 <div class="asistentes-list" id="asistentesList">
                     <p style="text-align: center; color: var(--text);">Cargando asistentes...</p>
+                </div>
+            </div>
+
+            <!-- FILTROS COMO REPORTE (ABAJO) -->
+            <div class="filter-report">
+                <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
+                    <div class="filter-number" id="filterTodos">0</div>
+                    <div class="filter-label">📋 Todos</div>
+                </div>
+                <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
+                    <div class="filter-number" id="filterPending">0</div>
+                    <div class="filter-label">⏳ Pendientes</div>
+                </div>
+                <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
+                    <div class="filter-number" id="filterConfirmed">0</div>
+                    <div class="filter-label">✓ Confirmados</div>
+                </div>
+                <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
+                    <div class="filter-number" id="filterRejected">0</div>
+                    <div class="filter-label">✗ No Asisten</div>
                 </div>
             </div>
         </div>
@@ -780,6 +785,83 @@
             document.getElementById('filterPending').textContent = pending;
         }
 
+        // RENDERIZAR GRUPOS
+        function renderGroups() {
+            if (Object.keys(groups).length === 0) {
+                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos. Crea uno o importa los 44 originales.</p>';
+                return;
+            }
+
+            let gruposToShow = Object.values(groups)
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .filter(group => {
+                    // FILTRO POR BÚSQUEDA
+                    if (currentSearch && !group.name.toLowerCase().includes(currentSearch)) {
+                        return false;
+                    }
+
+                    // FILTRO POR ESTADO
+                    if (currentFilter !== 'todos') {
+                        const groupConfs = Object.values(confirmations).filter(c => c.groupId === group.id);
+                        const groupConfirmed = groupConfs.filter(c => c.status === 'confirmed').length;
+                        const groupTotal = groupConfs.length;
+
+                        if (currentFilter === 'pending' && groupTotal > 0) return false;
+                        if (currentFilter === 'confirmed' && groupConfirmed !== groupTotal) return false;
+                        if (currentFilter === 'rejected' && groupConfirmed > 0) return false;
+                    }
+
+                    return true;
+                });
+
+            if (gruposToShow.length === 0) {
+                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos que coincidan con tu búsqueda.</p>';
+                return;
+            }
+
+            gruposList.innerHTML = gruposToShow
+                .map(group => {
+                    const hash = generateHash(group.id + group.name);
+                    const groupConfs = Object.values(confirmations).filter(c => c.groupId === group.id);
+                    const groupConfirmed = groupConfs.filter(c => c.status === 'confirmed').length;
+                    const groupTotal = groupConfs.length;
+
+                    let statusClass = 'status-pending';
+                    let statusText = 'Pendiente';
+
+                    if (groupTotal > 0) {
+                        if (groupConfirmed === groupTotal) {
+                            statusClass = 'status-confirmed';
+                            statusText = '✓ Confirmado';
+                        } else if (groupConfirmed === 0) {
+                            statusClass = 'status-rejected';
+                            statusText = '✗ No Asiste';
+                        } else {
+                            statusClass = 'status-partial';
+                            statusText = `${groupConfirmed}/${groupTotal} Confirman`;
+                        }
+                    }
+
+                    const link = `${window.location.origin}/invitacion.html?group=${hash}`;
+
+                    return `
+                        <div class="grupo-item">
+                            <div class="grupo-info">
+                                <h3>${group.name}</h3>
+                                <div class="grupo-members">${group.members.join(', ')}</div>
+                            </div>
+                            <div class="grupo-status ${statusClass}">${statusText}</div>
+                            <button type="button" class="btn-action" onclick="copyLink('${link}')">📋 Copiar</button>
+                            <div class="grupo-actions">
+                                <button type="button" class="btn-action" onclick="openEditModal(${group.id})">✏️ Editar</button>
+                                <button type="button" class="btn-action delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                })
+                .join('');
+        }
+
         // RENDERIZAR ASISTENTES POR PERSONA
         function renderAsistentes() {
             const asistentesList = document.getElementById('asistentesList');
@@ -790,12 +872,10 @@
                 if (conf.status === 'confirmed') {
                     const group = groups[conf.groupId];
                     if (group) {
-                        group.members.forEach(member => {
-                            asistentes.push({
-                                name: member,
-                                groupName: group.name,
-                                groupId: group.id
-                            });
+                        asistentes.push({
+                            name: conf.memberName,
+                            groupName: group.name,
+                            groupId: group.id
                         });
                     }
                 }
@@ -822,74 +902,6 @@
                         <div style="color: #27ae60; font-weight: 600; font-size: 13px;">✓ Confirmado</div>
                     </div>
                 `)
-                .join('');
-        }
-
-        // RENDERIZAR GRUPOS
-        function renderGroups() {
-            if (Object.keys(groups).length === 0) {
-                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos. Crea uno o importa los 44 originales.</p>';
-                return;
-            }
-
-            let gruposToShow = Object.values(groups)
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .filter(group => {
-                    // FILTRO POR BÚSQUEDA
-                    if (currentSearch && !group.name.toLowerCase().includes(currentSearch)) {
-                        return false;
-                    }
-
-                    // FILTRO POR ESTADO
-                    if (currentFilter !== 'todos') {
-                        const conf = confirmations[group.id];
-                        if (currentFilter === 'pending' && conf) return false;
-                        if (currentFilter === 'confirmed' && (!conf || conf.status !== 'confirmed')) return false;
-                        if (currentFilter === 'rejected' && (!conf || conf.status !== 'rejected')) return false;
-                    }
-
-                    return true;
-                });
-
-            if (gruposToShow.length === 0) {
-                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos que coincidan con tu búsqueda.</p>';
-                return;
-            }
-
-            gruposList.innerHTML = gruposToShow
-                .map(group => {
-                    const hash = generateHash(group.id + group.name);
-                    const conf = confirmations[group.id];
-                    let statusClass = 'status-pending';
-                    let statusText = 'Pendiente';
-
-                    if (conf) {
-                        if (conf.status === 'confirmed') {
-                            statusClass = 'status-confirmed';
-                            statusText = 'Confirmado';
-                        } else {
-                            statusClass = 'status-rejected';
-                            statusText = 'No Asiste';
-                        }
-                    }
-
-                    const link = `${window.location.origin}/invitacion.html?group=${hash}`;
-
-                    return `
-                        <div class="grupo-item">
-                            <div class="grupo-info">
-                                <h3>${group.name}</h3>
-                                <div class="grupo-members">${group.members.join(', ')}</div>
-                            </div>
-                            <div class="grupo-status ${statusClass}">${statusText}</div>
-                            <button type="button" class="btn-action" onclick="copyLink('${link}')">📋 Copiar</button>
-                            <div class="grupo-actions">
-                                <button type="button" class="btn-action" onclick="openEditModal(${group.id})">✏️ Editar</button>
-                                <button type="button" class="btn-action delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
-                            </div>
-                        </div>
-                    `;
-                })
                 .join('');
         }
 
@@ -924,6 +936,8 @@
             if (!confirm('¿Eliminar este grupo?')) return;
             try {
                 await remove(ref(database, `groups/${groupId}`));
+                updateFilterNumbers();
+                renderGroups();
             } catch (error) {
                 alert('Error: ' + error.message);
             }

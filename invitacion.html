@@ -454,6 +454,18 @@
         </div>
     </div>
 
+    <!-- MODAL CONFIRMACIÓN -->
+    <div id="confirmModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; border-radius: 12px; max-width: 500px; text-align: center;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #3d3d3d; margin-bottom: 20px;">¿Estás seguro?</h2>
+            <p style="color: #5a5a5a; margin-bottom: 30px; font-size: 14px; line-height: 1.6;">Por favor confirma que los datos son correctos antes de proceder. Esta acción no se puede deshacer.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="cancelBtn" type="button" style="padding: 12px 30px; border: 2px solid #9db4a0; background: white; color: #9db4a0; border-radius: 6px; font-weight: 600; cursor: pointer;">Cancelar</button>
+                <button id="confirmBtn" type="button" style="padding: 12px 30px; background: linear-gradient(135deg, #9db4a0 0%, #c5ddd5 100%); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
@@ -545,7 +557,6 @@
 
         // Cargar grupos de Firebase
         const groupsRef = ref(database, 'groups');
-        import { onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
         
         onValue(groupsRef, (snapshot) => {
             const data = snapshot.val() || {};
@@ -573,44 +584,57 @@
                 return;
             }
 
-            try {
-                // Guardar por cada miembro confirmado
-                for (let member of confirmedMembers) {
-                    const memberId = `${currentGroup.id}_${member}`;
-                    await set(ref(database, `confirmations/${memberId}`), {
+            // Mostrar modal de confirmación
+            document.getElementById('confirmModal').style.display = 'flex';
+
+            // Manejar click en Cancelar
+            document.getElementById('cancelBtn').onclick = () => {
+                document.getElementById('confirmModal').style.display = 'none';
+            };
+
+            // Manejar click en Confirmar
+            document.getElementById('confirmBtn').onclick = async () => {
+                document.getElementById('confirmModal').style.display = 'none';
+
+                try {
+                    // Guardar por cada miembro confirmado
+                    for (let member of confirmedMembers) {
+                        const memberId = `${currentGroup.id}_${member}`;
+                        await set(ref(database, `confirmations/${memberId}`), {
+                            groupId: currentGroup.id,
+                            groupName: currentGroup.name,
+                            memberName: member,
+                            status: 'confirmed',
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+
+                    // Guardar resumen del grupo
+                    await set(ref(database, `groups_confirmation/${currentGroup.id}`), {
                         groupId: currentGroup.id,
                         groupName: currentGroup.name,
-                        memberName: member,
-                        status: 'confirmed',
+                        totalMembers: currentGroup.members.length,
+                        confirmedCount: confirmedMembers.length,
                         timestamp: new Date().toISOString()
                     });
+
+                    const message = confirmedMembers.length === currentGroup.members.length
+                        ? '✓ ¡Gracias por confirmar! Todos asistirán 💚'
+                        : `✓ ¡Gracias! Confirmamos ${confirmedMembers.length} persona(s) de tu grupo 💚`;
+
+                    document.getElementById('successText').textContent = message;
+                    document.getElementById('successMessage').classList.add('show');
+
+                    document.getElementById('rsvpForm').reset();
+                    renderGroup();
+
+                    setTimeout(() => {
+                        document.getElementById('successMessage').classList.remove('show');
+                    }, 4000);
+                } catch (error) {
+                    alert('Error al guardar confirmación: ' + error.message);
                 }
-
-                // Guardar resumen del grupo
-                await set(ref(database, `groups_confirmation/${currentGroup.id}`), {
-                    groupId: currentGroup.id,
-                    groupName: currentGroup.name,
-                    totalMembers: currentGroup.members.length,
-                    confirmedCount: confirmedMembers.length,
-                    timestamp: new Date().toISOString()
-                });
-
-                const message = confirmedMembers.length === currentGroup.members.length
-                    ? '✓ ¡Gracias por confirmar! Todos asistirán 💚'
-                    : `✓ ¡Gracias! Confirmamos ${confirmedMembers.length} persona(s) de tu grupo 💚`;
-
-                document.getElementById('successText').textContent = message;
-                document.getElementById('successMessage').classList.add('show');
-
-                document.getElementById('rsvpForm').reset();
-                renderGroup();
-
-                setTimeout(() => {
-                    document.getElementById('successMessage').classList.remove('show');
-                }, 4000);
-            } catch (error) {
-                alert('Error al guardar confirmación: ' + error.message);
-            }
+            };
         });
 
         updateCountdown();
