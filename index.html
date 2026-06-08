@@ -102,52 +102,6 @@
             box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
         }
 
-        .btn-filter {
-            padding: 8px 16px;
-            font-size: 12px;
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--mint);
-            border-radius: 20px;
-        }
-
-        .btn-filter:hover {
-            background: rgba(197, 221, 213, 0.3);
-        }
-
-        .btn-filter.active {
-            background: var(--sage);
-            color: white;
-            border-color: var(--sage);
-        }
-
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 11px;
-            margin-right: 5px;
-        }
-
-        .btn-copy {
-            background: var(--sage);
-            font-size: 12px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .btn-copy.copied {
-            background: #27ae60;
-        }
-
-        .btn-delete {
-            background: #e74c3c;
-            padding: 6px 12px;
-            font-size: 11px;
-        }
-
-        .btn-delete:hover {
-            background: #c0392b;
-        }
-
         .btn-logout {
             background: #e74c3c;
             padding: 8px 15px;
@@ -204,34 +158,58 @@
             margin-bottom: 10px;
         }
 
-        .stats {
+        /* FILTROS COMO REPORTE */
+        .filter-report {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
 
-        .stat-card {
+        .filter-card {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--sage);
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-align: center;
         }
 
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--sage);
-            margin-bottom: 8px;
+        .filter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
 
-        .stat-label {
-            font-size: 12px;
-            color: var(--text);
-            text-transform: uppercase;
+        .filter-card.active {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            color: white;
+            border-left-color: white;
+        }
+
+        .filter-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--sage);
+        }
+
+        .filter-card.active .filter-number {
+            color: white;
+        }
+
+        .filter-label {
+            font-size: 14px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .filter-card.active .filter-label {
+            color: white;
         }
 
         /* MAIN CONTENT */
@@ -268,6 +246,26 @@
 
         .form-row.full {
             grid-template-columns: 1fr;
+        }
+
+        /* BÚSQUEDA */
+        .search-box {
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--mint);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--sage);
+            box-shadow: 0 0 0 3px rgba(157, 180, 160, 0.1);
         }
 
         /* GRUPOS LIST */
@@ -329,6 +327,63 @@
         .grupo-actions {
             display: flex;
             gap: 5px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--sage);
+            border-bottom-color: var(--sage);
+        }
+
+        .tab-btn:hover {
+            color: var(--sage);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .asistentes-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .asistente-item {
+            background: linear-gradient(135deg, rgba(157, 180, 160, 0.08) 0%, rgba(197, 221, 213, 0.08) 100%);
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .asistente-info h3 {
+            font-size: 15px;
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .asistente-grupo {
+            font-size: 12px;
+            color: var(--text);
         }
 
         .btn-action {
@@ -415,6 +470,10 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
+
+            .filter-report {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -448,22 +507,23 @@
             </div>
         </div>
 
-        <div class="stats" id="stats">
-            <div class="stat-card">
-                <div class="stat-number" id="totalGroups">0</div>
-                <div class="stat-label">Total de Grupos</div>
+        <!-- FILTROS COMO REPORTE -->
+        <div class="filter-report">
+            <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
+                <div class="filter-number" id="filterTodos">0</div>
+                <div class="filter-label">📋 Todos</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalConfirmed">0</div>
-                <div class="stat-label">Confirmados</div>
+            <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
+                <div class="filter-number" id="filterPending">0</div>
+                <div class="filter-label">⏳ Pendientes</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalRejected">0</div>
-                <div class="stat-label">No Asisten</div>
+            <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
+                <div class="filter-number" id="filterConfirmed">0</div>
+                <div class="filter-label">✓ Confirmados</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalPending">0</div>
-                <div class="stat-label">Pendientes</div>
+            <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
+                <div class="filter-number" id="filterRejected">0</div>
+                <div class="filter-label">✗ No Asisten</div>
             </div>
         </div>
 
@@ -494,27 +554,36 @@
             <!-- IMPORTAR 44 GRUPOS -->
             <button class="btn" onclick="importDefault44Groups()" style="margin-bottom: 30px; background: #3498db;">📥 Importar 44 Grupos Originales</button>
 
-            <!-- LISTA DE GRUPOS -->
-            <div class="section-title">Tus Grupos</div>
-            
-            <!-- BÚSQUEDA Y FILTROS -->
-            <div class="form-section" style="margin-bottom: 25px;">
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label>🔍 Buscar por nombre</label>
-                        <input type="text" id="searchInput" placeholder="Escribe un nombre...">
-                    </div>
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button type="button" class="btn btn-filter active" data-filter="todos">Todos (44)</button>
-                    <button type="button" class="btn btn-filter" data-filter="pending">⏳ Pendientes</button>
-                    <button type="button" class="btn btn-filter" data-filter="confirmed">✓ Confirmados</button>
-                    <button type="button" class="btn btn-filter" data-filter="rejected">✗ No Asisten</button>
-                </div>
+            <!-- BÚSQUEDA -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre de grupo...">
             </div>
 
+            <!-- TABS -->
+            <div style="display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid var(--mint); padding-bottom: 15px;">
+                <button type="button" class="tab-btn active" data-tab="grupos">Grupos</button>
+                <button type="button" class="tab-btn" data-tab="asistentes">Asistentes por Persona</button>
+            </div>
+
+            <!-- TAB GRUPOS -->
+            <div id="tabGrupos" class="tab-content active">
             <div class="grupos-list" id="gruposList">
                 <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
+            </div>
+            </div>
+
+            <!-- TAB ASISTENTES -->
+            <div id="tabAsistentes" class="tab-content">
+                <div style="margin-bottom: 25px;">
+                    <p style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Total de asistentes confirmados:</p>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--sage);" id="totalAsistentes">0</div>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchAsistentes" placeholder="🔍 Buscar por nombre de persona...">
+                </div>
+                <div class="asistentes-list" id="asistentesList">
+                    <p style="text-align: center; color: var(--text);">Cargando asistentes...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -586,7 +655,9 @@
         const editModal = document.getElementById('editModal');
         const editGroupForm = document.getElementById('editGroupForm');
         const searchInput = document.getElementById('searchInput');
-        const filterBtns = document.querySelectorAll('.btn-filter');
+        const searchAsistentes = document.getElementById('searchAsistentes');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
 
         // LOGIN
         loginForm.addEventListener('submit', async (e) => {
@@ -653,32 +724,105 @@
             renderGroups();
         });
 
-        // FILTROS
-        filterBtns.forEach(btn => {
+        // TABS
+        tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
                 btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-                renderGroups();
+                const tabId = 'tab' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1);
+                document.getElementById(tabId).classList.add('active');
+                if (btn.dataset.tab === 'asistentes') {
+                    renderAsistentes();
+                }
             });
-        });;;
+        });
+
+        // BÚSQUEDA ASISTENTES
+        searchAsistentes.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.asistente-item');
+            items.forEach(item => {
+                const name = item.querySelector('h3').textContent.toLowerCase();
+                item.style.display = name.includes(searchTerm) ? '' : 'none';
+            });
+        });
 
         // CARGAR DATOS
         function loadData() {
             onValue(ref(database, 'groups'), (snapshot) => {
                 groups = {};
-                (snapshot.val() || {});
                 Object.entries(snapshot.val() || {}).forEach(([key, value]) => {
                     groups[value.id] = value;
                 });
                 renderGroups();
-                updateStats();
+                updateFilterNumbers();
             });
 
             onValue(ref(database, 'confirmations'), (snapshot) => {
                 confirmations = snapshot.val() || {};
-                updateStats();
+                renderGroups();
+                updateFilterNumbers();
             });
+        }
+
+        // ACTUALIZAR NÚMEROS DE FILTROS
+        function updateFilterNumbers() {
+            const confs = Object.values(confirmations);
+            const total = Object.keys(groups).length;
+            const confirmed = confs.filter(c => c.status === 'confirmed').length;
+            const rejected = confs.filter(c => c.status === 'rejected').length;
+            const pending = total - confirmed - rejected;
+
+            document.getElementById('filterTodos').textContent = total;
+            document.getElementById('filterConfirmed').textContent = confirmed;
+            document.getElementById('filterRejected').textContent = rejected;
+            document.getElementById('filterPending').textContent = pending;
+        }
+
+        // RENDERIZAR ASISTENTES POR PERSONA
+        function renderAsistentes() {
+            const asistentesList = document.getElementById('asistentesList');
+            const asistentes = [];
+
+            // Extraer personas confirmadas de los grupos
+            Object.values(confirmations).forEach(conf => {
+                if (conf.status === 'confirmed') {
+                    const group = groups[conf.groupId];
+                    if (group) {
+                        group.members.forEach(member => {
+                            asistentes.push({
+                                name: member,
+                                groupName: group.name,
+                                groupId: group.id
+                            });
+                        });
+                    }
+                }
+            });
+
+            if (asistentes.length === 0) {
+                asistentesList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay asistentes confirmados aún.</p>';
+                document.getElementById('totalAsistentes').textContent = '0';
+                return;
+            }
+
+            // Ordenar alfabéticamente
+            asistentes.sort((a, b) => a.name.localeCompare(b.name));
+
+            document.getElementById('totalAsistentes').textContent = asistentes.length;
+
+            asistentesList.innerHTML = asistentes
+                .map(asistente => `
+                    <div class="asistente-item">
+                        <div class="asistente-info">
+                            <h3>${asistente.name}</h3>
+                            <div class="asistente-grupo">Grupo: ${asistente.groupName}</div>
+                        </div>
+                        <div style="color: #27ae60; font-weight: 600; font-size: 13px;">✓ Confirmado</div>
+                    </div>
+                `)
+                .join('');
         }
 
         // RENDERIZAR GRUPOS
@@ -689,7 +833,7 @@
             }
 
             let gruposToShow = Object.values(groups)
-                .sort((a, b) => a.id - b.id)
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .filter(group => {
                     // FILTRO POR BÚSQUEDA
                     if (currentSearch && !group.name.toLowerCase().includes(currentSearch)) {
@@ -749,16 +893,15 @@
                 .join('');
         }
 
-        // STATS
-        function updateStats() {
-            document.getElementById('totalGroups').textContent = Object.keys(groups).length;
-            const confs = Object.values(confirmations);
-            document.getElementById('totalConfirmed').textContent = confs.filter(c => c.status === 'confirmed').length;
-            document.getElementById('totalRejected').textContent = confs.filter(c => c.status === 'rejected').length;
-            document.getElementById('totalPending').textContent = Object.keys(groups).length - confs.length;
-        }
-
         // FUNCIONES GLOBALES
+        window.setFilter = function(filter, element) {
+            const cards = document.querySelectorAll('.filter-card');
+            cards.forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+            currentFilter = filter;
+            renderGroups();
+        };
+
         window.copyLink = function(link) {
             navigator.clipboard.writeText(link);
             alert('Link copiado al portapapeles');
