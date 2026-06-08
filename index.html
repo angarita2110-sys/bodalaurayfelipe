@@ -579,9 +579,12 @@
 
             <!-- TAB ASISTENTES -->
             <div id="tabAsistentes" class="tab-content">
-                <div style="margin-bottom: 25px;">
-                    <p style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Total de asistentes confirmados:</p>
-                    <div style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--sage);" id="totalAsistentes">0</div>
+                <div style="margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <p style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Total de asistentes confirmados:</p>
+                        <div style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--sage);" id="totalAsistentes">0</div>
+                    </div>
+                    <button type="button" class="btn-action" onclick="exportarExcel()" style="height: fit-content;">📊 Descargar Excel</button>
                 </div>
                 <div class="search-box">
                     <input type="text" id="searchAsistentes" placeholder="🔍 Buscar por nombre de persona...">
@@ -856,7 +859,8 @@
                                 <div class="grupo-members">${group.members.join(', ')}</div>
                             </div>
                             <div class="grupo-status ${statusClass}">${statusText}</div>
-                            <button type="button" class="btn-action" onclick="copyLink('${link}')">📋 Copiar</button>
+                            <button type="button" class="btn-action" onclick="abrirLink('${link}')">🔗 Link</button>
+                            <button type="button" class="btn-action" onclick="enviarInvitacion('${link}', '${group.name}')">📧 Enviar invitación</button>
                             <div class="grupo-actions">
                                 <button type="button" class="btn-action" onclick="openEditModal(${group.id})">✏️ Editar</button>
                                 <button type="button" class="btn-action delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
@@ -919,9 +923,17 @@
             renderGroups();
         };
 
-        window.copyLink = function(link) {
-            navigator.clipboard.writeText(link);
-            alert('Link copiado al portapapeles');
+        window.abrirLink = function(link) {
+            window.open(link, '_blank');
+        };
+
+        window.enviarInvitacion = function(link, groupName) {
+            const texto = `Con mucho amor queremos invitarte a compartir una cena muy especial para celebrar nuestra unión. Será una noche íntima, tranquila y llena de significado, junto a personas que han sido importantes en nuestra historia.
+Aquí puedes ver todos los detalles: ${link}
+Con cariño, Laura & Felipe`;
+            
+            navigator.clipboard.writeText(texto);
+            alert('✓ Invitación copiada!\n\nAhora puedes pegarla en tu mensaje.');
         };
 
         window.openEditModal = function(groupId) {
@@ -1021,6 +1033,42 @@
             } catch (error) {
                 alert('Error: ' + error.message);
             }
+        };
+
+        // EXPORTAR EXCEL
+        window.exportarExcel = function() {
+            let csv = 'Grupo,Persona,Estado,Timestamp\n';
+            
+            // Recorrer todas las confirmaciones
+            const confirmacionesDiv = document.getElementById('asistentesList');
+            const items = confirmacionesDiv.querySelectorAll('.asistente-item');
+            
+            if (items.length === 0) {
+                alert('No hay asistentes para exportar');
+                return;
+            }
+            
+            items.forEach(item => {
+                const grupo = item.querySelector('.asistente-grupo')?.textContent || '';
+                const persona = item.querySelector('.asistente-nombre')?.textContent || '';
+                const estado = 'Confirmado';
+                const timestamp = new Date().toISOString();
+                
+                csv += `"${grupo}","${persona}","${estado}","${timestamp}"\n`;
+            });
+            
+            // Crear blob y descargar
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', `confirmaciones_boda_${new Date().toISOString().slice(0,10)}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         };
     </script>
 </body>
