@@ -209,7 +209,7 @@
 
         .members-list {
             display: grid;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .member {
@@ -276,21 +276,31 @@
             margin-bottom: 10px;
         }
 
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--mint);
+        .member-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
             border-radius: 6px;
-            font-size: 14px;
-            color: var(--dark);
-            background: white;
-            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            border: 1px solid rgba(157, 180, 160, 0.2);
         }
 
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--sage);
-            box-shadow: 0 0 0 3px rgba(157, 180, 160, 0.1);
+        .member-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: var(--sage);
+        }
+
+        .member-checkbox label {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+            cursor: pointer;
+            flex: 1;
         }
 
         .button {
@@ -373,8 +383,8 @@
 
         <div class="content">
             <div class="security-notice">
-                <span>🔒</span>
-                <span class="security-text"><strong>Esta invitación es personal.</strong> Los datos que ves aquí son privados y específicos para tu grupo.</span>
+                <span>⚠️</span>
+                <span class="security-text"><strong>Esta invitación es solo para los miembros de este grupo.</strong> No compartas este link con otras personas.</span>
             </div>
 
             <div class="countdown-section">
@@ -397,11 +407,6 @@
                         <span class="countdown-label-item">Seg</span>
                     </div>
                 </div>
-            </div>
-
-            <div class="section-card">
-                <h2 class="section-title">Miembros de tu Grupo</h2>
-                <div class="members-list" id="membersList"></div>
             </div>
 
             <div class="section-card">
@@ -433,12 +438,8 @@
                 <div class="info-box">⏰ Plazo límite: 12 de Noviembre, 2026</div>
                 <form id="rsvpForm">
                     <div class="form-group">
-                        <label for="attendance">¿Confirmas tu asistencia?</label>
-                        <select id="attendance" name="attendance" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="confirmed">✓ Sí, ¡confirmamos nuestra asistencia!</option>
-                            <option value="rejected">✗ Lamentablemente no podemos asistir</option>
-                        </select>
+                        <label>¿Quién asiste a la boda?</label>
+                        <div id="membersCheckboxes"></div>
                     </div>
                     <button type="submit" class="button">Registrar Confirmación</button>
                 </form>
@@ -455,7 +456,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
@@ -472,6 +473,7 @@
         const database = getDatabase(app);
 
         let allGroups = {};
+        let currentGroup = null;
 
         function generateHash(str) {
             let hash = 0;
@@ -497,17 +499,24 @@
         }
 
         function renderGroup() {
-            const group = getGroupFromURL();
-            if (!group) {
+            currentGroup = getGroupFromURL();
+            if (!currentGroup) {
                 document.getElementById('groupName').textContent = 'Invitación no válida';
-                document.getElementById('membersList').innerHTML = '<p>No pudimos encontrar tu grupo</p>';
+                document.getElementById('membersCheckboxes').innerHTML = '<p>No pudimos encontrar tu grupo</p>';
                 return;
             }
 
-            document.getElementById('groupName').textContent = `Bienvenidos, ${group.name}`;
+            document.getElementById('groupName').textContent = `Bienvenidos, ${currentGroup.name}`;
             
-            const membersList = document.getElementById('membersList');
-            membersList.innerHTML = group.members.map(m => `<div class="member">${m}</div>`).join('');
+            const membersCheckboxes = document.getElementById('membersCheckboxes');
+            membersCheckboxes.innerHTML = currentGroup.members
+                .map((member, index) => `
+                    <div class="member-checkbox">
+                        <input type="checkbox" id="member${index}" name="members" value="${member}" checked>
+                        <label for="member${index}">${member}</label>
+                    </div>
+                `)
+                .join('');
         }
 
         function updateCountdown() {
@@ -536,6 +545,8 @@
 
         // Cargar grupos de Firebase
         const groupsRef = ref(database, 'groups');
+        import { onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+        
         onValue(groupsRef, (snapshot) => {
             const data = snapshot.val() || {};
             allGroups = {};
@@ -548,36 +559,51 @@
         document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const group = getGroupFromURL();
-            const attendance = document.getElementById('attendance').value;
-
-            if (!group) {
+            if (!currentGroup) {
                 alert('Grupo no válido');
                 return;
             }
 
-            if (!attendance) {
-                alert('Por favor selecciona una opción');
+            // Obtener qué miembros confirmaron
+            const checkboxes = document.querySelectorAll('input[name="members"]:checked');
+            const confirmedMembers = Array.from(checkboxes).map(cb => cb.value);
+
+            if (confirmedMembers.length === 0) {
+                alert('Por favor selecciona al menos una persona que asistirá');
                 return;
             }
 
             try {
-                const confirmationRef = ref(database, `confirmations/${group.id}`);
-                await set(confirmationRef, {
-                    groupId: group.id,
-                    groupName: group.name,
-                    status: attendance,
+                // Guardar por cada miembro confirmado
+                for (let member of confirmedMembers) {
+                    const memberId = `${currentGroup.id}_${member}`;
+                    await set(ref(database, `confirmations/${memberId}`), {
+                        groupId: currentGroup.id,
+                        groupName: currentGroup.name,
+                        memberName: member,
+                        status: 'confirmed',
+                        timestamp: new Date().toISOString()
+                    });
+                }
+
+                // Guardar resumen del grupo
+                await set(ref(database, `groups_confirmation/${currentGroup.id}`), {
+                    groupId: currentGroup.id,
+                    groupName: currentGroup.name,
+                    totalMembers: currentGroup.members.length,
+                    confirmedCount: confirmedMembers.length,
                     timestamp: new Date().toISOString()
                 });
 
-                const message = attendance === 'confirmed' 
-                    ? '✓ ¡Gracias por confirmar tu asistencia! Ya contamos con ustedes 💚' 
-                    : '✓ Entendemos, ¡nos hubiera gustado verlos!';
+                const message = confirmedMembers.length === currentGroup.members.length
+                    ? '✓ ¡Gracias por confirmar! Todos asistirán 💚'
+                    : `✓ ¡Gracias! Confirmamos ${confirmedMembers.length} persona(s) de tu grupo 💚`;
 
                 document.getElementById('successText').textContent = message;
                 document.getElementById('successMessage').classList.add('show');
 
                 document.getElementById('rsvpForm').reset();
+                renderGroup();
 
                 setTimeout(() => {
                     document.getElementById('successMessage').classList.remove('show');
