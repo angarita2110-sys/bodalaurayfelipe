@@ -230,31 +230,49 @@
             margin-bottom: 10px;
         }
 
-        .member-checkbox {
-            display: flex;
-            align-items: center;
-            padding: 12px;
+        .member-selector {
             background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
-            border-radius: 6px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
             border: 1px solid rgba(157, 180, 160, 0.2);
         }
 
-        .member-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-            cursor: pointer;
-            accent-color: var(--sage);
+        .member-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
         }
 
-        .member-checkbox label {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--dark);
-            cursor: pointer;
+        .member-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .member-btn {
             flex: 1;
+            padding: 10px;
+            border: 2px solid var(--sage);
+            background: white;
+            color: var(--sage);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .member-btn:hover {
+            background: var(--sage);
+            color: white;
+        }
+
+        .member-btn.selected {
+            background: var(--sage);
+            color: white;
+            border-color: var(--sage);
         }
 
         .button {
@@ -542,9 +560,16 @@
             const membersCheckboxes = document.getElementById('membersCheckboxes');
             membersCheckboxes.innerHTML = currentGroup.members
                 .map((member, index) => `
-                    <div class="member-checkbox">
-                        <input type="checkbox" id="member${index}" name="members" value="${member}" checked>
-                        <label for="member${index}">${member}</label>
+                    <div class="member-selector">
+                        <div class="member-name">${member}</div>
+                        <div class="member-buttons">
+                            <button type="button" class="member-btn selected" onclick="setMemberStatus(${index}, '${member}', 'yes', this)" data-member="${member}" data-status="yes">
+                                ✓ ASISTIRÉ
+                            </button>
+                            <button type="button" class="member-btn" onclick="setMemberStatus(${index}, '${member}', 'no', this)" data-member="${member}" data-status="no">
+                                ✗ NO ASISTIRÉ
+                            </button>
+                        </div>
                     </div>
                 `)
                 .join('');
@@ -585,6 +610,17 @@
             renderGroup();
         });
 
+        let memberStatus = {};
+
+        function setMemberStatus(index, member, status, btn) {
+            memberStatus[member] = status === 'yes';
+            
+            // Actualizar visual
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.member-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
         document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -593,8 +629,8 @@
                 return;
             }
 
-            const checkboxes = document.querySelectorAll('input[name="members"]:checked');
-            const confirmedMembers = Array.from(checkboxes).map(cb => cb.value);
+            // Obtener miembros que dijeron ASISTIRÉ
+            const confirmedMembers = currentGroup.members.filter(member => memberStatus[member] !== false);
 
             if (confirmedMembers.length === 0) {
                 alert('Por favor selecciona al menos una persona que asistirá');
@@ -641,6 +677,7 @@
 
                     document.getElementById('rsvpForm').reset();
                     renderGroup();
+                    memberStatus = {};
                     pendingConfirmation = null;
 
                     setTimeout(() => {
