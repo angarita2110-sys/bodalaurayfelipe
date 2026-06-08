@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Laura & Felipe - Invitación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage: #6B8E7F;
+            --sage-light: #A8C5B8;
+            --mint: #D4E8E0;
+            --gold: #C9A87D;
+            --cream: #FAF8F6;
+            --dark: #3D4A44;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--mint) 0%, var(--cream) 100%);
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .hero {
+            position: relative;
+            height: 450px;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(107, 142, 127, 0.7) 0%, rgba(107, 142, 127, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-group {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            max-width: 500px;
+        }
+
+        .quote-text {
+            font-size: 15px;
+            color: white;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .content {
+            padding: 2rem 1rem;
+        }
+
+        .security-notice {
+            background: linear-gradient(135deg, rgba(107, 142, 127, 0.1) 0%, rgba(212, 232, 224, 0.5) 100%);
+            border-radius: 12px;
+            border: 0.5px solid rgba(107, 142, 127, 0.3);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .security-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .security-text {
+            font-size: 13px;
+            color: var(--sage);
+            line-height: 1.5;
+        }
+
+        .security-text strong {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .countdown-section {
+            background: white;
+            border-radius: 16px;
+            border: 0.5px solid rgba(107, 142, 127, 0.15);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(107, 142, 127, 0.08);
+        }
+
+        .countdown-label {
+            font-size: 13px;
+            color: var(--sage);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 0.5px solid rgba(107, 142, 127, 0.2);
+        }
+
+        .countdown-number {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--sage);
+            margin-bottom: 0.25rem;
+        }
+
+        .countdown-label-item {
+            font-size: 11px;
+            color: var(--sage);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 16px;
+            border: 0.5px solid rgba(107, 142, 127, 0.15);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(107, 142, 127, 0.08);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--mint);
+        }
+
+        .members-list {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 0;
+        }
+
+        .member {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.3) 100%);
+            border-radius: 8px;
+            border: 0.5px solid rgba(107, 142, 127, 0.2);
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .member::before {
+            content: "✓";
+            color: var(--sage);
+            font-weight: 600;
+            margin-right: 0.75rem;
+            font-size: 16px;
+        }
+
+        .event-detail {
+            margin-bottom: 1.5rem;
+        }
+
+        .event-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-detail-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sage);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .event-detail-content {
+            font-size: 15px;
+            color: var(--dark);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--mint);
+            border-radius: 12px;
+            border: 1px solid rgba(107, 142, 127, 0.2);
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--sage);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 14px;
+            border: 1px solid rgba(107, 142, 127, 0.2);
+            border-radius: 8px;
+            background: white;
+            color: var(--dark);
+            font-family: inherit;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--sage);
+            background: var(--mint);
+        }
+
+        .button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(107, 142, 127, 0.2);
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 13px;
+            text-align: center;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: linear-gradient(135deg, rgba(212, 232, 224, 0.8) 0%, rgba(107, 142, 127, 0.1) 100%);
+            color: var(--sage);
+            border: 1px solid rgba(107, 142, 127, 0.3);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);
+            border-radius: 12px;
+            border: 0.5px solid rgba(107, 142, 127, 0.2);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 13px;
+            color: var(--sage);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--sage);
+            font-size: 13px;
+        }
+
+        .heart {
+            color: var(--gold);
+            margin: 0 4px;
+        }
+
+        .gallery-subtitle {
+            font-size: 13px;
+            color: var(--sage);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <img src="IMG_3598.jpg" alt="Laura & Felipe" class="hero-image">
+            <div class="hero-overlay">
+                <h1 class="hero-title">Laura & Felipe</h1>
+                <p class="hero-group" id="groupName">Bienvenidos al grupo</p>
+                <div class="quote-box">
+                    <p class="quote-text">"El amor es la única realidad, el único acto creador que puede traer la verdad al mundo. Nuestro viaje juntos apenas comienza..."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="security-notice">
+                <div class="security-icon">🔐</div>
+                <div class="security-text">
+                    <strong>Invitación personalizada</strong><br>
+                    Esta invitación es válida únicamente para las personas mencionadas en la lista a continuación. Por favor, verifica que tu nombre aparezca entre los miembros de tu grupo.
+                </div>
+            </div>
+
+            <div class="message success" id="successMessage">
+                <span id="successText">✓ ¡Gracias por confirmar!</span>
+            </div>
+
+            <div class="countdown-section">
+                <div class="countdown-label">Faltan para nuestro gran día</div>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">157</div>
+                        <div class="countdown-label-item">Días</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">12</div>
+                        <div class="countdown-label-item">Horas</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">34</div>
+                        <div class="countdown-label-item">Min</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">28</div>
+                        <div class="countdown-label-item">Seg</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">Miembros de tu Grupo</div>
+                <div class="members-list" id="membersList"></div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">La Celebración</div>
+                <div class="event-detail">
+                    <div class="event-detail-label">Día y Hora</div>
+                    <div class="event-detail-content">Sábado, 12 de Diciembre • 6:00 PM</div>
+                </div>
+                <div class="event-detail">
+                    <div class="event-detail-label">Ubicación</div>
+                    <div class="event-detail-content">
+                        Club Campestre Palmira<br>
+                        Salón Fundadores<br>
+                        Palmira, Valle del Cauca
+                    </div>
+                </div>
+                <div class="event-detail">
+                    <div class="event-detail-label">Dress Code</div>
+                    <div class="event-detail-content">Formal</div>
+                </div>
+                <div class="event-detail">
+                    <div class="event-detail-label">Experiencia</div>
+                    <div class="event-detail-content">Te invitamos a una cena en celebración de nuestra unión</div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2 class="section-title">Retratos de Nuestro Amor</h2>
+                <p class="gallery-subtitle">Momentos que quedan en la eternidad</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="IMG_8452.jpg" alt="Momento 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="IMG_3520.jpg" alt="Momento 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="IMG_3598.jpg" alt="Momento 3">
+                    </div>
+                    <div class="gallery-item" style="background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);"></div>
+                    <div class="gallery-item" style="background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);"></div>
+                    <div class="gallery-item" style="background: linear-gradient(135deg, var(--mint) 0%, rgba(212, 232, 224, 0.5) 100%);"></div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2 class="form-title">Confirma tu Asistencia</h2>
+                <div class="info-box">
+                    ⏰ Plazo límite: 12 de Noviembre, 2026
+                </div>
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="attendance">¿Confirmas tu asistencia?</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="confirmed">✓ Sí, ¡confirmamos nuestra asistencia!</option>
+                            <option value="rejected">✗ Lamentablemente no podemos asistir</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="button">Registrar Confirmación</button>
+                </form>
+            </div>
+
+            <div class="footer">
+                Hecho con <span class="heart">♥</span> para Laura & Felipe
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const groups = [
+            { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
+            { id: 2, name: "Rodolfo Calle", members: ["Rodolfo Calle", "Esposa Rodolfo Calle", "Rodolfo Calle JR"] },
+            { id: 3, name: "Veronica Calle", members: ["Veronica Calle", "Esposo Veronica Calle"] },
+            { id: 4, name: "Arturo Calle", members: ["Arturo Calle", "Esposa Arturo Calle", "Esteban Calle", "Camila Cano"] },
+            { id: 5, name: "Uriel Calle", members: ["Uriel Calle", "Esposa Uriel Calle", "Hijo Uriel Calle"] },
+            { id: 6, name: "Jose Antonio Calle", members: ["Jose Antonio Calle", "Ligia Martinez", "Pablo de Santiago", "Alejandra Calle"] },
+            { id: 7, name: "Rosalba Martinez", members: ["Rosalba Martinez", "Cosme", "Gustavo hijo de rosalba"] },
+            { id: 8, name: "Juan Carlos", members: ["Juan Carlos hijo de rosalba", "Esposa Juan Carlos"] },
+            { id: 9, name: "Juan Pablo", members: ["Juanbra", "Acompañante Juan bra"] },
+            { id: 10, name: "Doris Martinez", members: ["Doris Martinez", "Acompañante Doris Martinez"] },
+            { id: 11, name: "Lina Amiga Lau", members: ["Lina Amiga Lau", "Angelica"] },
+            { id: 12, name: "Jen", members: ["Jen"] },
+            { id: 13, name: "Leydi Di", members: ["Leydi Di"] },
+            { id: 14, name: "Diana Isabel", members: ["Diana Isabel"] },
+            { id: 15, name: "Juliana H", members: ["Juliana H", "Esposo Juliana H"] },
+            { id: 16, name: "Laura y Felipe", members: ["Laura Calle (esposa)", "Felipe Angarita (esposo)"] },
+            { id: 17, name: "Andres Zuluaga", members: ["Andres Zuluaga"] },
+            { id: 18, name: "Juan Pablo Ayala", members: ["Juan Pablo Ayala", "Acompañante Juan Pablo Ayala"] },
+            { id: 19, name: "Americo Ortega", members: ["Americo Ortega", "Acompañante Americo Ortega"] },
+            { id: 20, name: "Scheinder", members: ["Scheinder"] },
+            { id: 21, name: "Liliana Laverde", members: ["Liliana Laverde", "Jorge Duque", "Natalia Angarita", "Oscar Giraldo"] },
+            { id: 22, name: "Ana Morales", members: ["Ana Morales"] },
+            { id: 23, name: "Gilberto Laverde", members: ["Gilberto Laverde"] },
+            { id: 24, name: "Sebastian Laverde", members: ["Sebastian Laverde", "Jose Daniel"] },
+            { id: 25, name: "Margie Laverde", members: ["Margie Laverde", "Acompañante Margie"] },
+            { id: 26, name: "Juliana Laverde", members: ["Juliana Laverde", "Acompañante Juliana"] },
+            { id: 27, name: "Maria Laverde", members: ["Maria Laverde", "Silvio Echeverri", "Karen Echeverri", "Laura Echeverri", "Mauricio Amaya", "John Yama"] },
+            { id: 28, name: "Amanda Laverde", members: ["Amanda Laverde"] },
+            { id: 29, name: "Leonardo Rodriguez", members: ["Leonardo Rodriguez"] },
+            { id: 30, name: "Lorena", members: ["Lorena"] },
+            { id: 31, name: "Margarita Laverde", members: ["Margarita Laverde", "Gabriel Diaz", "Angela Diaz", "Luisa Diaz"] },
+            { id: 32, name: "Gloria Angarita", members: ["Gloria Angarita", "Cesar Angarita", "Daniela Montoya", "Olga Montoya", "Bernardo Angarita", "Argenis Salazar", "Miguel Angarita", "Juan Camilo Angarita"] },
+            { id: 33, name: "Liliana Cortes", members: ["Liliana Cortes", "Acompañante Liliana Cortes"] },
+            { id: 34, name: "Claudia Cortes", members: ["Claudia Cortes", "Acompañante Claudia Cortes"] },
+            { id: 35, name: "Juliana Roldan", members: ["Juliana Roldan", "Juanfer esposo Juliana"] },
+            { id: 36, name: "Sebastian Garcia", members: ["Sebastian Garcia", "Acompañanate Sebastian Garcia"] },
+            { id: 37, name: "Juan Guillermo Ceron", members: ["Juan Guillermo Ceron", "Acompañante Ceron"] },
+            { id: 38, name: "Felipe Sepulveda", members: ["Felipe Sepulveda", "Aura Esposa Sepulveda"] },
+            { id: 39, name: "Andres Horrillo", members: ["Andres Horrillo", "Catalina Franco"] },
+            { id: 40, name: "Daniel Bujato", members: ["Daniel Bujato", "Stefania Marcano"] },
+            { id: 41, name: "Guillermo Giraldo", members: ["Guillermo Giraldo", "Acompañanate Guillermo"] },
+            { id: 42, name: "Isabel Londoño", members: ["Isabel Londoño"] },
+            { id: 43, name: "Juan Pablo Galvis", members: ["Juan Pablo Galvis"] },
+            { id: 44, name: "Diego Duque", members: ["Diego Duque", "Karen Duque", "Elene Duque", "Steve", "Margoth Duque", "Carlos Quiceno"] }
+        ];
+
+        function generateHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(36).substring(0, 8);
+        }
+
+        function getGroupFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const hash = params.get('group');
+            if (!hash) return groups[0];
+            
+            for (let group of groups) {
+                if (generateHash(group.id + group.name) === hash) {
+                    return group;
+                }
+            }
+            return groups[0];
+        }
+
+        function renderGroup() {
+            const group = getGroupFromURL();
+            document.getElementById('groupName').textContent = `Bienvenidos, ${group.name}`;
+            
+            const membersList = document.getElementById('membersList');
+            membersList.innerHTML = group.members.map(m => `<div class="member">${m}</div>`).join('');
+        }
+
+        function updateCountdown() {
+            const targetDate = new Date('2026-12-12T18:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const group = getGroupFromURL();
+            const attendance = document.getElementById('attendance').value;
+
+            if (!attendance) {
+                alert('Por favor selecciona una opción');
+                return;
+            }
+
+            const confirmations = JSON.parse(localStorage.getItem('laura-felipe-confirmations') || '[]');
+            const existingIndex = confirmations.findIndex(c => c.groupId === group.id);
+            
+            const confirmation = {
+                groupId: group.id,
+                groupName: group.name,
+                status: attendance,
+                timestamp: new Date().toISOString()
+            };
+
+            if (existingIndex !== -1) {
+                confirmations[existingIndex] = confirmation;
+            } else {
+                confirmations.push(confirmation);
+            }
+
+            localStorage.setItem('laura-felipe-confirmations', JSON.stringify(confirmations));
+
+            const message = attendance === 'confirmed' 
+                ? '✓ ¡Gracias por confirmar tu asistencia! Ya contamos con ustedes 💚' 
+                : '✓ Entendemos, ¡nos hubiera gustado verlos!';
+
+            document.getElementById('successText').textContent = message;
+            document.getElementById('successMessage').classList.add('show');
+
+            document.getElementById('rsvpForm').reset();
+
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 4000);
+        });
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        renderGroup();
+    </script>
+</body>
+</html>
