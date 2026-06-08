@@ -536,8 +536,25 @@
                 </form>
             </div>
 
-            <!-- IMPORTAR 44 GRUPOS -->
-            <button class="btn" onclick="importDefault44Groups()" style="margin-bottom: 30px; background: #3498db;">📥 Importar 44 Grupos Originales</button>
+            <!-- FILTROS COMO REPORTE (ARRIBA - VISIBLES) -->
+            <div class="filter-report">
+                <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
+                    <div class="filter-number" id="filterTodos">0</div>
+                    <div class="filter-label">📋 Todos</div>
+                </div>
+                <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
+                    <div class="filter-number" id="filterPending">0</div>
+                    <div class="filter-label">⏳ Pendientes</div>
+                </div>
+                <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
+                    <div class="filter-number" id="filterConfirmed">0</div>
+                    <div class="filter-label">✓ Confirmados</div>
+                </div>
+                <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
+                    <div class="filter-number" id="filterRejected">0</div>
+                    <div class="filter-label">✗ No Asisten</div>
+                </div>
+            </div>
 
             <!-- BÚSQUEDA -->
             <div class="search-box">
@@ -568,26 +585,6 @@
                 </div>
                 <div class="asistentes-list" id="asistentesList">
                     <p style="text-align: center; color: var(--text);">Cargando asistentes...</p>
-                </div>
-            </div>
-
-            <!-- FILTROS COMO REPORTE (ABAJO) -->
-            <div class="filter-report">
-                <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
-                    <div class="filter-number" id="filterTodos">0</div>
-                    <div class="filter-label">📋 Todos</div>
-                </div>
-                <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
-                    <div class="filter-number" id="filterPending">0</div>
-                    <div class="filter-label">⏳ Pendientes</div>
-                </div>
-                <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
-                    <div class="filter-number" id="filterConfirmed">0</div>
-                    <div class="filter-label">✓ Confirmados</div>
-                </div>
-                <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
-                    <div class="filter-number" id="filterRejected">0</div>
-                    <div class="filter-label">✗ No Asisten</div>
                 </div>
             </div>
         </div>
