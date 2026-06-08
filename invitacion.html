@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laura & Felipe - Nuestra Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -45,12 +45,12 @@
         .container::before { top: 560px; left: -150px; }
         .container::after { top: 1040px; right: -170px; }
         .hero {
-            height: 540px;
+            height: 590px;
             background:
-                linear-gradient(180deg, rgba(28,28,28,.28) 0%, rgba(28,28,28,.50) 100%),
+                linear-gradient(180deg, rgba(20,20,20,.14) 0%, rgba(20,20,20,.18) 34%, rgba(20,20,20,.58) 100%),
                 url('IMG_8452.jpg');
             background-size: cover;
-            background-position: center 40%;
+            background-position: center 32%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -74,78 +74,71 @@
             background: var(--cream);
             clip-path: ellipse(62% 48% at 50% 100%);
         }
-        .hero-inner { padding: 0 34px; transform: translateY(-14px); }
+        .hero-inner {
+            position: absolute;
+            left: 28px;
+            right: 28px;
+            bottom: 122px;
+            padding: 0 26px;
+            z-index: 2;
+        }
         .eyebrow {
             color: rgba(255,255,255,.92);
-            font-size: 13px;
-            letter-spacing: 3px;
+            font-size: 12px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 18px;
+            margin-bottom: 10px;
             display: inline-flex;
             align-items: center;
             gap: 14px;
+            text-shadow: 0 2px 12px rgba(0,0,0,.45);
         }
         .eyebrow::before, .eyebrow::after {
             content: "";
             display: block;
-            width: 58px;
+            width: 64px;
             height: 1px;
-            background: rgba(255,255,255,.55);
+            background: rgba(255,255,255,.58);
         }
-        .hero-title {
-            display: grid;
-            gap: 4px;
-            justify-items: center;
+        .hero h1 {
             color: white;
-            text-shadow: 0 8px 26px rgba(0,0,0,.38);
+            text-shadow: 0 8px 26px rgba(0,0,0,.42);
+            font-weight: 400;
+            display: grid;
+            gap: 2px;
+            justify-items: center;
+            margin: 0 auto;
         }
-        .hero-salute {
+        .hero-welcome {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(13px, 2.4vw, 18px);
+            font-size: clamp(12px, 2.5vw, 15px);
             line-height: 1;
-            letter-spacing: 5px;
+            letter-spacing: 7px;
             text-transform: uppercase;
             font-weight: 500;
-            color: rgba(255,255,255,.92);
-            position: relative;
-            padding: 0 52px;
         }
-        .hero-salute::before,
-        .hero-salute::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 34px;
-            height: 1px;
-            background: rgba(255,255,255,.62);
-        }
-        .hero-salute::before { left: 0; }
-        .hero-salute::after { right: 0; }
-        .hero-name {
+        .guest-name {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(58px, 11vw, 104px);
-            line-height: .92;
+            font-size: clamp(62px, 13vw, 106px);
+            line-height: .78;
             font-weight: 400;
-            color: #fffdf9;
-            letter-spacing: .2px;
-            max-width: 650px;
-            filter: drop-shadow(0 8px 18px rgba(0,0,0,.28));
+            max-width: 640px;
+            text-wrap: balance;
         }
-        .hero-name::after {
-            content: "";
-            display: block;
-            width: min(230px, 54%);
+        .hero-name-rule {
+            width: min(300px, 70%);
             height: 1px;
-            margin: 14px auto 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent);
+            background: rgba(255,255,255,.52);
+            margin: 7px auto 0;
         }
         .hero-quote {
-            max-width: 470px;
-            margin: 24px auto 0;
-            color: rgba(255,255,255,.93);
-            font-size: 15px;
-            line-height: 1.65;
-            font-weight: 300;
+            max-width: 520px;
+            margin: 18px auto 0;
+            color: rgba(255,255,255,.94);
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 400;
+            text-shadow: 0 3px 16px rgba(0,0,0,.52);
         }
         .content {
             padding: 0 42px 54px;
@@ -537,9 +530,15 @@
         }
         @media (max-width: 640px) {
             .container { max-width: 100%; }
-            .hero { height: 500px; }
+            .hero { height: 560px; background-position: center top; }
             .hero::before { inset: 16px; }
-            .hero-quote { font-size: 13px; }
+            .hero-inner { left: 12px; right: 12px; bottom: 118px; padding: 0 18px; }
+            .eyebrow { font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; }
+            .eyebrow::before, .eyebrow::after { width: 38px; }
+            .hero-welcome { font-size: 12px; letter-spacing: 5px; }
+            .guest-name { font-size: clamp(54px, 15vw, 76px); line-height: .82; max-width: 340px; }
+            .hero-name-rule { width: 210px; margin-top: 6px; }
+            .hero-quote { font-size: 13px; margin-top: 16px; max-width: 340px; }
             .content { padding: 0 20px 48px; }
             .security-notice { border-radius: 18px; line-height: 1.5; }
             .section { padding: 34px 20px; border-radius: 24px; }
@@ -558,10 +557,7 @@
         <div class="hero">
             <div class="hero-inner">
                 <div class="eyebrow">12.12.2026</div>
-                <h1 class="hero-title" aria-label="Bienvenido, invitado especial">
-                    <span class="hero-salute" id="heroGreeting">Bienvenido</span>
-                    <span class="hero-name" id="heroName">Invitado Especial</span>
-                </h1>
+                <h1><span class="hero-welcome">Bienvenido</span><span class="guest-name">Laura & Felipe</span><span class="hero-name-rule"></span></h1>
                 <div class="hero-quote">“Hay momentos que se vuelven eternos cuando se comparten con las personas correctas.”</div>
             </div>
         </div>
@@ -718,9 +714,7 @@
                 return;
             }
 
-            document.getElementById('heroGreeting').textContent = 'Bienvenido';
-            document.getElementById('heroName').textContent = grupoActual.name || 'Invitado Especial';
-            document.querySelector('.hero-title').setAttribute('aria-label', `Bienvenido, ${grupoActual.name || 'Invitado Especial'}`);
+            document.querySelector('.hero h1').innerHTML = `<span class="hero-welcome">Bienvenido</span><span class="guest-name">${grupoActual.name}</span><span class="hero-name-rule"></span>`;
             
             let html = '';
             grupoActual.members.forEach((miembro, i) => {
