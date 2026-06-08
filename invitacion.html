@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laura & Felipe - Nuestra Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&family=Cormorant+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --sage: #9db4a0;
             --mint: #c5ddd5;
@@ -20,236 +15,125 @@
             --dark: #3d3d3d;
             --text: #5a5a5a;
         }
-
         body {
             font-family: 'Montserrat', sans-serif;
-            color: var(--text);
             background: linear-gradient(135deg, var(--cream) 0%, #f5f0e8 100%);
-            line-height: 1.6;
-            overflow-x: hidden;
         }
-
         .container {
             max-width: 680px;
             margin: 0 auto;
             background: white;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
         }
-
         .hero {
-            position: relative;
             height: 500px;
-            background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.35)), url('IMG_8452.jpg');
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('IMG_8452.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            padding: 2rem;
-            z-index: 2;
         }
-
-        .hero-title {
+        .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 56px;
-            font-weight: 900;
             color: white;
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-            line-height: 1.1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-
-        .hero-group {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.95);
-            font-style: italic;
-            letter-spacing: 2px;
-        }
-
-        .content {
-            padding: 50px 40px;
-        }
-
+        .content { padding: 50px 40px; }
         .security-notice {
-            background: linear-gradient(135deg, rgba(157, 180, 160, 0.1) 0%, rgba(197, 221, 213, 0.2) 100%);
-            border-radius: 8px;
+            background: rgba(157, 180, 160, 0.15);
             border-left: 4px solid var(--sage);
-            padding: 1.25rem;
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .security-text {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 30px;
             font-size: 13px;
-            color: var(--sage);
-            line-height: 1.5;
+            color: var(--text);
         }
-
-        .security-text strong {
-            color: var(--dark);
-            font-weight: 600;
-        }
-
         .countdown-section {
-            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            background: linear-gradient(135deg, var(--sage), var(--mint));
             border-radius: 12px;
             padding: 40px;
             margin-bottom: 50px;
             text-align: center;
         }
-
         .countdown-label {
             font-family: 'Playfair Display', serif;
-            font-size: 20px;
             color: white;
             margin-bottom: 30px;
-            letter-spacing: 2px;
+            font-size: 18px;
         }
-
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
         }
-
         .countdown-item {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px 15px;
+            background: white;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
         .countdown-number {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 700;
             color: var(--sage);
-            margin-bottom: 5px;
-            display: block;
         }
-
-        .countdown-label-item {
+        .countdown-text {
             font-size: 11px;
             color: var(--text);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
+            margin-top: 5px;
         }
-
-        .section-card {
+        .section {
             background: white;
+            border: 1px solid rgba(157, 180, 160, 0.15);
             border-radius: 12px;
             padding: 40px;
             margin-bottom: 40px;
-            border: 1px solid rgba(157, 180, 160, 0.15);
         }
-
-        .section-title {
+        .section h2 {
             font-family: 'Playfair Display', serif;
             font-size: 24px;
             color: var(--dark);
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
             text-align: center;
-            position: relative;
+            border-bottom: 2px solid var(--mint);
             padding-bottom: 15px;
         }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(to right, var(--mint), var(--gold), var(--mint));
-        }
-
         .event-detail {
-            margin-bottom: 2rem;
+            margin-bottom: 20px;
         }
-
-        .event-detail:last-child {
-            margin-bottom: 0;
-        }
-
-        .event-detail-label {
+        .event-label {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
             color: var(--sage);
-            margin-bottom: 0.75rem;
             font-weight: 600;
+            margin-bottom: 8px;
         }
-
-        .event-detail-content {
+        .event-content {
             font-size: 15px;
             color: var(--dark);
-            line-height: 1.6;
             font-weight: 500;
         }
-
-        .form-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--dark);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--dark);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .member-selector {
+        .member {
             background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
+            border: 1px solid rgba(157, 180, 160, 0.2);
             border-radius: 8px;
             padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(157, 180, 160, 0.2);
+            margin-bottom: 15px;
         }
-
         .member-name {
             font-size: 15px;
             font-weight: 600;
             color: var(--dark);
             margin-bottom: 12px;
         }
-
         .member-buttons {
             display: flex;
             gap: 10px;
         }
-
         .member-btn {
             flex: 1;
             padding: 10px;
@@ -260,66 +144,35 @@
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             text-transform: uppercase;
         }
-
+        .member-btn.active {
+            background: var(--sage);
+            color: white;
+        }
         .member-btn:hover {
             background: var(--sage);
             color: white;
         }
-
-        .member-btn.selected {
-            background: var(--sage);
-            color: white;
-            border-color: var(--sage);
-        }
-
-        .button {
+        .btn-submit {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            background: linear-gradient(135deg, var(--sage), var(--mint));
             color: white;
             border: none;
             border-radius: 6px;
             font-weight: 600;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            margin-top: 20px;
         }
-
-        .button:hover {
+        .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
         }
-
-        .success-message {
-            display: none;
-            background: var(--sage);
-            color: white;
-            padding: 16px;
-            border-radius: 6px;
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 14px;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        .info-box {
-            background: linear-gradient(135deg, rgba(212, 175, 106, 0.15), rgba(197, 221, 213, 0.15));
-            border-left: 4px solid var(--gold);
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 2rem;
-            font-size: 13px;
-            color: var(--text);
-        }
-
+        .success { display: none; background: var(--sage); color: white; padding: 15px; border-radius: 6px; text-align: center; margin-top: 20px; }
+        .success.show { display: block; }
         .footer {
             background: linear-gradient(135deg, var(--sage), var(--mint));
             color: white;
@@ -327,177 +180,134 @@
             padding: 40px;
             font-size: 14px;
         }
-
-        .heart {
-            color: #ff6b9d;
-        }
-
-        /* MODAL CONFIRMACIÓN */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-content {
+        .modal.show { display: flex; }
+        .modal-box {
             background: white;
             padding: 40px;
             border-radius: 12px;
-            max-width: 500px;
             text-align: center;
+            max-width: 500px;
         }
-
         .modal-title {
             font-family: 'Playfair Display', serif;
             font-size: 24px;
-            color: var(--dark);
             margin-bottom: 20px;
+            color: var(--dark);
         }
-
         .modal-text {
             color: var(--text);
             margin-bottom: 30px;
             font-size: 14px;
-            line-height: 1.6;
         }
-
         .modal-buttons {
             display: flex;
             gap: 15px;
-            justify-content: center;
         }
-
         .modal-btn {
-            padding: 12px 30px;
+            flex: 1;
+            padding: 12px;
             border: none;
             border-radius: 6px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 13px;
         }
-
         .modal-btn.cancel {
-            border: 2px solid var(--sage);
             background: white;
+            border: 2px solid var(--sage);
             color: var(--sage);
         }
-
         .modal-btn.confirm {
-            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            background: var(--sage);
             color: white;
         }
-
         @media (max-width: 600px) {
-            .hero { height: 400px; }
-            .hero-title { font-size: 42px; }
+            .hero h1 { font-size: 42px; }
             .content { padding: 30px 20px; }
-            .section-card { padding: 25px; }
-            .countdown { gap: 10px; }
-            .countdown-number { font-size: 26px; }
+            .countdown { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="hero">
-            <div class="hero-overlay">
-                <h1 class="hero-title">Laura & Felipe</h1>
-                <div class="hero-group" id="groupName">Bienvenidos</div>
-            </div>
+            <h1>Laura & Felipe</h1>
         </div>
 
         <div class="content">
             <div class="security-notice">
-                <span>⚠️</span>
-                <span class="security-text"><strong>Esta invitación es solo para los miembros de este grupo.</strong> No compartas este link con otras personas.</span>
+                ⚠️ <strong>Esta invitación es solo para los miembros de este grupo.</strong> No compartas este link con otras personas.
             </div>
 
             <div class="countdown-section">
                 <div class="countdown-label">FALTAN PARA NUESTRO GRAN DÍA</div>
                 <div class="countdown">
                     <div class="countdown-item">
-                        <span class="countdown-number" id="days">0</span>
-                        <span class="countdown-label-item">Días</span>
+                        <div class="countdown-number" id="days">0</div>
+                        <div class="countdown-text">Días</div>
                     </div>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="hours">0</span>
-                        <span class="countdown-label-item">Horas</span>
+                        <div class="countdown-number" id="hours">0</div>
+                        <div class="countdown-text">Horas</div>
                     </div>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">0</span>
-                        <span class="countdown-label-item">Min</span>
+                        <div class="countdown-number" id="minutes">0</div>
+                        <div class="countdown-text">Min</div>
                     </div>
                     <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">0</span>
-                        <span class="countdown-label-item">Seg</span>
+                        <div class="countdown-number" id="seconds">0</div>
+                        <div class="countdown-text">Seg</div>
                     </div>
                 </div>
             </div>
 
-            <div class="section-card">
-                <h2 class="section-title">La Celebración</h2>
+            <div class="section">
+                <h2>La Celebración</h2>
                 <div class="event-detail">
-                    <div class="event-detail-label">Día y Hora</div>
-                    <div class="event-detail-content">Sábado, 12 de Diciembre • 6:00 PM</div>
+                    <div class="event-label">Día y Hora</div>
+                    <div class="event-content">Sábado, 12 de Diciembre • 6:00 PM</div>
                 </div>
                 <div class="event-detail">
-                    <div class="event-detail-label">Ubicación</div>
-                    <div class="event-detail-content">
-                        Club Campestre Palmira<br>
-                        Salón Fundadores<br>
-                        Palmira, Valle del Cauca
-                    </div>
+                    <div class="event-label">Ubicación</div>
+                    <div class="event-content">Club Campestre Palmira - Salón Fundadores<br>Palmira, Valle del Cauca</div>
                 </div>
                 <div class="event-detail">
-                    <div class="event-detail-label">Atuendo</div>
-                    <div class="event-detail-content">Formal</div>
-                </div>
-                <div class="event-detail">
-                    <div class="event-detail-label">Experiencia</div>
-                    <div class="event-detail-content">Te invitamos a una cena en celebración de nuestra unión</div>
+                    <div class="event-label">Atuendo</div>
+                    <div class="event-content">Formal</div>
                 </div>
             </div>
 
-            <div class="section-card">
-                <h2 class="form-title">Confirma tu Asistencia</h2>
-                <div class="info-box">⏰ Plazo límite: 12 de Noviembre, 2026</div>
-                <form id="rsvpForm">
-                    <div class="form-group">
-                        <label>¿Quién asiste a la boda?</label>
-                        <div id="membersCheckboxes"></div>
-                    </div>
-                    <button type="submit" class="button">Registrar Confirmación</button>
-                </form>
-                <div class="success-message" id="successMessage">
-                    <span id="successText"></span>
-                </div>
+            <div class="section">
+                <h2>Confirma tu Asistencia</h2>
+                <div style="font-size: 13px; color: var(--text); margin-bottom: 20px;">⏰ Plazo límite: 12 de Noviembre, 2026</div>
+                
+                <div id="members"></div>
+
+                <button class="btn-submit" onclick="confirmarAsistencia()">Registrar Confirmación</button>
+                <div class="success" id="success"></div>
             </div>
 
             <div class="footer">
-                Hecho con <span class="heart">♥</span> para Laura & Felipe
+                Hecho con ♥ para Laura & Felipe
             </div>
         </div>
     </div>
 
-    <!-- MODAL CONFIRMACIÓN -->
-    <div class="modal" id="confirmModal">
-        <div class="modal-content">
+    <div class="modal" id="modal">
+        <div class="modal-box">
             <div class="modal-title">¿Estás seguro?</div>
-            <div class="modal-text">Por favor confirma que los datos son correctos antes de proceder. Esta acción no se puede deshacer.</div>
+            <div class="modal-text">Por favor confirma que los datos son correctos antes de proceder.</div>
             <div class="modal-buttons">
-                <button class="modal-btn cancel" id="cancelBtn">Cancelar</button>
-                <button class="modal-btn confirm" id="confirmBtn">Confirmar</button>
+                <button class="modal-btn cancel" onclick="cerrarModal()">Cancelar</button>
+                <button class="modal-btn confirm" onclick="guardarConfirmacion()">Confirmar</button>
             </div>
         </div>
     </div>
@@ -518,69 +328,116 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+        const db = getDatabase(app);
 
-        let allGroups = {};
-        let currentGroup = null;
-        let pendingConfirmation = null;
+        let grupos = {};
+        let grupoActual = null;
+        let selecciones = {};
 
-        function generateHash(str) {
-            let hash = 0;
+        function hashear(str) {
+            let h = 0;
             for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash;
+                h = ((h << 5) - h) + str.charCodeAt(i);
+                h = h & h;
             }
-            return Math.abs(hash).toString(36).substring(0, 8);
+            return Math.abs(h).toString(36).substring(0, 8);
         }
 
-        function getGroupFromURL() {
-            const params = new URLSearchParams(window.location.search);
+        function obtenerGrupo() {
+            const params = new URLSearchParams(location.search);
             const hash = params.get('group');
             if (!hash) return null;
             
-            for (let group of Object.values(allGroups)) {
-                if (generateHash(group.id + group.name) === hash) {
-                    return group;
+            for (let g of Object.values(grupos)) {
+                if (hashear(g.id + g.name) === hash) {
+                    return g;
                 }
             }
             return null;
         }
 
-        function renderGroup() {
-            currentGroup = getGroupFromURL();
-            if (!currentGroup) {
-                document.getElementById('groupName').textContent = 'Invitación no válida';
-                document.getElementById('membersCheckboxes').innerHTML = '<p>No pudimos encontrar tu grupo</p>';
+        function renderizarGrupo() {
+            grupoActual = obtenerGrupo();
+            if (!grupoActual) {
+                document.getElementById('members').innerHTML = '<p>Grupo no encontrado</p>';
                 return;
             }
 
-            document.getElementById('groupName').textContent = `Bienvenidos, ${currentGroup.name}`;
+            document.querySelector('.hero h1').textContent = `Bienvenidos, ${grupoActual.name}`;
             
-            const membersCheckboxes = document.getElementById('membersCheckboxes');
-            membersCheckboxes.innerHTML = currentGroup.members
-                .map((member, index) => `
-                    <div class="member-selector">
-                        <div class="member-name">${member}</div>
+            let html = '';
+            grupoActual.members.forEach((miembro, i) => {
+                html += `
+                    <div class="member">
+                        <div class="member-name">${miembro}</div>
                         <div class="member-buttons">
-                            <button type="button" class="member-btn selected" onclick="setMemberStatus(${index}, '${member}', 'yes', this)" data-member="${member}" data-status="yes">
-                                ✓ ASISTIRÉ
-                            </button>
-                            <button type="button" class="member-btn" onclick="setMemberStatus(${index}, '${member}', 'no', this)" data-member="${member}" data-status="no">
-                                ✗ NO ASISTIRÉ
-                            </button>
+                            <button type="button" class="member-btn active" onclick="seleccionar('${miembro}', true, this)">✓ ASISTIRÉ</button>
+                            <button type="button" class="member-btn" onclick="seleccionar('${miembro}', false, this)">✗ NO ASISTIRÉ</button>
                         </div>
                     </div>
-                `)
-                .join('');
+                `;
+                selecciones[miembro] = true;
+            });
+            document.getElementById('members').innerHTML = html;
         }
 
-        function updateCountdown() {
-            const targetDate = new Date('2026-12-12T18:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+        window.seleccionar = function(miembro, valor, btn) {
+            selecciones[miembro] = valor;
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.member-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        };
 
-            if (distance < 0) {
+        window.confirmarAsistencia = function() {
+            const confirmados = Object.entries(selecciones).filter(([_, v]) => v).map(([k, _]) => k);
+            if (confirmados.length === 0) {
+                alert('Selecciona al menos una persona que asistirá');
+                return;
+            }
+            document.getElementById('modal').classList.add('show');
+        };
+
+        window.cerrarModal = function() {
+            document.getElementById('modal').classList.remove('show');
+        };
+
+        window.guardarConfirmacion = async function() {
+            const confirmados = Object.entries(selecciones).filter(([_, v]) => v).map(([k, _]) => k);
+            
+            try {
+                for (let miembro of confirmados) {
+                    const id = `${grupoActual.id}_${miembro}`;
+                    await set(ref(db, `confirmations/${id}`), {
+                        groupId: grupoActual.id,
+                        groupName: grupoActual.name,
+                        memberName: miembro,
+                        status: 'confirmed',
+                        timestamp: new Date().toISOString()
+                    });
+                }
+
+                const msg = confirmados.length === grupoActual.members.length
+                    ? '✓ ¡Gracias! Todos asistirán 💚'
+                    : `✓ ¡Gracias! Confirmamos ${confirmados.length} persona(s) 💚`;
+                
+                document.getElementById('success').textContent = msg;
+                document.getElementById('success').classList.add('show');
+                document.getElementById('modal').classList.remove('show');
+                
+                setTimeout(() => {
+                    document.getElementById('success').classList.remove('show');
+                }, 4000);
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        };
+
+        function actualizarCountdown() {
+            const fecha = new Date('2026-12-12T18:00:00').getTime();
+            const ahora = new Date().getTime();
+            const distancia = fecha - ahora;
+
+            if (distancia < 0) {
                 document.getElementById('days').textContent = '0';
                 document.getElementById('hours').textContent = '0';
                 document.getElementById('minutes').textContent = '0';
@@ -588,109 +445,24 @@
                 return;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            document.getElementById('days').textContent = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').textContent = String(Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(Math.floor((distancia % (1000 * 60)) / 1000)).padStart(2, '0');
         }
 
-        // Cargar grupos de Firebase
-        const groupsRef = ref(database, 'groups');
-        onValue(groupsRef, (snapshot) => {
-            const data = snapshot.val() || {};
-            allGroups = {};
-            Object.values(data).forEach(group => {
-                allGroups[group.id] = group;
+        const dbRef = ref(db, 'groups');
+        onValue(dbRef, (snap) => {
+            grupos = {};
+            (snap.val() || {});
+            Object.values(snap.val() || {}).forEach(g => {
+                grupos[g.id] = g;
             });
-            renderGroup();
+            renderizarGrupo();
         });
 
-        let memberStatus = {};
-
-        function setMemberStatus(index, member, status, btn) {
-            memberStatus[member] = status === 'yes';
-            
-            // Actualizar visual
-            const parent = btn.parentElement;
-            parent.querySelectorAll('.member-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-        }
-
-        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            if (!currentGroup) {
-                alert('Grupo no válido');
-                return;
-            }
-
-            // Obtener miembros que dijeron ASISTIRÉ
-            const confirmedMembers = currentGroup.members.filter(member => memberStatus[member] !== false);
-
-            if (confirmedMembers.length === 0) {
-                alert('Por favor selecciona al menos una persona que asistirá');
-                return;
-            }
-
-            pendingConfirmation = { confirmedMembers };
-            document.getElementById('confirmModal').classList.add('show');
-
-            document.getElementById('cancelBtn').onclick = () => {
-                document.getElementById('confirmModal').classList.remove('show');
-                pendingConfirmation = null;
-            };
-
-            document.getElementById('confirmBtn').onclick = async () => {
-                document.getElementById('confirmModal').classList.remove('show');
-
-                try {
-                    for (let member of pendingConfirmation.confirmedMembers) {
-                        const memberId = `${currentGroup.id}_${member}`;
-                        await set(ref(database, `confirmations/${memberId}`), {
-                            groupId: currentGroup.id,
-                            groupName: currentGroup.name,
-                            memberName: member,
-                            status: 'confirmed',
-                            timestamp: new Date().toISOString()
-                        });
-                    }
-
-                    await set(ref(database, `groups_confirmation/${currentGroup.id}`), {
-                        groupId: currentGroup.id,
-                        groupName: currentGroup.name,
-                        totalMembers: currentGroup.members.length,
-                        confirmedCount: pendingConfirmation.confirmedMembers.length,
-                        timestamp: new Date().toISOString()
-                    });
-
-                    const message = pendingConfirmation.confirmedMembers.length === currentGroup.members.length
-                        ? '✓ ¡Gracias por confirmar! Todos asistirán 💚'
-                        : `✓ ¡Gracias! Confirmamos ${pendingConfirmation.confirmedMembers.length} persona(s) de tu grupo 💚`;
-
-                    document.getElementById('successText').textContent = message;
-                    document.getElementById('successMessage').classList.add('show');
-
-                    document.getElementById('rsvpForm').reset();
-                    renderGroup();
-                    memberStatus = {};
-                    pendingConfirmation = null;
-
-                    setTimeout(() => {
-                        document.getElementById('successMessage').classList.remove('show');
-                    }, 4000);
-                } catch (error) {
-                    alert('Error al guardar confirmación: ' + error.message);
-                }
-            };
-        });
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        actualizarCountdown();
+        setInterval(actualizarCountdown, 1000);
     </script>
 </body>
 </html>
