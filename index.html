@@ -77,16 +77,17 @@
             margin-bottom: 8px;
         }
 
-        .form-group input {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid var(--mint);
             border-radius: 6px;
             font-size: 14px;
             color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--sage);
             box-shadow: 0 0 0 3px rgba(157, 180, 160, 0.1);
@@ -154,12 +155,12 @@
 
         .user-info {
             text-align: right;
-            font-size: 13px;
         }
 
         .user-info p {
             color: var(--text);
             margin-bottom: 5px;
+            font-size: 13px;
         }
 
         .btn-logout {
@@ -221,6 +222,7 @@
             padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            flex-wrap: wrap;
         }
 
         .tab-btn {
@@ -261,26 +263,13 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border-left: 4px solid var(--sage);
-            transition: all 0.3s ease;
-        }
-
-        .grupo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .grupo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 15px;
         }
 
         .grupo-name {
             font-family: 'Playfair Display', serif;
             font-size: 18px;
             color: var(--dark);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .grupo-status {
@@ -289,6 +278,8 @@
             padding: 4px 10px;
             border-radius: 4px;
             text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
         }
 
         .status-pending {
@@ -312,6 +303,8 @@
             border-radius: 6px;
             margin-bottom: 15px;
             font-size: 12px;
+            max-height: 100px;
+            overflow-y: auto;
         }
 
         .miembro {
@@ -349,6 +342,74 @@
             background: #27ae60;
         }
 
+        .btn-small {
+            padding: 6px 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-right: 5px;
+            font-weight: 600;
+        }
+
+        .btn-small.delete {
+            background: #e74c3c;
+        }
+
+        .btn-small:hover {
+            opacity: 0.8;
+        }
+
+        /* ADMIN FORM */
+        .admin-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .admin-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--mint);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .btn-submit {
+            padding: 14px 30px;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(157, 180, 160, 0.3);
+        }
+
         /* CONFIRMACIONES */
         .confirmation-list {
             display: grid;
@@ -372,7 +433,6 @@
 
         .confirmation-item.rejected {
             border-left-color: #e74c3c;
-            opacity: 0.8;
         }
 
         .confirmation-info h3 {
@@ -414,8 +474,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .tabs {
-                flex-wrap: wrap;
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -462,20 +522,50 @@
                     <div class="stat-label">No Pueden Asistir</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="totalPending">44</div>
+                    <div class="stat-number" id="totalPending">0</div>
                     <div class="stat-label">Pendientes</div>
                 </div>
             </div>
 
             <div class="tabs">
                 <button class="tab-btn active" data-tab="grupos">Grupos & Links</button>
-                <button class="tab-btn" data-tab="confirmaciones">Confirmaciones en Vivo</button>
+                <button class="tab-btn" data-tab="administracion">Administración</button>
+                <button class="tab-btn" data-tab="confirmaciones">Confirmaciones</button>
             </div>
 
             <!-- TAB: GRUPOS -->
             <div id="grupos" class="tab-content active">
                 <div class="grupos-grid" id="gruposGrid">
                     <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- TAB: ADMINISTRACIÓN -->
+            <div id="administracion" class="tab-content">
+                <div class="admin-section">
+                    <div class="admin-title">Crear Nuevo Grupo</div>
+                    <form id="newGroupForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="groupName">Nombre del Grupo</label>
+                                <input type="text" id="groupName" required placeholder="Ej: Alberto Calle">
+                            </div>
+                        </div>
+                        <div class="form-row full">
+                            <div class="form-group">
+                                <label for="groupMembers">Miembros (uno por línea)</label>
+                                <textarea id="groupMembers" required placeholder="Alberto Calle&#10;Esposa Alberto&#10;Hijo Alberto" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">Crear Grupo</button>
+                    </form>
+                </div>
+
+                <div class="admin-section">
+                    <div class="admin-title">Editar Grupos Existentes</div>
+                    <div id="editGroupsList">
+                        <p style="color: var(--text); text-align: center;">Cargando grupos...</p>
+                    </div>
                 </div>
             </div>
 
@@ -491,7 +581,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
@@ -508,54 +598,9 @@
         const auth = getAuth(app);
         const database = getDatabase(app);
 
-        const groups = [
-            { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
-            { id: 2, name: "Rodolfo Calle", members: ["Rodolfo Calle", "Esposa Rodolfo Calle", "Rodolfo Calle JR"] },
-            { id: 3, name: "Veronica Calle", members: ["Veronica Calle", "Esposo Veronica Calle"] },
-            { id: 4, name: "Arturo Calle", members: ["Arturo Calle", "Esposa Arturo Calle", "Esteban Calle", "Camila Cano"] },
-            { id: 5, name: "Uriel Calle", members: ["Uriel Calle", "Esposa Uriel Calle", "Hijo Uriel Calle"] },
-            { id: 6, name: "Jose Antonio Calle", members: ["Jose Antonio Calle", "Ligia Martinez", "Pablo de Santiago", "Alejandra Calle"] },
-            { id: 7, name: "Rosalba Martinez", members: ["Rosalba Martinez", "Cosme", "Gustavo hijo de rosalba"] },
-            { id: 8, name: "Juan Carlos", members: ["Juan Carlos hijo de rosalba", "Esposa Juan Carlos"] },
-            { id: 9, name: "Juan Pablo", members: ["Juanbra", "Acompañante Juan bra"] },
-            { id: 10, name: "Doris Martinez", members: ["Doris Martinez", "Acompañante Doris Martinez"] },
-            { id: 11, name: "Lina Amiga Lau", members: ["Lina Amiga Lau", "Angelica"] },
-            { id: 12, name: "Jen", members: ["Jen"] },
-            { id: 13, name: "Leydi Di", members: ["Leydi Di"] },
-            { id: 14, name: "Diana Isabel", members: ["Diana Isabel"] },
-            { id: 15, name: "Juliana H", members: ["Juliana H", "Esposo Juliana H"] },
-            { id: 16, name: "Laura y Felipe", members: ["Laura Calle (esposa)", "Felipe Angarita (esposo)"] },
-            { id: 17, name: "Andres Zuluaga", members: ["Andres Zuluaga"] },
-            { id: 18, name: "Juan Pablo Ayala", members: ["Juan Pablo Ayala", "Acompañante Juan Pablo Ayala"] },
-            { id: 19, name: "Americo Ortega", members: ["Americo Ortega", "Acompañante Americo Ortega"] },
-            { id: 20, name: "Scheinder", members: ["Scheinder"] },
-            { id: 21, name: "Liliana Laverde", members: ["Liliana Laverde", "Jorge Duque", "Natalia Angarita", "Oscar Giraldo"] },
-            { id: 22, name: "Ana Morales", members: ["Ana Morales"] },
-            { id: 23, name: "Gilberto Laverde", members: ["Gilberto Laverde"] },
-            { id: 24, name: "Sebastian Laverde", members: ["Sebastian Laverde", "Jose Daniel"] },
-            { id: 25, name: "Margie Laverde", members: ["Margie Laverde", "Acompañante Margie"] },
-            { id: 26, name: "Juliana Laverde", members: ["Juliana Laverde", "Acompañante Juliana"] },
-            { id: 27, name: "Maria Laverde", members: ["Maria Laverde", "Silvio Echeverri", "Karen Echeverri", "Laura Echeverri", "Mauricio Amaya", "John Yama"] },
-            { id: 28, name: "Amanda Laverde", members: ["Amanda Laverde"] },
-            { id: 29, name: "Leonardo Rodriguez", members: ["Leonardo Rodriguez"] },
-            { id: 30, name: "Lorena", members: ["Lorena"] },
-            { id: 31, name: "Margarita Laverde", members: ["Margarita Laverde", "Gabriel Diaz", "Angela Diaz", "Luisa Diaz"] },
-            { id: 32, name: "Gloria Angarita", members: ["Gloria Angarita", "Cesar Angarita", "Daniela Montoya", "Olga Montoya", "Bernardo Angarita", "Argenis Salazar", "Miguel Angarita", "Juan Camilo Angarita"] },
-            { id: 33, name: "Liliana Cortes", members: ["Liliana Cortes", "Acompañante Liliana Cortes"] },
-            { id: 34, name: "Claudia Cortes", members: ["Claudia Cortes", "Acompañante Claudia Cortes"] },
-            { id: 35, name: "Juliana Roldan", members: ["Juliana Roldan", "Juanfer esposo Juliana"] },
-            { id: 36, name: "Sebastian Garcia", members: ["Sebastian Garcia", "Acompañanate Sebastian Garcia"] },
-            { id: 37, name: "Juan Guillermo Ceron", members: ["Juan Guillermo Ceron", "Acompañante Ceron"] },
-            { id: 38, name: "Felipe Sepulveda", members: ["Felipe Sepulveda", "Aura Esposa Sepulveda"] },
-            { id: 39, name: "Andres Horrillo", members: ["Andres Horrillo", "Catalina Franco"] },
-            { id: 40, name: "Daniel Bujato", members: ["Daniel Bujato", "Stefania Marcano"] },
-            { id: 41, name: "Guillermo Giraldo", members: ["Guillermo Giraldo", "Acompañanate Guillermo"] },
-            { id: 42, name: "Isabel Londoño", members: ["Isabel Londoño"] },
-            { id: 43, name: "Juan Pablo Galvis", members: ["Juan Pablo Galvis"] },
-            { id: 44, name: "Diego Duque", members: ["Diego Duque", "Karen Duque", "Elene Duque", "Steve", "Margoth Duque", "Carlos Quiceno"] }
-        ];
-
+        let groups = {};
         let confirmations = {};
+        let nextGroupId = 1;
 
         function generateHash(str) {
             let hash = 0;
@@ -582,6 +627,8 @@
         const confirmationList = document.getElementById('confirmationList');
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
+        const newGroupForm = document.getElementById('newGroupForm');
+        const editGroupsList = document.getElementById('editGroupsList');
 
         // Tabs
         tabBtns.forEach(btn => {
@@ -613,22 +660,65 @@
             await signOut(auth);
         });
 
+        // Crear grupo
+        newGroupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('groupName').value;
+            const membersText = document.getElementById('groupMembers').value;
+            const members = membersText.split('\n').map(m => m.trim()).filter(m => m);
+
+            const newId = Math.max(...Object.keys(groups).map(k => parseInt(groups[k].id) || 0), 0) + 1;
+
+            try {
+                await set(ref(database, `groups/${newId}`), {
+                    id: newId,
+                    name: name,
+                    members: members
+                });
+
+                newGroupForm.reset();
+                alert('Grupo creado exitosamente');
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
         // Auth State
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 loginContainer.classList.add('hidden');
                 dashboard.classList.add('active');
                 userEmail.textContent = user.email;
-                loadGrupos();
-                loadConfirmations();
+                loadData();
             } else {
                 loginContainer.classList.remove('hidden');
                 dashboard.classList.remove('active');
             }
         });
 
+        function loadData() {
+            const groupsRef = ref(database, 'groups');
+            onValue(groupsRef, (snapshot) => {
+                groups = {};
+                const data = snapshot.val() || {};
+                Object.values(data).forEach(group => {
+                    groups[group.id] = group;
+                    nextGroupId = Math.max(nextGroupId, group.id + 1);
+                });
+                loadGrupos();
+                renderEditGroups();
+            });
+
+            const confRef = ref(database, 'confirmations');
+            onValue(confRef, (snapshot) => {
+                confirmations = snapshot.val() || {};
+                displayConfirmations();
+                updateStats();
+            });
+        }
+
         function loadGrupos() {
-            gruposGrid.innerHTML = groups.map(group => {
+            gruposGrid.innerHTML = Object.values(groups).map(group => {
                 const hash = getGroupHash(group.id, group.name);
                 const status = confirmations[group.id];
                 let statusClass = 'status-pending';
@@ -648,12 +738,8 @@
 
                 return `
                     <div class="grupo-card">
-                        <div class="grupo-header">
-                            <div>
-                                <div class="grupo-name">${group.name}</div>
-                                <span class="grupo-status ${statusClass}">${statusText}</span>
-                            </div>
-                        </div>
+                        <div class="grupo-name">${group.name}</div>
+                        <span class="grupo-status ${statusClass}">${statusText}</span>
                         <div class="miembros">
                             ${group.members.map(m => `<div class="miembro">${m}</div>`).join('')}
                         </div>
@@ -663,14 +749,16 @@
             }).join('');
         }
 
-        function loadConfirmations() {
-            const confRef = ref(database, 'confirmations');
-            onValue(confRef, (snapshot) => {
-                confirmations = snapshot.val() || {};
-                displayConfirmations();
-                updateStats();
-                loadGrupos();
-            });
+        function renderEditGroups() {
+            editGroupsList.innerHTML = Object.values(groups).map(group => `
+                <div class="grupo-card" style="margin-bottom: 20px;">
+                    <div class="grupo-name">${group.name}</div>
+                    <div class="miembros">
+                        ${group.members.map(m => `<div class="miembro">${m}</div>`).join('')}
+                    </div>
+                    <button class="btn-small delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
+                </div>
+            `).join('');
         }
 
         function displayConfirmations() {
@@ -705,7 +793,7 @@
             const confs = Object.values(confirmations);
             const confirmed = confs.filter(c => c.status === 'confirmed').length;
             const rejected = confs.filter(c => c.status === 'rejected').length;
-            const pending = 44 - confirmed - rejected;
+            const pending = Object.keys(groups).length - confirmed - rejected;
 
             document.getElementById('totalConfirmed').textContent = confirmed;
             document.getElementById('totalRejected').textContent = rejected;
@@ -722,6 +810,16 @@
                     btn.classList.remove('copied');
                 }, 2000);
             });
+        };
+
+        window.deleteGroup = async function(groupId) {
+            if (confirm('¿Eliminar este grupo?')) {
+                try {
+                    await remove(ref(database, `groups/${groupId}`));
+                } catch (error) {
+                    alert('Error: ' + error.message);
+                }
+            }
         };
     </script>
 </body>
