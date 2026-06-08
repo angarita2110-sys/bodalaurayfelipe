@@ -543,6 +543,12 @@
             <!-- TAB: ADMINISTRACIÓN -->
             <div id="administracion" class="tab-content">
                 <div class="admin-section">
+                    <div class="admin-title">Importar Grupos Predeterminados</div>
+                    <p style="margin-bottom: 20px; color: var(--text);">Restaura los 44 grupos originales si los eliminaste accidentalmente:</p>
+                    <button type="button" class="btn-submit" onclick="importDefault44Groups()">📥 Importar 44 Grupos</button>
+                </div>
+
+                <div class="admin-section">
                     <div class="admin-title">Crear Nuevo Grupo</div>
                     <form id="newGroupForm">
                         <div class="form-row">
@@ -819,6 +825,68 @@
                 } catch (error) {
                     alert('Error: ' + error.message);
                 }
+            }
+        };
+
+        window.importDefault44Groups = async function() {
+            if (!confirm('¿Importar los 44 grupos originales?')) {
+                return;
+            }
+
+            const defaultGroups = [
+                { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
+                { id: 2, name: "Rodolfo Calle", members: ["Rodolfo Calle", "Esposa Rodolfo Calle", "Rodolfo Calle JR"] },
+                { id: 3, name: "Veronica Calle", members: ["Veronica Calle", "Esposo Veronica Calle"] },
+                { id: 4, name: "Arturo Calle", members: ["Arturo Calle", "Esposa Arturo Calle", "Esteban Calle", "Camila Cano"] },
+                { id: 5, name: "Uriel Calle", members: ["Uriel Calle", "Esposa Uriel Calle", "Hijo Uriel Calle"] },
+                { id: 6, name: "Jose Antonio Calle", members: ["Jose Antonio Calle", "Ligia Martinez", "Pablo de Santiago", "Alejandra Calle"] },
+                { id: 7, name: "Rosalba Martinez", members: ["Rosalba Martinez", "Cosme", "Gustavo hijo de rosalba"] },
+                { id: 8, name: "Juan Carlos", members: ["Juan Carlos hijo de rosalba", "Esposa Juan Carlos"] },
+                { id: 9, name: "Juan Pablo", members: ["Juanbra", "Acompañante Juan bra"] },
+                { id: 10, name: "Doris Martinez", members: ["Doris Martinez", "Acompañante Doris Martinez"] },
+                { id: 11, name: "Lina Amiga Lau", members: ["Lina Amiga Lau", "Angelica"] },
+                { id: 12, name: "Jen", members: ["Jen"] },
+                { id: 13, name: "Leydi Di", members: ["Leydi Di"] },
+                { id: 14, name: "Diana Isabel", members: ["Diana Isabel"] },
+                { id: 15, name: "Juliana H", members: ["Juliana H", "Esposo Juliana H"] },
+                { id: 16, name: "Laura y Felipe", members: ["Laura Calle (esposa)", "Felipe Angarita (esposo)"] },
+                { id: 17, name: "Andres Zuluaga", members: ["Andres Zuluaga"] },
+                { id: 18, name: "Juan Pablo Ayala", members: ["Juan Pablo Ayala", "Acompañante Juan Pablo Ayala"] },
+                { id: 19, name: "Americo Ortega", members: ["Americo Ortega", "Acompañante Americo Ortega"] },
+                { id: 20, name: "Scheinder", members: ["Scheinder"] },
+                { id: 21, name: "Liliana Laverde", members: ["Liliana Laverde", "Jorge Duque", "Natalia Angarita", "Oscar Giraldo"] },
+                { id: 22, name: "Ana Morales", members: ["Ana Morales"] },
+                { id: 23, name: "Gilberto Laverde", members: ["Gilberto Laverde"] },
+                { id: 24, name: "Sebastian Laverde", members: ["Sebastian Laverde", "Jose Daniel"] },
+                { id: 25, name: "Margie Laverde", members: ["Margie Laverde", "Acompañante Margie"] },
+                { id: 26, name: "Juliana Laverde", members: ["Juliana Laverde", "Acompañante Juliana"] },
+                { id: 27, name: "Maria Laverde", members: ["Maria Laverde", "Silvio Echeverri", "Karen Echeverri", "Laura Echeverri", "Mauricio Amaya", "John Yama"] },
+                { id: 28, name: "Amanda Laverde", members: ["Amanda Laverde"] },
+                { id: 29, name: "Leonardo Rodriguez", members: ["Leonardo Rodriguez"] },
+                { id: 30, name: "Lorena", members: ["Lorena"] },
+                { id: 31, name: "Margarita Laverde", members: ["Margarita Laverde", "Gabriel Diaz", "Angela Diaz", "Luisa Diaz"] },
+                { id: 32, name: "Gloria Angarita", members: ["Gloria Angarita", "Cesar Angarita", "Daniela Montoya", "Olga Montoya", "Bernardo Angarita", "Argenis Salazar", "Miguel Angarita", "Juan Camilo Angarita"] },
+                { id: 33, name: "Liliana Cortes", members: ["Liliana Cortes", "Acompañante Liliana Cortes"] },
+                { id: 34, name: "Claudia Cortes", members: ["Claudia Cortes", "Acompañante Claudia Cortes"] },
+                { id: 35, name: "Juliana Roldan", members: ["Juliana Roldan", "Juanfer esposo Juliana"] },
+                { id: 36, name: "Sebastian Garcia", members: ["Sebastian Garcia", "Acompañanate Sebastian Garcia"] },
+                { id: 37, name: "Juan Guillermo Ceron", members: ["Juan Guillermo Ceron", "Acompañante Ceron"] },
+                { id: 38, name: "Felipe Sepulveda", members: ["Felipe Sepulveda", "Aura Esposa Sepulveda"] },
+                { id: 39, name: "Andres Horrillo", members: ["Andres Horrillo", "Catalina Franco"] },
+                { id: 40, name: "Daniel Bujato", members: ["Daniel Bujato", "Stefania Marcano"] },
+                { id: 41, name: "Guillermo Giraldo", members: ["Guillermo Giraldo", "Acompañanate Guillermo"] },
+                { id: 42, name: "Isabel Londoño", members: ["Isabel Londoño"] },
+                { id: 43, name: "Juan Pablo Galvis", members: ["Juan Pablo Galvis"] },
+                { id: 44, name: "Diego Duque", members: ["Diego Duque", "Karen Duque", "Elene Duque", "Steve", "Margoth Duque", "Carlos Quiceno"] }
+            ];
+
+            try {
+                for (let group of defaultGroups) {
+                    await set(ref(database, `groups/${group.id}`), group);
+                }
+                alert('✅ Los 44 grupos se importaron correctamente');
+            } catch (error) {
+                alert('Error: ' + error.message);
             }
         };
     </script>
