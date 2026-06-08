@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laura & Felipe - Nuestra Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -92,13 +92,52 @@
             height: 1px;
             background: rgba(255,255,255,.55);
         }
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(44px, 9vw, 74px);
-            line-height: .95;
+        .hero-title {
+            display: grid;
+            gap: 4px;
+            justify-items: center;
             color: white;
-            text-shadow: 0 6px 22px rgba(0,0,0,.32);
-            font-weight: 900;
+            text-shadow: 0 8px 26px rgba(0,0,0,.38);
+        }
+        .hero-salute {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(13px, 2.4vw, 18px);
+            line-height: 1;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: rgba(255,255,255,.92);
+            position: relative;
+            padding: 0 52px;
+        }
+        .hero-salute::before,
+        .hero-salute::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 34px;
+            height: 1px;
+            background: rgba(255,255,255,.62);
+        }
+        .hero-salute::before { left: 0; }
+        .hero-salute::after { right: 0; }
+        .hero-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(58px, 11vw, 104px);
+            line-height: .92;
+            font-weight: 400;
+            color: #fffdf9;
+            letter-spacing: .2px;
+            max-width: 650px;
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,.28));
+        }
+        .hero-name::after {
+            content: "";
+            display: block;
+            width: min(230px, 54%);
+            height: 1px;
+            margin: 14px auto 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent);
         }
         .hero-quote {
             max-width: 470px;
@@ -519,7 +558,10 @@
         <div class="hero">
             <div class="hero-inner">
                 <div class="eyebrow">12.12.2026</div>
-                <h1>Laura & Felipe</h1>
+                <h1 class="hero-title" aria-label="Bienvenido, invitado especial">
+                    <span class="hero-salute" id="heroGreeting">Bienvenido</span>
+                    <span class="hero-name" id="heroName">Invitado Especial</span>
+                </h1>
                 <div class="hero-quote">“Hay momentos que se vuelven eternos cuando se comparten con las personas correctas.”</div>
             </div>
         </div>
@@ -676,7 +718,9 @@
                 return;
             }
 
-            document.querySelector('.hero h1').textContent = `Bienvenidos, ${grupoActual.name}`;
+            document.getElementById('heroGreeting').textContent = 'Bienvenido';
+            document.getElementById('heroName').textContent = grupoActual.name || 'Invitado Especial';
+            document.querySelector('.hero-title').setAttribute('aria-label', `Bienvenido, ${grupoActual.name || 'Invitado Especial'}`);
             
             let html = '';
             grupoActual.members.forEach((miembro, i) => {
