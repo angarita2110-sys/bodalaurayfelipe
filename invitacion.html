@@ -86,14 +86,8 @@
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-group {
@@ -107,14 +101,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .content {
@@ -130,23 +118,6 @@
             display: flex;
             gap: 0.75rem;
             animation: slideIn 0.6s ease-out 0.3s backwards;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .security-icon {
-            font-size: 20px;
-            flex-shrink: 0;
-            margin-top: 0.25rem;
         }
 
         .security-text {
@@ -166,20 +137,7 @@
             padding: 40px;
             margin-bottom: 50px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
             animation: slideUp 0.8s ease-out 0.4s backwards;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .countdown-label {
@@ -226,23 +184,6 @@
             padding: 40px;
             margin-bottom: 40px;
             border: 1px solid rgba(157, 180, 160, 0.15);
-            animation: fadeInSection 0.6s ease-out forwards;
-        }
-
-        .section-card:nth-child(2) { animation-delay: 0.5s; }
-        .section-card:nth-child(3) { animation-delay: 0.6s; }
-        .section-card:nth-child(4) { animation-delay: 0.7s; }
-        .section-card:nth-child(5) { animation-delay: 0.8s; }
-
-        @keyframes fadeInSection {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .section-title {
@@ -264,18 +205,15 @@
             width: 40px;
             height: 2px;
             background: linear-gradient(to right, var(--mint), var(--gold), var(--mint));
-            border-radius: 1px;
         }
 
         .members-list {
             display: grid;
             gap: 0.75rem;
-            margin-bottom: 0;
         }
 
         .member {
             display: flex;
-            align-items: center;
             padding: 0.75rem;
             background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
             border-radius: 8px;
@@ -343,7 +281,6 @@
             padding: 12px 15px;
             border: 1px solid var(--mint);
             border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
             font-size: 14px;
             color: var(--dark);
             background: white;
@@ -363,7 +300,6 @@
             color: white;
             border: none;
             border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             font-size: 13px;
             text-transform: uppercase;
@@ -409,7 +345,6 @@
             text-align: center;
             padding: 40px;
             font-size: 14px;
-            letter-spacing: 0.5px;
         }
 
         .heart {
@@ -417,29 +352,12 @@
         }
 
         @media (max-width: 600px) {
-            .hero {
-                height: 400px;
-            }
-
-            .hero-title {
-                font-size: 42px;
-            }
-
-            .content {
-                padding: 30px 20px;
-            }
-
-            .section-card {
-                padding: 25px;
-            }
-
-            .countdown {
-                gap: 10px;
-            }
-
-            .countdown-number {
-                font-size: 26px;
-            }
+            .hero { height: 400px; }
+            .hero-title { font-size: 42px; }
+            .content { padding: 30px 20px; }
+            .section-card { padding: 25px; }
+            .countdown { gap: 10px; }
+            .countdown-number { font-size: 26px; }
         }
     </style>
 </head>
@@ -455,7 +373,7 @@
 
         <div class="content">
             <div class="security-notice">
-                <span class="security-icon">🔒</span>
+                <span>🔒</span>
                 <span class="security-text"><strong>Esta invitación es personal.</strong> Los datos que ves aquí son privados y específicos para tu grupo.</span>
             </div>
 
@@ -512,9 +430,7 @@
 
             <div class="section-card">
                 <h2 class="form-title">Confirma tu Asistencia</h2>
-                <div class="info-box">
-                    ⏰ Plazo límite: 12 de Noviembre, 2026
-                </div>
+                <div class="info-box">⏰ Plazo límite: 12 de Noviembre, 2026</div>
                 <form id="rsvpForm">
                     <div class="form-group">
                         <label for="attendance">¿Confirmas tu asistencia?</label>
@@ -537,7 +453,24 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
+            authDomain: "laurafelipeboda-3bb11.firebaseapp.com",
+            databaseURL: "https://laurafelipeboda-3bb11-default-rtdb.firebaseio.com",
+            projectId: "laurafelipeboda-3bb11",
+            storageBucket: "laurafelipeboda-3bb11.firebasestorage.app",
+            messagingSenderId: "364429589081",
+            appId: "1:364429589081:web:6805d468e88774b2fb8f48",
+            measurementId: "G-L699XCYWCL"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
         const groups = [
             { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
             { id: 2, name: "Rodolfo Calle", members: ["Rodolfo Calle", "Esposa Rodolfo Calle", "Rodolfo Calle JR"] },
@@ -640,7 +573,7 @@
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
 
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const group = getGroupFromURL();
@@ -651,36 +584,30 @@
                 return;
             }
 
-            const confirmations = JSON.parse(localStorage.getItem('laura-felipe-confirmations') || '[]');
-            const existingIndex = confirmations.findIndex(c => c.groupId === group.id);
-            
-            const confirmation = {
-                groupId: group.id,
-                groupName: group.name,
-                status: attendance,
-                timestamp: new Date().toISOString()
-            };
+            try {
+                const confirmationRef = ref(database, `confirmations/${group.id}`);
+                await set(confirmationRef, {
+                    groupId: group.id,
+                    groupName: group.name,
+                    status: attendance,
+                    timestamp: new Date().toISOString()
+                });
 
-            if (existingIndex !== -1) {
-                confirmations[existingIndex] = confirmation;
-            } else {
-                confirmations.push(confirmation);
+                const message = attendance === 'confirmed' 
+                    ? '✓ ¡Gracias por confirmar tu asistencia! Ya contamos con ustedes 💚' 
+                    : '✓ Entendemos, ¡nos hubiera gustado verlos!';
+
+                document.getElementById('successText').textContent = message;
+                document.getElementById('successMessage').classList.add('show');
+
+                document.getElementById('rsvpForm').reset();
+
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('show');
+                }, 4000);
+            } catch (error) {
+                alert('Error al guardar confirmación: ' + error.message);
             }
-
-            localStorage.setItem('laura-felipe-confirmations', JSON.stringify(confirmations));
-
-            const message = attendance === 'confirmed' 
-                ? '✓ ¡Gracias por confirmar tu asistencia! Ya contamos con ustedes 💚' 
-                : '✓ Entendemos, ¡nos hubiera gustado verlos!';
-
-            document.getElementById('successText').textContent = message;
-            document.getElementById('successMessage').classList.add('show');
-
-            document.getElementById('rsvpForm').reset();
-
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.remove('show');
-            }, 4000);
         });
 
         updateCountdown();
