@@ -25,25 +25,15 @@
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, var(--cream) 0%, #f5f0e8 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
         }
 
-        /* LOGIN SCREEN */
+        /* LOGIN */
         .login-container {
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--cream) 0%, #f5f0e8 100%);
-            z-index: 1000;
+            padding: 20px;
         }
 
         .login-container.hidden {
@@ -71,7 +61,6 @@
             text-align: center;
             color: var(--text);
             margin-bottom: 30px;
-            font-size: 14px;
         }
 
         .form-group {
@@ -80,7 +69,7 @@
 
         .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--dark);
             text-transform: uppercase;
@@ -93,10 +82,8 @@
             padding: 12px 15px;
             border: 1px solid var(--mint);
             border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
             font-size: 14px;
             color: var(--dark);
-            transition: all 0.3s ease;
         }
 
         .form-group input:focus {
@@ -140,8 +127,8 @@
         /* DASHBOARD */
         .dashboard {
             display: none;
-            max-width: 1200px;
-            width: 100%;
+            min-height: 100vh;
+            padding: 30px;
         }
 
         .dashboard.active {
@@ -221,22 +208,148 @@
             font-weight: 600;
         }
 
-        .confirmations-section {
+        .container-main {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
             background: white;
-            padding: 40px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .confirmations-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--dark);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--mint);
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
         }
 
+        .tab-btn.active {
+            color: var(--sage);
+            border-bottom-color: var(--sage);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* GRUPOS */
+        .grupos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grupo-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--sage);
+            transition: all 0.3s ease;
+        }
+
+        .grupo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .grupo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .grupo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .grupo-status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: #f39c12;
+            color: white;
+        }
+
+        .status-confirmed {
+            background: #27ae60;
+            color: white;
+        }
+
+        .status-rejected {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .miembros {
+            background: linear-gradient(135deg, rgba(197, 221, 213, 0.15), rgba(212, 175, 106, 0.08));
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .miembro {
+            padding: 4px 0;
+            color: var(--text);
+        }
+
+        .miembro::before {
+            content: "• ";
+            color: var(--sage);
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .btn-copy {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 8px;
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(157, 180, 160, 0.3);
+        }
+
+        .btn-copy.copied {
+            background: #27ae60;
+        }
+
+        /* CONFIRMACIONES */
         .confirmation-list {
             display: grid;
             gap: 15px;
@@ -247,9 +360,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px;
-            background: linear-gradient(135deg, var(--mint) 0%, rgba(197, 221, 213, 0.3) 100%);
+            background: white;
             border-radius: 8px;
             border-left: 4px solid var(--sage);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .confirmation-item.confirmed {
@@ -258,7 +372,7 @@
 
         .confirmation-item.rejected {
             border-left-color: #e74c3c;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .confirmation-info h3 {
@@ -280,57 +394,34 @@
             text-transform: uppercase;
         }
 
-        .status-confirmed {
+        .status-conf {
             background: #27ae60;
             color: white;
         }
 
-        .status-rejected {
+        .status-rej {
             background: #e74c3c;
             color: white;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text);
-        }
-
-        .spinner {
-            border: 3px solid var(--mint);
-            border-top: 3px solid var(--sage);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .header {
                 flex-direction: column;
                 gap: 20px;
             }
 
-            .stats {
+            .grupos-grid {
                 grid-template-columns: 1fr;
             }
 
-            .confirmation-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+            .tabs {
+                flex-wrap: wrap;
             }
         }
     </style>
 </head>
 <body>
-    <!-- LOGIN SCREEN -->
+    <!-- LOGIN -->
     <div class="login-container" id="loginContainer">
         <div class="login-card">
             <h1>Laura & Felipe</h1>
@@ -353,34 +444,45 @@
     <!-- DASHBOARD -->
     <div class="dashboard" id="dashboard">
         <div class="header">
-            <h1>Panel de Confirmaciones</h1>
+            <h1>Panel de Control</h1>
             <div class="user-info">
                 <p>Usuario: <strong id="userEmail"></strong></p>
                 <button class="btn-logout" id="logoutBtn">Cerrar Sesión</button>
             </div>
         </div>
 
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number" id="totalConfirmed">0</div>
-                <div class="stat-label">Confirmados</div>
+        <div class="container-main">
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalConfirmed">0</div>
+                    <div class="stat-label">Confirmados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalRejected">0</div>
+                    <div class="stat-label">No Pueden Asistir</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPending">44</div>
+                    <div class="stat-label">Pendientes</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalRejected">0</div>
-                <div class="stat-label">No Pueden Asistir</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="totalPending">44</div>
-                <div class="stat-label">Pendientes</div>
-            </div>
-        </div>
 
-        <div class="confirmations-section">
-            <h2>Confirmaciones en Vivo</h2>
-            <div class="confirmation-list" id="confirmationList">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Cargando confirmaciones...</p>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="grupos">Grupos & Links</button>
+                <button class="tab-btn" data-tab="confirmaciones">Confirmaciones en Vivo</button>
+            </div>
+
+            <!-- TAB: GRUPOS -->
+            <div id="grupos" class="tab-content active">
+                <div class="grupos-grid" id="gruposGrid">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- TAB: CONFIRMACIONES -->
+            <div id="confirmaciones" class="tab-content">
+                <div class="confirmation-list" id="confirmationList">
+                    <p style="text-align: center; color: var(--text);">Sin confirmaciones aún</p>
                 </div>
             </div>
         </div>
@@ -389,7 +491,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-        import { getDatabase, ref, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
@@ -406,6 +508,69 @@
         const auth = getAuth(app);
         const database = getDatabase(app);
 
+        const groups = [
+            { id: 1, name: "Alberto Calle", members: ["Alberto Calle", "Miguel Calle", "Angela Calle", "Esposa Alberto Calle"] },
+            { id: 2, name: "Rodolfo Calle", members: ["Rodolfo Calle", "Esposa Rodolfo Calle", "Rodolfo Calle JR"] },
+            { id: 3, name: "Veronica Calle", members: ["Veronica Calle", "Esposo Veronica Calle"] },
+            { id: 4, name: "Arturo Calle", members: ["Arturo Calle", "Esposa Arturo Calle", "Esteban Calle", "Camila Cano"] },
+            { id: 5, name: "Uriel Calle", members: ["Uriel Calle", "Esposa Uriel Calle", "Hijo Uriel Calle"] },
+            { id: 6, name: "Jose Antonio Calle", members: ["Jose Antonio Calle", "Ligia Martinez", "Pablo de Santiago", "Alejandra Calle"] },
+            { id: 7, name: "Rosalba Martinez", members: ["Rosalba Martinez", "Cosme", "Gustavo hijo de rosalba"] },
+            { id: 8, name: "Juan Carlos", members: ["Juan Carlos hijo de rosalba", "Esposa Juan Carlos"] },
+            { id: 9, name: "Juan Pablo", members: ["Juanbra", "Acompañante Juan bra"] },
+            { id: 10, name: "Doris Martinez", members: ["Doris Martinez", "Acompañante Doris Martinez"] },
+            { id: 11, name: "Lina Amiga Lau", members: ["Lina Amiga Lau", "Angelica"] },
+            { id: 12, name: "Jen", members: ["Jen"] },
+            { id: 13, name: "Leydi Di", members: ["Leydi Di"] },
+            { id: 14, name: "Diana Isabel", members: ["Diana Isabel"] },
+            { id: 15, name: "Juliana H", members: ["Juliana H", "Esposo Juliana H"] },
+            { id: 16, name: "Laura y Felipe", members: ["Laura Calle (esposa)", "Felipe Angarita (esposo)"] },
+            { id: 17, name: "Andres Zuluaga", members: ["Andres Zuluaga"] },
+            { id: 18, name: "Juan Pablo Ayala", members: ["Juan Pablo Ayala", "Acompañante Juan Pablo Ayala"] },
+            { id: 19, name: "Americo Ortega", members: ["Americo Ortega", "Acompañante Americo Ortega"] },
+            { id: 20, name: "Scheinder", members: ["Scheinder"] },
+            { id: 21, name: "Liliana Laverde", members: ["Liliana Laverde", "Jorge Duque", "Natalia Angarita", "Oscar Giraldo"] },
+            { id: 22, name: "Ana Morales", members: ["Ana Morales"] },
+            { id: 23, name: "Gilberto Laverde", members: ["Gilberto Laverde"] },
+            { id: 24, name: "Sebastian Laverde", members: ["Sebastian Laverde", "Jose Daniel"] },
+            { id: 25, name: "Margie Laverde", members: ["Margie Laverde", "Acompañante Margie"] },
+            { id: 26, name: "Juliana Laverde", members: ["Juliana Laverde", "Acompañante Juliana"] },
+            { id: 27, name: "Maria Laverde", members: ["Maria Laverde", "Silvio Echeverri", "Karen Echeverri", "Laura Echeverri", "Mauricio Amaya", "John Yama"] },
+            { id: 28, name: "Amanda Laverde", members: ["Amanda Laverde"] },
+            { id: 29, name: "Leonardo Rodriguez", members: ["Leonardo Rodriguez"] },
+            { id: 30, name: "Lorena", members: ["Lorena"] },
+            { id: 31, name: "Margarita Laverde", members: ["Margarita Laverde", "Gabriel Diaz", "Angela Diaz", "Luisa Diaz"] },
+            { id: 32, name: "Gloria Angarita", members: ["Gloria Angarita", "Cesar Angarita", "Daniela Montoya", "Olga Montoya", "Bernardo Angarita", "Argenis Salazar", "Miguel Angarita", "Juan Camilo Angarita"] },
+            { id: 33, name: "Liliana Cortes", members: ["Liliana Cortes", "Acompañante Liliana Cortes"] },
+            { id: 34, name: "Claudia Cortes", members: ["Claudia Cortes", "Acompañante Claudia Cortes"] },
+            { id: 35, name: "Juliana Roldan", members: ["Juliana Roldan", "Juanfer esposo Juliana"] },
+            { id: 36, name: "Sebastian Garcia", members: ["Sebastian Garcia", "Acompañanate Sebastian Garcia"] },
+            { id: 37, name: "Juan Guillermo Ceron", members: ["Juan Guillermo Ceron", "Acompañante Ceron"] },
+            { id: 38, name: "Felipe Sepulveda", members: ["Felipe Sepulveda", "Aura Esposa Sepulveda"] },
+            { id: 39, name: "Andres Horrillo", members: ["Andres Horrillo", "Catalina Franco"] },
+            { id: 40, name: "Daniel Bujato", members: ["Daniel Bujato", "Stefania Marcano"] },
+            { id: 41, name: "Guillermo Giraldo", members: ["Guillermo Giraldo", "Acompañanate Guillermo"] },
+            { id: 42, name: "Isabel Londoño", members: ["Isabel Londoño"] },
+            { id: 43, name: "Juan Pablo Galvis", members: ["Juan Pablo Galvis"] },
+            { id: 44, name: "Diego Duque", members: ["Diego Duque", "Karen Duque", "Elene Duque", "Steve", "Margoth Duque", "Carlos Quiceno"] }
+        ];
+
+        let confirmations = {};
+
+        function generateHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(36).substring(0, 8);
+        }
+
+        function getGroupHash(groupId, groupName) {
+            return generateHash(groupId + groupName);
+        }
+
         // DOM Elements
         const loginContainer = document.getElementById('loginContainer');
         const dashboard = document.getElementById('dashboard');
@@ -413,10 +578,20 @@
         const errorMessage = document.getElementById('errorMessage');
         const userEmail = document.getElementById('userEmail');
         const logoutBtn = document.getElementById('logoutBtn');
+        const gruposGrid = document.getElementById('gruposGrid');
         const confirmationList = document.getElementById('confirmationList');
-        const totalConfirmed = document.getElementById('totalConfirmed');
-        const totalRejected = document.getElementById('totalRejected');
-        const totalPending = document.getElementById('totalPending');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Tabs
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
 
         // Login
         loginForm.addEventListener('submit', async (e) => {
@@ -444,6 +619,7 @@
                 loginContainer.classList.add('hidden');
                 dashboard.classList.add('active');
                 userEmail.textContent = user.email;
+                loadGrupos();
                 loadConfirmations();
             } else {
                 loginContainer.classList.remove('hidden');
@@ -451,17 +627,53 @@
             }
         });
 
-        // Load Confirmations
+        function loadGrupos() {
+            gruposGrid.innerHTML = groups.map(group => {
+                const hash = getGroupHash(group.id, group.name);
+                const status = confirmations[group.id];
+                let statusClass = 'status-pending';
+                let statusText = 'Pendiente';
+
+                if (status) {
+                    if (status.status === 'confirmed') {
+                        statusClass = 'status-confirmed';
+                        statusText = 'Confirmado';
+                    } else {
+                        statusClass = 'status-rejected';
+                        statusText = 'No asiste';
+                    }
+                }
+
+                const link = `${window.location.origin}/invitacion.html?group=${hash}`;
+
+                return `
+                    <div class="grupo-card">
+                        <div class="grupo-header">
+                            <div>
+                                <div class="grupo-name">${group.name}</div>
+                                <span class="grupo-status ${statusClass}">${statusText}</span>
+                            </div>
+                        </div>
+                        <div class="miembros">
+                            ${group.members.map(m => `<div class="miembro">${m}</div>`).join('')}
+                        </div>
+                        <button class="btn-copy" onclick="copyToClipboard('${link}', this)">📋 Copiar Link</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function loadConfirmations() {
-            const confirmationsRef = ref(database, 'confirmations');
-            onValue(confirmationsRef, (snapshot) => {
-                const confirmations = snapshot.val() || {};
-                displayConfirmations(confirmations);
-                updateStats(confirmations);
+            const confRef = ref(database, 'confirmations');
+            onValue(confRef, (snapshot) => {
+                confirmations = snapshot.val() || {};
+                displayConfirmations();
+                updateStats();
+                loadGrupos();
             });
         }
 
-        function displayConfirmations(confirmations) {
+        function displayConfirmations() {
             if (Object.keys(confirmations).length === 0) {
                 confirmationList.innerHTML = '<p style="text-align: center; color: var(--text);">Sin confirmaciones aún</p>';
                 return;
@@ -470,9 +682,9 @@
             const items = Object.values(confirmations)
                 .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
                 .map(conf => {
-                    const date = new Date(conf.timestamp).toLocaleDateString('es-CO');
+                    const date = new Date(conf.timestamp).toLocaleString('es-CO');
                     const status = conf.status === 'confirmed' ? 'Confirmado' : 'No asiste';
-                    const statusClass = conf.status === 'confirmed' ? 'status-confirmed' : 'status-rejected';
+                    const statusClass = conf.status === 'confirmed' ? 'status-conf' : 'status-rej';
                     
                     return `
                         <div class="confirmation-item ${conf.status}">
@@ -489,16 +701,28 @@
             confirmationList.innerHTML = items;
         }
 
-        function updateStats(confirmations) {
+        function updateStats() {
             const confs = Object.values(confirmations);
             const confirmed = confs.filter(c => c.status === 'confirmed').length;
             const rejected = confs.filter(c => c.status === 'rejected').length;
             const pending = 44 - confirmed - rejected;
 
-            totalConfirmed.textContent = confirmed;
-            totalRejected.textContent = rejected;
-            totalPending.textContent = pending;
+            document.getElementById('totalConfirmed').textContent = confirmed;
+            document.getElementById('totalRejected').textContent = rejected;
+            document.getElementById('totalPending').textContent = pending;
         }
+
+        window.copyToClipboard = function(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const original = btn.textContent;
+                btn.textContent = '✓ Copiado';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        };
     </script>
 </body>
 </html>
