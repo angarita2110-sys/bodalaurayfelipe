@@ -395,6 +395,36 @@
             font-style: italic;
             text-align: center;
         }
+        .reserved-note-soft {
+            width: min(500px, 100%);
+            margin: 18px auto 0;
+            padding: 12px 16px;
+            border-radius: 999px;
+            background: rgba(255,253,249,.72);
+            border: 1px solid rgba(200,160,97,.22);
+            box-shadow: 0 10px 26px rgba(70,70,70,.045);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            text-align: center;
+        }
+        .reserved-note-mark {
+            color: var(--gold);
+            font-size: 12px;
+            line-height: 1;
+            flex: 0 0 auto;
+        }
+        .reserved-note-soft p {
+            margin: 0;
+            color: var(--text);
+            font-size: 11.2px;
+            line-height: 1.55;
+        }
+        .reserved-note-soft strong {
+            color: var(--charcoal);
+            font-weight: 600;
+        }
         .map-frame {
             margin-top: 30px;
             border-radius: 24px;
@@ -619,6 +649,12 @@
             .countdown-section { margin-top: -76px; width: min(300px, 88%); }
             .countdown-number { font-size: 24px; }
             .member-buttons, .modal-buttons { grid-template-columns: 1fr; display: grid; }
+            .reserved-note-soft {
+                border-radius: 18px;
+                padding: 12px 13px;
+                align-items: flex-start;
+            }
+            .reserved-note-soft p { font-size: 10.8px; }
             .footer { margin-left: -20px; margin-right: -20px; }
         }
     </style>
@@ -702,20 +738,12 @@
                         <div class="event-content">Nos reservamos<br><small>el blanco</small></div>
                     </div>
                 </div>
-                <div class="reserved-note">
-                    <div class="reserved-note-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M4.5 8.2 12 13.1l7.5-4.9"></path>
-                            <path d="M5.5 7h13a1.8 1.8 0 0 1 1.8 1.8v8.4a1.8 1.8 0 0 1-1.8 1.8h-13a1.8 1.8 0 0 1-1.8-1.8V8.8A1.8 1.8 0 0 1 5.5 7Z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <strong>Invitación reservada para las personas mencionadas en este grupo.</strong>
-                        <span>Para mantener el carácter íntimo de esta cena, agradecemos que la asistencia corresponda a las personas incluidas en esta invitación.</span>
-                    </div>
-                </div>
                 <div class="love-note">
                     Te invitamos a compartir una cena íntima para celebrar nuestra unión, rodeados de las personas más cercanas a nuestro corazón.
+                </div>
+                <div class="reserved-note reserved-note-soft">
+                    <span class="reserved-note-mark" aria-hidden="true">✦</span>
+                    <p><strong>Invitación reservada para las personas mencionadas en este grupo.</strong> Para mantener el carácter íntimo de esta cena, agradecemos que la asistencia corresponda a las personas incluidas en esta invitación.</p>
                 </div>
                 <div class="map-frame">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.218581168781!2d-76.28343662502706!3d3.5369536964373065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3a04c846a8043f%3A0x947d327a739b2f80!2sClub%20Campestre%20de%20Palmira!5e0!3m2!1ses-419!2sco!4v1780956269694!5m2!1ses-419!2sco" width="100%" height="360" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
