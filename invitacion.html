@@ -59,14 +59,12 @@
         .container::before { top: 560px; left: -150px; }
         .container::after { top: 1040px; right: -170px; }
         .hero {
-            height: 650px;
+            height: 590px;
             background:
-                linear-gradient(180deg, rgba(20,20,20,.10) 0%, rgba(20,20,20,.16) 44%, rgba(20,20,20,.70) 100%),
+                linear-gradient(180deg, rgba(20,20,20,.08) 0%, rgba(20,20,20,.12) 36%, rgba(20,20,20,.66) 100%),
                 url('IMG_8452.jpg');
             background-size: cover;
-            background-position: center 4%;
-            background-repeat: no-repeat;
-            background-color: #181716;
+            background-position: center 32%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -94,7 +92,7 @@
             position: absolute;
             left: 34px;
             right: 34px;
-            bottom: 142px;
+            bottom: 126px;
             padding: 0 34px;
             z-index: 2;
         }
@@ -238,16 +236,29 @@
             letter-spacing: .4px;
         }
         .security-notice {
-            width: min(560px, 100%);
+            width: min(600px, 100%);
             margin: 0 auto 34px;
-            background: rgba(255,253,249,.78);
-            border: 1px solid rgba(200,160,97,.18);
-            padding: 13px 18px;
-            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(255,253,249,.94), rgba(255,248,238,.88));
+            border: 1px solid rgba(200,160,97,.28);
+            padding: 14px 20px;
+            border-radius: 22px;
             font-size: 12px;
             color: var(--text);
-            text-align: center;
-            box-shadow: 0 10px 28px rgba(70,70,70,.05);
+            text-align: left;
+            box-shadow: 0 12px 32px rgba(70,70,70,.06);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.55;
+        }
+        .security-notice .notice-icon {
+            color: var(--gold);
+            flex: 0 0 auto;
+            line-height: 1.35;
+        }
+        .security-notice strong {
+            color: var(--charcoal);
+            font-weight: 600;
         }
         .section {
             position: relative;
@@ -295,97 +306,85 @@
         }
         .event-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 14px;
-            margin: 22px 0 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 22px 0 28px;
             position: relative;
-            align-items: stretch;
         }
         .event-grid::before {
             content: "";
             position: absolute;
-            left: 7%;
-            right: 7%;
-            top: 42px;
+            left: 8%;
+            right: 8%;
+            top: 34px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(200,160,97,.30), transparent);
+            background: linear-gradient(90deg, transparent, rgba(200,160,97,.35), transparent);
             z-index: 0;
         }
         .event-detail {
             position: relative;
             z-index: 1;
-            background: linear-gradient(180deg, rgba(255,253,249,.99), rgba(255,250,244,.92));
-            border: 1px solid rgba(200,160,97,.24);
-            border-radius: 24px;
-            padding: 22px 12px 18px;
+            background: linear-gradient(180deg, rgba(255,253,249,.98), rgba(255,250,244,.88));
+            border: 1px solid rgba(200,160,97,.22);
+            border-radius: 22px;
+            padding: 22px 14px 20px;
             text-align: center;
-            box-shadow: 0 14px 34px rgba(70,70,70,.06);
-            min-height: 205px;
-            height: 100%;
-            display: grid;
-            grid-template-rows: 58px 34px 1fr;
-            justify-items: center;
-            align-items: start;
+            box-shadow: 0 12px 30px rgba(70,70,70,.055);
+            min-height: 178px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
         .event-detail::after {
             content: "";
             position: absolute;
-            inset: 9px;
-            border: 1px solid rgba(159,184,173,.18);
-            border-radius: 19px;
+            inset: 8px;
+            border: 1px solid rgba(159,184,173,.16);
+            border-radius: 17px;
             pointer-events: none;
         }
         .event-icon {
-            width: 50px;
-            height: 50px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            margin: 0 auto;
+            margin: 0 auto 14px;
             display: grid;
             place-items: center;
             color: var(--gold);
-            border: 1px solid rgba(200,160,97,.36);
+            border: 1px solid rgba(200,160,97,.34);
             background: radial-gradient(circle, #fffdf9 0%, #fff8ef 100%);
             box-shadow: 0 8px 22px rgba(200,160,97,.12);
         }
         .event-icon svg {
-            width: 23px;
-            height: 23px;
+            width: 24px;
+            height: 24px;
             stroke: currentColor;
-            stroke-width: 1.65;
+            stroke-width: 1.7;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
         .event-label {
-            min-height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 9.5px;
+            font-size: 10px;
             text-transform: uppercase;
             color: var(--gold);
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: 1.35px;
-            line-height: 1.35;
+            font-weight: 600;
+            margin-bottom: 9px;
+            letter-spacing: 1.45px;
         }
         .event-content {
-            width: 100%;
-            font-size: 12.5px;
+            font-size: 13px;
             color: var(--charcoal);
             font-weight: 500;
             line-height: 1.55;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-self: stretch;
         }
         .event-content small {
             display: block;
             color: var(--text);
             font-size: 11px;
             font-weight: 400;
-            margin-top: 5px;
+            margin-top: 3px;
         }
         .love-note {
             margin: 26px auto 0;
@@ -404,11 +403,38 @@
             box-shadow: 0 14px 36px rgba(70,70,70,.10);
         }
         .rsvp-deadline {
+            width: min(520px, 100%);
+            margin: -8px auto 26px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255,248,238,.98), rgba(255,253,249,.92));
+            border: 1px solid rgba(200,160,97,.34);
+            box-shadow: 0 12px 28px rgba(70,70,70,.055);
             text-align: center;
-            font-size: 12px;
+            color: var(--charcoal);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: 10px;
+            row-gap: 4px;
+            align-items: center;
+            justify-content: center;
+        }
+        .rsvp-deadline span {
+            grid-row: 1 / span 2;
             color: var(--gold);
-            margin: -10px 0 24px;
-            letter-spacing: .5px;
+            font-size: 17px;
+        }
+        .rsvp-deadline strong {
+            font-size: 12px;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .rsvp-deadline small {
+            font-size: 11.5px;
+            color: var(--text);
+            line-height: 1.45;
         }
         .member {
             background: linear-gradient(135deg, rgba(220,235,230,.85), rgba(255,253,249,.95));
@@ -572,9 +598,9 @@
         }
         @media (max-width: 640px) {
             .container { max-width: 100%; }
-            .hero { height: 640px; background-size: cover; background-position: center 6%; }
+            .hero { height: 610px; background-position: center top; }
             .hero::before { inset: 16px; }
-            .hero-inner { left: 10px; right: 10px; bottom: 142px; padding: 0 20px; }
+            .hero-inner { left: 10px; right: 10px; bottom: 132px; padding: 0 20px; }
             .eyebrow { font-size: 10px; letter-spacing: 4px; margin-bottom: 11px; gap: 12px; }
             .eyebrow::before, .eyebrow::after { width: 56px; }
             .hero h1 { gap: 10px; }
@@ -583,13 +609,13 @@
             .hero-name-rule { width: min(320px, 88%); margin-top: 1px; }
             .hero-quote { font-size: 12.5px; margin-top: 18px; max-width: 360px; line-height: 1.55; }
             .content { padding: 0 20px 48px; }
-            .security-notice { border-radius: 18px; line-height: 1.5; }
+            .security-notice { border-radius: 18px; line-height: 1.5; padding: 13px 14px; }
+            .rsvp-deadline { grid-template-columns: 1fr; padding: 14px 14px; }
+            .rsvp-deadline span { grid-row: auto; }
             .section { padding: 34px 20px; border-radius: 24px; }
-            .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+            .event-grid { grid-template-columns: 1fr; }
             .event-grid::before { display: none; }
-            .event-detail { min-height: 190px; padding: 20px 10px 17px; }
-            .event-label { font-size: 9px; letter-spacing: 1.05px; }
-            .event-content { font-size: 12px; }
+            .event-detail { min-height: auto; }
             .countdown-section { margin-top: -76px; width: min(300px, 88%); }
             .countdown-number { font-size: 24px; }
             .member-buttons, .modal-buttons { grid-template-columns: 1fr; display: grid; }
@@ -630,10 +656,6 @@
                 </div>
             </div>
 
-            <div class="security-notice">
-                ⚠️ <strong>Esta invitación es solo para los miembros de este grupo.</strong> No compartas este link con otras personas.
-            </div>
-
             <div class="ornament-line"></div>
 
             <div class="section invitation-section">
@@ -658,28 +680,38 @@
                             </svg>
                         </div>
                         <div class="event-label">Ubicación</div>
-                        <div class="event-content">Club Campestre de Palmira<br><small>salón fundadores</small></div>
+                        <div class="event-content">Club Campestre de Palmira<br>Salón Fundadores<small>Palmira, Valle del Cauca</small></div>
                     </div>
                     <div class="event-detail">
                         <div class="event-icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24">
-                                <path d="M4.5 8.2l6 3.8-6 3.8V8.2z"></path>
-                                <path d="M19.5 8.2l-6 3.8 6 3.8V8.2z"></path>
-                                <rect x="10.2" y="9.7" width="3.6" height="4.6" rx="1"></rect>
+                                <circle cx="12" cy="12" r="8.5"></circle>
+                                <path d="M12 7.5v5l3.2 1.9"></path>
                             </svg>
                         </div>
                         <div class="event-label">Atuendo</div>
-                        <div class="event-content">Traje formal</div>
+                        <div class="event-content">Traje formal<br><small>Elegante y de celebración</small></div>
                     </div>
                     <div class="event-detail">
-                        <div class="event-icon" aria-hidden="true">
+                        <div class="event-icon" aria-hidden="true" style="width: 60px; height: 60px; margin: 0 auto;">
                             <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="7.8" fill="white" stroke="currentColor" stroke-width="1.5"></circle>
-                                <path d="M7.6 16.4c2.8 1.7 6.8 1.7 8.8 0"></path>
+                                <circle cx="12" cy="12" r="10" fill="white" stroke="var(--gold)" stroke-width="1.5"></circle>
                             </svg>
                         </div>
                         <div class="event-label">Color de la novia</div>
                         <div class="event-content">Nos reservamos<br><small>el blanco</small></div>
+                    </div>
+                </div>
+                <div class="reserved-note">
+                    <div class="reserved-note-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4.5 8.2 12 13.1l7.5-4.9"></path>
+                            <path d="M5.5 7h13a1.8 1.8 0 0 1 1.8 1.8v8.4a1.8 1.8 0 0 1-1.8 1.8h-13a1.8 1.8 0 0 1-1.8-1.8V8.8A1.8 1.8 0 0 1 5.5 7Z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Invitación reservada para las personas mencionadas en este grupo.</strong>
+                        <span>Para mantener el carácter íntimo de esta cena, agradecemos que la asistencia corresponda a las personas incluidas en esta invitación.</span>
                     </div>
                 </div>
                 <div class="love-note">
@@ -693,7 +725,7 @@
             <div class="section rsvp-section">
                 <div class="section-subtitle">Confirma tu lugar</div>
                 <h2>Confirmación de asistencia</h2>
-                <div class="rsvp-deadline">⏰ Plazo límite: 12 de Noviembre, 2026</div>
+                <div class="rsvp-deadline"><span>⏰</span><strong>Confirma antes del 12 de noviembre de 2026.</strong><small>Después de esta fecha no podremos garantizar tu lugar en la cena.</small></div>
                 
                 <div id="members"></div>
 
