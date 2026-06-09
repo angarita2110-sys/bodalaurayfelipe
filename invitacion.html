@@ -59,12 +59,14 @@
         .container::before { top: 560px; left: -150px; }
         .container::after { top: 1040px; right: -170px; }
         .hero {
-            height: 590px;
+            height: 650px;
             background:
-                linear-gradient(180deg, rgba(20,20,20,.08) 0%, rgba(20,20,20,.12) 36%, rgba(20,20,20,.66) 100%),
+                linear-gradient(180deg, rgba(20,20,20,.10) 0%, rgba(20,20,20,.16) 44%, rgba(20,20,20,.70) 100%),
                 url('IMG_8452.jpg');
-            background-size: cover;
-            background-position: center 32%;
+            background-size: 92% auto;
+            background-position: center 8%;
+            background-repeat: no-repeat;
+            background-color: #181716;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,7 +94,7 @@
             position: absolute;
             left: 34px;
             right: 34px;
-            bottom: 126px;
+            bottom: 142px;
             padding: 0 34px;
             z-index: 2;
         }
@@ -293,85 +295,97 @@
         }
         .event-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin: 22px 0 28px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin: 22px 0 30px;
             position: relative;
+            align-items: stretch;
         }
         .event-grid::before {
             content: "";
             position: absolute;
-            left: 8%;
-            right: 8%;
-            top: 34px;
+            left: 7%;
+            right: 7%;
+            top: 42px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(200,160,97,.35), transparent);
+            background: linear-gradient(90deg, transparent, rgba(200,160,97,.30), transparent);
             z-index: 0;
         }
         .event-detail {
             position: relative;
             z-index: 1;
-            background: linear-gradient(180deg, rgba(255,253,249,.98), rgba(255,250,244,.88));
-            border: 1px solid rgba(200,160,97,.22);
-            border-radius: 22px;
-            padding: 22px 14px 20px;
+            background: linear-gradient(180deg, rgba(255,253,249,.99), rgba(255,250,244,.92));
+            border: 1px solid rgba(200,160,97,.24);
+            border-radius: 24px;
+            padding: 22px 12px 18px;
             text-align: center;
-            box-shadow: 0 12px 30px rgba(70,70,70,.055);
-            min-height: 178px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            box-shadow: 0 14px 34px rgba(70,70,70,.06);
+            min-height: 205px;
+            height: 100%;
+            display: grid;
+            grid-template-rows: 58px 34px 1fr;
+            justify-items: center;
+            align-items: start;
         }
         .event-detail::after {
             content: "";
             position: absolute;
-            inset: 8px;
-            border: 1px solid rgba(159,184,173,.16);
-            border-radius: 17px;
+            inset: 9px;
+            border: 1px solid rgba(159,184,173,.18);
+            border-radius: 19px;
             pointer-events: none;
         }
         .event-icon {
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            margin: 0 auto 14px;
+            margin: 0 auto;
             display: grid;
             place-items: center;
             color: var(--gold);
-            border: 1px solid rgba(200,160,97,.34);
+            border: 1px solid rgba(200,160,97,.36);
             background: radial-gradient(circle, #fffdf9 0%, #fff8ef 100%);
             box-shadow: 0 8px 22px rgba(200,160,97,.12);
         }
         .event-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 23px;
+            height: 23px;
             stroke: currentColor;
-            stroke-width: 1.7;
+            stroke-width: 1.65;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
         .event-label {
-            font-size: 10px;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9.5px;
             text-transform: uppercase;
             color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 9px;
-            letter-spacing: 1.45px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 1.35px;
+            line-height: 1.35;
         }
         .event-content {
-            font-size: 13px;
+            width: 100%;
+            font-size: 12.5px;
             color: var(--charcoal);
             font-weight: 500;
             line-height: 1.55;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-self: stretch;
         }
         .event-content small {
             display: block;
             color: var(--text);
             font-size: 11px;
             font-weight: 400;
-            margin-top: 3px;
+            margin-top: 5px;
         }
         .love-note {
             margin: 26px auto 0;
@@ -558,9 +572,9 @@
         }
         @media (max-width: 640px) {
             .container { max-width: 100%; }
-            .hero { height: 610px; background-position: center top; }
+            .hero { height: 640px; background-size: 96% auto; background-position: center 6%; }
             .hero::before { inset: 16px; }
-            .hero-inner { left: 10px; right: 10px; bottom: 132px; padding: 0 20px; }
+            .hero-inner { left: 10px; right: 10px; bottom: 142px; padding: 0 20px; }
             .eyebrow { font-size: 10px; letter-spacing: 4px; margin-bottom: 11px; gap: 12px; }
             .eyebrow::before, .eyebrow::after { width: 56px; }
             .hero h1 { gap: 10px; }
@@ -571,9 +585,11 @@
             .content { padding: 0 20px 48px; }
             .security-notice { border-radius: 18px; line-height: 1.5; }
             .section { padding: 34px 20px; border-radius: 24px; }
-            .event-grid { grid-template-columns: 1fr; }
+            .event-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
             .event-grid::before { display: none; }
-            .event-detail { min-height: auto; }
+            .event-detail { min-height: 190px; padding: 20px 10px 17px; }
+            .event-label { font-size: 9px; letter-spacing: 1.05px; }
+            .event-content { font-size: 12px; }
             .countdown-section { margin-top: -76px; width: min(300px, 88%); }
             .countdown-number { font-size: 24px; }
             .member-buttons, .modal-buttons { grid-template-columns: 1fr; display: grid; }
@@ -642,22 +658,24 @@
                             </svg>
                         </div>
                         <div class="event-label">Ubicación</div>
-                        <div class="event-content">Club Campestre de Palmira<br>Salón Fundadores<small>Palmira, Valle del Cauca</small></div>
+                        <div class="event-content">Club Campestre de Palmira<br>Salón Fundadores</div>
                     </div>
                     <div class="event-detail">
                         <div class="event-icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="8.5"></circle>
-                                <path d="M12 7.5v5l3.2 1.9"></path>
+                                <path d="M4.5 8.2l6 3.8-6 3.8V8.2z"></path>
+                                <path d="M19.5 8.2l-6 3.8 6 3.8V8.2z"></path>
+                                <rect x="10.2" y="9.7" width="3.6" height="4.6" rx="1"></rect>
                             </svg>
                         </div>
                         <div class="event-label">Atuendo</div>
                         <div class="event-content">Traje formal<br><small>Elegante y de celebración</small></div>
                     </div>
                     <div class="event-detail">
-                        <div class="event-icon" aria-hidden="true" style="width: 60px; height: 60px; margin: 0 auto;">
+                        <div class="event-icon" aria-hidden="true">
                             <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10" fill="white" stroke="var(--gold)" stroke-width="1.5"></circle>
+                                <circle cx="12" cy="12" r="7.8" fill="white" stroke="currentColor" stroke-width="1.5"></circle>
+                                <path d="M7.6 16.4c2.8 1.7 6.8 1.7 8.8 0"></path>
                             </svg>
                         </div>
                         <div class="event-label">Color de la novia</div>
