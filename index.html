@@ -886,22 +886,23 @@
             const asistentesList = document.getElementById('asistentesList');
             const asistentes = [];
 
-            // Extraer personas confirmadas de los grupos
+            // Extraer personas confirmadas Y rechazadas
             Object.values(confirmations).forEach(conf => {
-                if (conf.status === 'confirmed') {
+                if (conf.status === 'confirmed' || conf.status === 'rejected') {
                     const group = groups[conf.groupId];
                     if (group) {
                         asistentes.push({
                             name: conf.memberName,
                             groupName: group.name,
-                            groupId: group.id
+                            groupId: group.id,
+                            status: conf.status
                         });
                     }
                 }
             });
 
             if (asistentes.length === 0) {
-                asistentesList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay asistentes confirmados aún.</p>';
+                asistentesList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay respuestas aún.</p>';
                 document.getElementById('totalAsistentes').textContent = '0';
                 return;
             }
@@ -912,15 +913,19 @@
             document.getElementById('totalAsistentes').textContent = asistentes.length;
 
             asistentesList.innerHTML = asistentes
-                .map(asistente => `
+                .map(asistente => {
+                    const statusText = asistente.status === 'confirmed' ? '✓ Confirmado' : '✗ No asiste';
+                    const statusColor = asistente.status === 'confirmed' ? '#27ae60' : '#e74c3c';
+                    return `
                     <div class="asistente-item">
                         <div class="asistente-info">
                             <h3>${asistente.name}</h3>
                             <div class="asistente-grupo">Grupo: ${asistente.groupName}</div>
                         </div>
-                        <div style="color: #27ae60; font-weight: 600; font-size: 13px;">✓ Confirmado</div>
+                        <div style="color: ${statusColor}; font-weight: 600; font-size: 13px;">${statusText}</div>
                     </div>
-                `)
+                `;
+                })
                 .join('');
         }
 
