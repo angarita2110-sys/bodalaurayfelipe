@@ -1054,73 +1054,86 @@ Con cariño, Laura & Felipe`;
 
         // EXPORTAR EXCEL
         window.exportarExcel = function() {
-            const asistentesList = document.getElementById('asistentesList');
-            const items = asistentesList.querySelectorAll('.asistente-item');
+            let csv = 'Grupo,Persona,Estado,Timestamp\n';
+            
+            // Recorrer todas las confirmaciones
+            const confirmacionesDiv = document.getElementById('asistentesList');
+            const items = confirmacionesDiv.querySelectorAll('.asistente-item');
             
             if (items.length === 0) {
                 alert('No hay asistentes para exportar');
                 return;
             }
             
-            // Crear array de datos
-            const datos = [['Nombre', 'Grupo', 'Estado', 'Fecha']];
-            const hoy = new Date().toLocaleDateString('es-CO');
-            
             items.forEach(item => {
-                const nombre = item.querySelector('.asistente-info h3')?.textContent || '';
-                const grupo = item.querySelector('.asistente-grupo')?.textContent?.replace('Grupo: ', '') || '';
+                const grupo = item.querySelector('.asistente-grupo')?.textContent || '';
+                const persona = item.querySelector('.asistente-nombre')?.textContent || '';
                 const estado = 'Confirmado';
+                const timestamp = new Date().toISOString();
                 
-                datos.push([nombre, grupo, estado, hoy]);
+                csv += `"${grupo}","${persona}","${estado}","${timestamp}"\n`;
             });
             
-            // Agregar total
-            datos.push(['']);
-            datos.push(['TOTAL DE ASISTENTES', items.length, '', '']);
+            // Crear blob y descargar
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
             
-            // Crear Excel
-            const ws = XLSX.utils.aoa_to_sheet(datos);
-            ws['!cols'] = [{ wch: 30 }, { wch: 25 }, { wch: 15 }, { wch: 15 }];
+            link.setAttribute('href', url);
+            link.setAttribute('download', `confirmaciones_boda_${new Date().toISOString().slice(0,10)}.csv`);
+            link.style.visibility = 'hidden';
             
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Asistentes');
-            
-            const fileName = `Asistentes_Boda_${new Date().toISOString().slice(0, 10)}.xlsx`;
-            XLSX.writeFile(wb, fileName);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         };
 
         // EXPORTAR TODOS LOS INVITADOS
         window.exportarTodosInvitados = function() {
-            const totalInvitados = Object.values(groups);
-            
-            if (totalInvitados.length === 0) {
-                alert('No hay grupos para exportar');
-                return;
-            }
-            
-            // Crear array de datos
-            const datos = [['Grupo', 'Miembro']];
-            
-            totalInvitados.forEach(group => {
-                group.members.forEach(member => {
-                    datos.push([group.name, member]);
+            try {
+                const totalInvitados = Object.values(groups);
+                
+                if (!totalInvitados || totalInvitados.length === 0) {
+                    alert('❌ No hay grupos para exportar. Carga los datos primero.');
+                    return;
+                }
+                
+                // Crear array de datos
+                const datos = [['Grupo', 'Miembro']];
+                
+                totalInvitados.forEach(group => {
+                    if (group && group.members && Array.isArray(group.members)) {
+                        group.members.forEach(member => {
+                            datos.push([group.name || '', member || '']);
+                        });
+                    }
                 });
-            });
-            
-            // Agregar total
-            const totalMiembros = totalInvitados.reduce((sum, group) => sum + group.members.length, 0);
-            datos.push(['']);
-            datos.push(['TOTAL', totalMiembros]);
-            
-            // Crear Excel
-            const ws = XLSX.utils.aoa_to_sheet(datos);
-            ws['!cols'] = [{ wch: 30 }, { wch: 30 }];
-            
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Todos los Invitados');
-            
-            const fileName = `Todos_Invitados_${new Date().toISOString().slice(0, 10)}.xlsx`;
-            XLSX.writeFile(wb, fileName);
+                
+                if (datos.length <= 1) {
+                    alert('❌ No hay miembros para exportar');
+                    return;
+                }
+                
+                // Agregar total
+                const totalMiembros = totalInvitados.reduce((sum, group) => sum + (group.members ? group.members.length : 0), 0);
+                datos.push(['']);
+                datos.push(['TOTAL', totalMiembros]);
+                
+                // Crear Excel
+                const ws = XLSX.utils.aoa_to_sheet(datos);
+                ws['!cols'] = [{ wch: 30 }, { wch: 30 }];
+                
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Todos los Invitados');
+                
+                const fileName = `Todos_Invitados_${new Date().toISOString().slice(0, 10)}.xlsx`;
+                XLSX.writeFile(wb, fileName);
+                
+                alert('✅ Excel descargado correctamente');
+            } catch (error) {
+                console.error('Error al exportar:', error);
+                alert('❌ Error: ' + error.message);
+            }
         };
     </script>
 </body>
