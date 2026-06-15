@@ -723,7 +723,7 @@
                             </svg>
                         </div>
                         <div class="event-label">Día y Hora</div>
-                        <div class="event-content">Sábado, 12 de diciembre<br>6:00 PM</div>
+                        <div class="event-content">Sábado, 12 de Diciembre<br>6:00 PM</div>
                     </div>
                     <div class="event-detail">
                         <div class="event-icon" aria-hidden="true">
@@ -849,12 +849,12 @@
                     <div class="member">
                         <div class="member-name">${miembro}</div>
                         <div class="member-buttons">
-                            <button type="button" class="member-btn active" onclick="seleccionar('${miembro}', true, this)">✓ ASISTIRÉ</button>
+                            <button type="button" class="member-btn" onclick="seleccionar('${miembro}', true, this)">✓ ASISTIRÉ</button>
                             <button type="button" class="member-btn" onclick="seleccionar('${miembro}', false, this)">✗ NO ASISTIRÉ</button>
                         </div>
                     </div>
                 `;
-                selecciones[miembro] = true;
+                selecciones[miembro] = false;
             });
             document.getElementById('members').innerHTML = html;
         }
