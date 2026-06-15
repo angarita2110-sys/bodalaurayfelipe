@@ -966,12 +966,19 @@
         };
 
         window.enviarInvitacion = function(link, groupName) {
-            const texto = `Con mucho amor queremos invitarte a compartir una cena muy especial para celebrar nuestra unión. Será una noche íntima, tranquila y llena de significado, junto a personas que han sido importantes en nuestra historia.
-Aquí puedes ver todos los detalles: ${link}
-Con cariño, Laura & Felipe`;
+            const texto = `Hola ${groupName},
+
+Les compartimos con mucho cariño la invitación a nuestro matrimonio. 💍✨💒
+
+📌 *Link de la invitación:*
+${link}
+
+Esperamos poder celebrar este momento tan especial junto a ustedes. ¡Gracias por ser parte de nuestra historia! 🤍
+
+Laura y Felipe`;
             
             navigator.clipboard.writeText(texto);
-            alert('✓ Invitación copiada!\n\nAhora puedes pegarla en tu mensaje.');
+            alert('✅ Invitación copiada!\n\nYa puedes pegarla en WhatsApp, correo o donde desees.');
         };
 
         window.openEditModal = function(groupId) {
