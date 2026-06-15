@@ -479,6 +479,25 @@
             .filter-report {
                 grid-template-columns: 1fr;
             }
+
+            .stats-grid {
+                gap: 8px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .stats-grid > div {
+                padding: 8px !important;
+            }
+
+            .stats-grid > div > div:first-child {
+                font-size: 9px !important;
+                margin-bottom: 4px !important;
+            }
+
+            .stats-grid > div > div:last-child {
+                font-size: 18px !important;
+                margin-bottom: 0;
+            }
         }
     </style>
 </head>
@@ -540,20 +559,20 @@
             <button class="btn" onclick="clearAllConfirmations()" style="margin-bottom: 30px; background: #e74c3c;">🔄 Limpiar todas las confirmaciones (TESTING)</button>
 
             <!-- RESUMEN GENERAL (PERSONAS) -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px;">
-                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid var(--gold);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px;" class="stats-grid">
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid var(--gold); transition: all 0.3s ease;">
                     <div style="font-size: 11px; color: var(--text); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">👥 Total Invitados</div>
                     <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--gold);" id="totalInvitados">0</div>
                 </div>
-                <div style="background: rgba(39, 174, 96, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60;">
+                <div style="background: rgba(39, 174, 96, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; transition: all 0.3s ease;">
                     <div style="font-size: 11px; color: #27ae60; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">✓ Confirmados</div>
                     <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #27ae60;" id="statConfirmados">0</div>
                 </div>
-                <div style="background: rgba(231, 76, 60, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                <div style="background: rgba(231, 76, 60, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #e74c3c; transition: all 0.3s ease;">
                     <div style="font-size: 11px; color: #e74c3c; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">✗ No Asisten</div>
                     <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #e74c3c;" id="statRechazados">0</div>
                 </div>
-                <div style="background: rgba(243, 156, 18, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #f39c12;">
+                <div style="background: rgba(243, 156, 18, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #f39c12; transition: all 0.3s ease;">
                     <div style="font-size: 11px; color: #f39c12; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">⏳ Sin Respuesta</div>
                     <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #f39c12;" id="statSinRespuesta">0</div>
                 </div>
