@@ -548,23 +548,33 @@
                 <button type="button" class="btn-action" onclick="exportarTodosInvitados()" style="height: fit-content; background: var(--gold); color: white; padding: 12px 20px; font-size: 14px;">📥 Exportar Todos</button>
             </div>
 
-            <!-- FILTROS COMO REPORTE (ARRIBA - VISIBLES) -->
-            <div class="filter-report">
-                <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
-                    <div class="filter-number" id="filterTodos">0</div>
-                    <div class="filter-label">📋 Todos</div>
+            <!-- FILTROS POR GRUPO -->
+            <div style="margin-bottom: 30px;">
+                <p style="font-size: 12px; color: var(--text); font-weight: 600; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">📋 Métricas por Grupo</p>
+                <div class="filter-report">
+                    <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
+                        <div class="filter-number" id="filterTodos">0</div>
+                        <div class="filter-label">GRUPOS</div>
+                    </div>
+                    <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
+                        <div class="filter-number" id="filterPending">0</div>
+                        <div class="filter-label">⏳ PENDIENTES</div>
+                    </div>
                 </div>
-                <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
-                    <div class="filter-number" id="filterPending">0</div>
-                    <div class="filter-label">⏳ Pendientes</div>
-                </div>
-                <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
-                    <div class="filter-number" id="filterConfirmed">0</div>
-                    <div class="filter-label">✓ Confirmados</div>
-                </div>
-                <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
-                    <div class="filter-number" id="filterRejected">0</div>
-                    <div class="filter-label">✗ No Asisten</div>
+            </div>
+
+            <!-- FILTROS POR PERSONA -->
+            <div style="margin-bottom: 30px;">
+                <p style="font-size: 12px; color: var(--text); font-weight: 600; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">👤 Métricas por Persona</p>
+                <div class="filter-report">
+                    <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)" style="border: 2px solid #27ae60; background: rgba(39, 174, 96, 0.08);">
+                        <div class="filter-number" id="filterConfirmed" style="color: #27ae60;">0</div>
+                        <div class="filter-label" style="color: #27ae60; font-weight: 600;">✓ CONFIRMADOS</div>
+                    </div>
+                    <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)" style="border: 2px solid #e74c3c; background: rgba(231, 76, 60, 0.08);">
+                        <div class="filter-number" id="filterRejected" style="color: #e74c3c;">0</div>
+                        <div class="filter-label" style="color: #e74c3c; font-weight: 600;">✗ NO ASISTEN</div>
+                    </div>
                 </div>
             </div>
 
