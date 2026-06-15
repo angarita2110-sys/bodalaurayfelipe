@@ -539,43 +539,28 @@
             <!-- BOTÓN LIMPIAR FIREBASE (TESTING) -->
             <button class="btn" onclick="clearAllConfirmations()" style="margin-bottom: 30px; background: #e74c3c;">🔄 Limpiar todas las confirmaciones (TESTING)</button>
 
-            <!-- TOTAL INVITADOS -->
-            <div style="background: linear-gradient(135deg, rgba(212, 175, 106, 0.15) 0%, rgba(197, 221, 213, 0.15) 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <p style="font-size: 13px; color: var(--text); margin-bottom: 8px; font-weight: 600; text-transform: uppercase;">👥 Total de Invitados (Todos los Grupos)</p>
-                    <div style="font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--gold);" id="totalInvitados">0</div>
+            <!-- RESUMEN GENERAL (PERSONAS) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 30px;">
+                <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid var(--gold);">
+                    <div style="font-size: 11px; color: var(--text); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">👥 Total Invitados</div>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--gold);" id="totalInvitados">0</div>
                 </div>
-                <button type="button" class="btn-action" onclick="exportarTodosInvitados()" style="height: fit-content; background: var(--gold); color: white; padding: 12px 20px; font-size: 14px;">📥 Exportar Todos</button>
-            </div>
-
-            <!-- FILTROS POR GRUPO -->
-            <div style="margin-bottom: 30px;">
-                <p style="font-size: 12px; color: var(--text); font-weight: 600; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">📋 Métricas por Grupo</p>
-                <div class="filter-report">
-                    <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
-                        <div class="filter-number" id="filterTodos">0</div>
-                        <div class="filter-label">GRUPOS</div>
-                    </div>
-                    <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
-                        <div class="filter-number" id="filterPending">0</div>
-                        <div class="filter-label">⏳ PENDIENTES</div>
-                    </div>
+                <div style="background: rgba(39, 174, 96, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <div style="font-size: 11px; color: #27ae60; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">✓ Confirmados</div>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #27ae60;" id="statConfirmados">0</div>
+                </div>
+                <div style="background: rgba(231, 76, 60, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <div style="font-size: 11px; color: #e74c3c; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">✗ No Asisten</div>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #e74c3c;" id="statRechazados">0</div>
+                </div>
+                <div style="background: rgba(243, 156, 18, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #f39c12;">
+                    <div style="font-size: 11px; color: #f39c12; font-weight: 600; text-transform: uppercase; margin-bottom: 8px;">⏳ Sin Respuesta</div>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #f39c12;" id="statSinRespuesta">0</div>
                 </div>
             </div>
 
-            <!-- FILTROS POR PERSONA -->
-            <div style="margin-bottom: 30px;">
-                <p style="font-size: 12px; color: var(--text); font-weight: 600; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">👤 Métricas por Persona</p>
-                <div class="filter-report">
-                    <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)" style="border: 2px solid #27ae60; background: rgba(39, 174, 96, 0.08);">
-                        <div class="filter-number" id="filterConfirmed" style="color: #27ae60;">0</div>
-                        <div class="filter-label" style="color: #27ae60; font-weight: 600;">✓ CONFIRMADOS</div>
-                    </div>
-                    <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)" style="border: 2px solid #e74c3c; background: rgba(231, 76, 60, 0.08);">
-                        <div class="filter-number" id="filterRejected" style="color: #e74c3c;">0</div>
-                        <div class="filter-label" style="color: #e74c3c; font-weight: 600;">✗ NO ASISTEN</div>
-                    </div>
-                </div>
+            <div style="margin-bottom: 20px; text-align: right;">
+                <button type="button" class="btn-action" onclick="exportarTodosInvitados()" style="background: var(--gold); color: white; padding: 10px 18px; font-size: 13px;">📥 Exportar Todos los Invitados</button>
             </div>
 
             <!-- BÚSQUEDA -->
@@ -591,6 +576,21 @@
 
             <!-- TAB GRUPOS -->
             <div id="tabGrupos" class="tab-content active">
+                <!-- FILTROS DE GRUPO -->
+                <div class="filter-report" style="margin-bottom: 20px;">
+                    <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
+                        <div class="filter-number" id="filterTodos">0</div>
+                        <div class="filter-label">📋 Todos</div>
+                    </div>
+                    <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
+                        <div class="filter-number" id="filterPending">0</div>
+                        <div class="filter-label">⏳ Pendientes</div>
+                    </div>
+                    <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
+                        <div class="filter-number" id="filterConfirmed">0</div>
+                        <div class="filter-label">✓ Respondidos</div>
+                    </div>
+                </div>
                 <div class="grupos-list" id="gruposList">
                     <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
                 </div>
@@ -600,7 +600,7 @@
             <div id="tabAsistentes" class="tab-content">
                 <div style="margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between;">
                     <div>
-                        <p style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Total de asistentes confirmados:</p>
+                        <p style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Total de respuestas recibidas:</p>
                         <div style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--sage);" id="totalAsistentes">0</div>
                     </div>
                     <button type="button" class="btn-action" onclick="exportarExcel()" style="height: fit-content;">📊 Descargar Excel</button>
@@ -797,15 +797,26 @@
         // ACTUALIZAR NÚMEROS DE FILTROS
         function updateFilterNumbers() {
             const confs = Object.values(confirmations);
-            const total = Object.keys(groups).length;
+            const totalGroups = Object.keys(groups).length;
             const confirmed = confs.filter(c => c.status === 'confirmed').length;
             const rejected = confs.filter(c => c.status === 'rejected').length;
-            const pending = total - confirmed - rejected;
+            const totalInvitados = Object.values(groups).reduce((sum, g) => sum + g.members.length, 0);
+            const sinRespuesta = totalInvitados - confirmed - rejected;
 
-            document.getElementById('filterTodos').textContent = total;
-            document.getElementById('filterConfirmed').textContent = confirmed;
-            document.getElementById('filterRejected').textContent = rejected;
-            document.getElementById('filterPending').textContent = pending;
+            // Grupos respondidos (tienen al menos 1 confirmación)
+            const groupsWithResponse = new Set(confs.map(c => c.groupId));
+            const groupsPending = totalGroups - groupsWithResponse.size;
+
+            // Cards resumen (personas)
+            document.getElementById('totalInvitados').textContent = totalInvitados;
+            document.getElementById('statConfirmados').textContent = confirmed;
+            document.getElementById('statRechazados').textContent = rejected;
+            document.getElementById('statSinRespuesta').textContent = sinRespuesta;
+
+            // Filtros de grupos
+            document.getElementById('filterTodos').textContent = totalGroups;
+            document.getElementById('filterPending').textContent = groupsPending;
+            document.getElementById('filterConfirmed').textContent = groupsWithResponse.size;
         }
 
         // RENDERIZAR GRUPOS
@@ -826,17 +837,13 @@
                     // FILTRO POR ESTADO
                     if (currentFilter !== 'todos') {
                         const groupConfs = Object.values(confirmations).filter(c => c.groupId === group.id);
-                        const groupConfirmed = groupConfs.filter(c => c.status === 'confirmed').length;
                         const groupTotal = groupConfs.length;
 
-                        if (currentFilter === 'pending' && groupTotal === 0) return true; // Mostrar solo si NO hay confirmaciones
+                        if (currentFilter === 'pending' && groupTotal === 0) return true;
                         else if (currentFilter === 'pending') return false;
                         
-                        if (currentFilter === 'confirmed' && groupConfirmed === groupTotal && groupTotal > 0) return true; // Mostrar solo si TODOS confirmaron
+                        if (currentFilter === 'confirmed' && groupTotal > 0) return true;
                         else if (currentFilter === 'confirmed') return false;
-                        
-                        if (currentFilter === 'rejected' && groupConfirmed === 0 && groupTotal > 0) return true; // Mostrar solo si NADIE confirmó
-                        else if (currentFilter === 'rejected') return false;
                     }
 
                     return true;
