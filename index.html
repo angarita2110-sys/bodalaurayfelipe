@@ -541,9 +541,12 @@
             <button class="btn" onclick="clearAllConfirmations()" style="margin-bottom: 30px; background: #e74c3c;">🔄 Limpiar todas las confirmaciones (TESTING)</button>
 
             <!-- TOTAL INVITADOS -->
-            <div style="background: linear-gradient(135deg, rgba(212, 175, 106, 0.15) 0%, rgba(197, 221, 213, 0.15) 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--gold);">
-                <p style="font-size: 13px; color: var(--text); margin-bottom: 8px; font-weight: 600; text-transform: uppercase;">👥 Total de Invitados (Todos los Grupos)</p>
-                <div style="font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--gold);" id="totalInvitados">0</div>
+            <div style="background: linear-gradient(135deg, rgba(212, 175, 106, 0.15) 0%, rgba(197, 221, 213, 0.15) 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <p style="font-size: 13px; color: var(--text); margin-bottom: 8px; font-weight: 600; text-transform: uppercase;">👥 Total de Invitados (Todos los Grupos)</p>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--gold);" id="totalInvitados">0</div>
+                </div>
+                <button type="button" class="btn-action" onclick="exportarTodosInvitados()" style="height: fit-content; background: var(--gold); color: white; padding: 12px 20px; font-size: 14px;">📥 Exportar Todos</button>
             </div>
 
             <!-- FILTROS COMO REPORTE (ARRIBA - VISIBLES) -->
@@ -1083,6 +1086,40 @@ Con cariño, Laura & Felipe`;
             XLSX.utils.book_append_sheet(wb, ws, 'Asistentes');
             
             const fileName = `Asistentes_Boda_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+        };
+
+        // EXPORTAR TODOS LOS INVITADOS
+        window.exportarTodosInvitados = function() {
+            const totalInvitados = Object.values(groups);
+            
+            if (totalInvitados.length === 0) {
+                alert('No hay grupos para exportar');
+                return;
+            }
+            
+            // Crear array de datos
+            const datos = [['Grupo', 'Miembro']];
+            
+            totalInvitados.forEach(group => {
+                group.members.forEach(member => {
+                    datos.push([group.name, member]);
+                });
+            });
+            
+            // Agregar total
+            const totalMiembros = totalInvitados.reduce((sum, group) => sum + group.members.length, 0);
+            datos.push(['']);
+            datos.push(['TOTAL', totalMiembros]);
+            
+            // Crear Excel
+            const ws = XLSX.utils.aoa_to_sheet(datos);
+            ws['!cols'] = [{ wch: 30 }, { wch: 30 }];
+            
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Todos los Invitados');
+            
+            const fileName = `Todos_Invitados_${new Date().toISOString().slice(0, 10)}.xlsx`;
             XLSX.writeFile(wb, fileName);
         };
     </script>
