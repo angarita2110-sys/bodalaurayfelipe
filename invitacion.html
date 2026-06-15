@@ -894,6 +894,8 @@
                     document.querySelectorAll('.member-btn').forEach(btn => {
                         btn.disabled = true;
                     });
+                    // Deshabilitar también el botón de registrar confirmación
+                    document.querySelector('.btn-submit').disabled = true;
                 }
             } catch (e) {
                 console.log('Error verificando confirmaciones:', e);
