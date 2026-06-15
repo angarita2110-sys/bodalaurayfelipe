@@ -881,8 +881,10 @@
 
         window.guardarConfirmacion = async function() {
             const confirmados = Object.entries(selecciones).filter(([_, v]) => v).map(([k, _]) => k);
+            const rechazados = Object.entries(selecciones).filter(([_, v]) => !v).map(([k, _]) => k);
             
             try {
+                // Guardar CONFIRMADOS
                 for (let miembro of confirmados) {
                     const id = `${grupoActual.id}_${miembro}`;
                     await set(ref(db, `confirmations/${id}`), {
@@ -890,6 +892,18 @@
                         groupName: grupoActual.name,
                         memberName: miembro,
                         status: 'confirmed',
+                        timestamp: new Date().toISOString()
+                    });
+                }
+
+                // Guardar RECHAZADOS
+                for (let miembro of rechazados) {
+                    const id = `${grupoActual.id}_${miembro}`;
+                    await set(ref(db, `confirmations/${id}`), {
+                        groupId: grupoActual.id,
+                        groupName: grupoActual.name,
+                        memberName: miembro,
+                        status: 'rejected',
                         timestamp: new Date().toISOString()
                     });
                 }
