@@ -1097,27 +1097,36 @@ Con cariño, Laura & Felipe`;
                     return;
                 }
                 
-                // Crear CSV
-                let csv = 'Grupo,Miembro\n';
+                // Crear CSV con estado
+                let csv = 'Grupo,Miembro,Estado\n';
                 
                 totalInvitados.forEach(group => {
                     if (group && group.members && Array.isArray(group.members)) {
                         group.members.forEach(member => {
+                            // Buscar estado en confirmations
+                            let estado = 'Pendiente';
+                            Object.values(confirmations).forEach(conf => {
+                                if (conf.groupId == group.id && conf.memberName === member) {
+                                    if (conf.status === 'confirmed') estado = 'Confirmado';
+                                    else if (conf.status === 'rejected') estado = 'Rechazado';
+                                }
+                            });
+                            
                             const nombreGrupo = (group.name || '').replace(/"/g, '""');
                             const nombreMiembro = (member || '').replace(/"/g, '""');
-                            csv += `"${nombreGrupo}","${nombreMiembro}"\n`;
+                            csv += `"${nombreGrupo}","${nombreMiembro}","${estado}"\n`;
                         });
                     }
                 });
                 
-                if (csv === 'Grupo,Miembro\n') {
+                if (csv === 'Grupo,Miembro,Estado\n') {
                     alert('❌ No hay miembros para exportar');
                     return;
                 }
                 
                 // Agregar total
                 const totalMiembros = totalInvitados.reduce((sum, group) => sum + (group.members ? group.members.length : 0), 0);
-                csv += `\n"TOTAL","${totalMiembros}"`;
+                csv += `\n"TOTAL","${totalMiembros}",""`;
                 
                 // Descargar
                 const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
