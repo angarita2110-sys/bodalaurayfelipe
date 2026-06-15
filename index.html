@@ -1119,36 +1119,50 @@ Con cariño, Laura & Felipe`;
                     return;
                 }
                 
-                // Crear CSV con estado
-                let csv = 'Grupo,Miembro,Estado\n';
+                // Crear array de datos (mejor control de CSV)
+                const datos = [];
+                datos.push(['Grupo', 'Miembro', 'Estado', 'Timestamp']);
+                
+                let totalPeople = 0;
                 
                 totalInvitados.forEach(group => {
                     if (group && group.members && Array.isArray(group.members)) {
                         group.members.forEach(member => {
-                            // Buscar estado en confirmations
+                            totalPeople++;
+                            
+                            // Buscar estado
                             let estado = 'Pendiente';
+                            let timestamp = '';
+                            
                             Object.values(confirmations).forEach(conf => {
                                 if (conf.groupId == group.id && conf.memberName === member) {
-                                    if (conf.status === 'confirmed') estado = 'Confirmado';
-                                    else if (conf.status === 'rejected') estado = 'Rechazado';
+                                    estado = conf.status === 'confirmed' ? 'Confirmado' : 'No asiste';
+                                    timestamp = conf.timestamp || '';
                                 }
                             });
                             
-                            const nombreGrupo = (group.name || '').replace(/"/g, '""');
-                            const nombreMiembro = (member || '').replace(/"/g, '""');
-                            csv += `"${nombreGrupo}","${nombreMiembro}","${estado}"\n`;
+                            datos.push([group.name || '', member || '', estado, timestamp]);
                         });
                     }
                 });
                 
-                if (csv === 'Grupo,Miembro,Estado\n') {
+                if (datos.length <= 1) {
                     alert('❌ No hay miembros para exportar');
                     return;
                 }
                 
-                // Agregar total
-                const totalMiembros = totalInvitados.reduce((sum, group) => sum + (group.members ? group.members.length : 0), 0);
-                csv += `\n"TOTAL","${totalMiembros}",""`;
+                // Convertir a CSV
+                let csv = datos.map(row => 
+                    row.map(cell => {
+                        const s = String(cell || '');
+                        if (s.includes('"') || s.includes(',') || s.includes('\n')) {
+                            return '"' + s.replace(/"/g, '""') + '"';
+                        }
+                        return s;
+                    }).join(',')
+                ).join('\n');
+                
+                csv += '\n\nTOTAL,' + totalPeople;
                 
                 // Descargar
                 const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1156,16 +1170,16 @@ Con cariño, Laura & Felipe`;
                 const url = URL.createObjectURL(blob);
                 
                 link.setAttribute('href', url);
-                link.setAttribute('download', `Todos_Invitados_${new Date().toISOString().slice(0, 10)}.csv`);
+                link.setAttribute('download', `Invitados_${new Date().toISOString().slice(0, 10)}.csv`);
                 link.style.visibility = 'hidden';
                 
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 
-                alert('✅ Archivo descargado correctamente');
+                alert(`✅ Exportados ${totalPeople} invitados`);
             } catch (error) {
-                console.error('Error al exportar:', error);
+                console.error('Error:', error);
                 alert('❌ Error: ' + error.message);
             }
         };
