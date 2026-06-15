@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Laura & Felipe</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -1098,38 +1097,42 @@ Con cariño, Laura & Felipe`;
                     return;
                 }
                 
-                // Crear array de datos
-                const datos = [['Grupo', 'Miembro']];
+                // Crear CSV
+                let csv = 'Grupo,Miembro\n';
                 
                 totalInvitados.forEach(group => {
                     if (group && group.members && Array.isArray(group.members)) {
                         group.members.forEach(member => {
-                            datos.push([group.name || '', member || '']);
+                            const nombreGrupo = (group.name || '').replace(/"/g, '""');
+                            const nombreMiembro = (member || '').replace(/"/g, '""');
+                            csv += `"${nombreGrupo}","${nombreMiembro}"\n`;
                         });
                     }
                 });
                 
-                if (datos.length <= 1) {
+                if (csv === 'Grupo,Miembro\n') {
                     alert('❌ No hay miembros para exportar');
                     return;
                 }
                 
                 // Agregar total
                 const totalMiembros = totalInvitados.reduce((sum, group) => sum + (group.members ? group.members.length : 0), 0);
-                datos.push(['']);
-                datos.push(['TOTAL', totalMiembros]);
+                csv += `\n"TOTAL","${totalMiembros}"`;
                 
-                // Crear Excel
-                const ws = XLSX.utils.aoa_to_sheet(datos);
-                ws['!cols'] = [{ wch: 30 }, { wch: 30 }];
+                // Descargar
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
                 
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, 'Todos los Invitados');
+                link.setAttribute('href', url);
+                link.setAttribute('download', `Todos_Invitados_${new Date().toISOString().slice(0, 10)}.csv`);
+                link.style.visibility = 'hidden';
                 
-                const fileName = `Todos_Invitados_${new Date().toISOString().slice(0, 10)}.xlsx`;
-                XLSX.writeFile(wb, fileName);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
                 
-                alert('✅ Excel descargado correctamente');
+                alert('✅ Archivo descargado correctamente');
             } catch (error) {
                 console.error('Error al exportar:', error);
                 alert('❌ Error: ' + error.message);
