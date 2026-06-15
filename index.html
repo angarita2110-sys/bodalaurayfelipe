@@ -109,13 +109,6 @@
             font-size: 12px;
         }
 
-        .btn-export {
-            background: var(--gold);
-            padding: 10px 18px;
-            font-size: 13px;
-            margin-left: 10px;
-        }
-
         .error-message {
             color: #e74c3c;
             font-size: 13px;
@@ -181,47 +174,6 @@
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--mint);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* ESTADÍSTICAS */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(212, 175, 106, 0.15) 0%, rgba(197, 221, 213, 0.15) 100%);
-            padding: 25px;
-            border-radius: 8px;
-            border: 2px solid var(--gold);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(212, 175, 106, 0.2);
-        }
-
-        .stat-card h3 {
-            color: var(--text);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
-
-        .stat-card .number {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--sage);
-            font-family: 'Playfair Display', serif;
         }
 
         .form-section {
@@ -401,12 +353,66 @@
         .asistente-info h3 {
             font-size: 15px;
             color: var(--dark);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
+            font-weight: 600;
         }
 
         .asistente-grupo {
             font-size: 12px;
             color: var(--text);
+        }
+
+        /* FILTROS COMO REPORTE (ABAJO) */
+        .filter-report {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .filter-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--sage);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .filter-card.active {
+            background: linear-gradient(135deg, var(--sage), var(--mint));
+            color: white;
+            border-left-color: white;
+        }
+
+        .filter-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--sage);
+        }
+
+        .filter-card.active .filter-number {
+            color: white;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .filter-card.active .filter-label {
+            color: white;
         }
 
         /* MODAL */
@@ -415,8 +421,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: rgba(0, 0, 0, 0.5);
             z-index: 1000;
             align-items: center;
@@ -431,88 +437,48 @@
             background: white;
             padding: 40px;
             border-radius: 12px;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
-        .modal-content h2 {
+        .modal-title {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 22px;
             color: var(--dark);
-            margin-bottom: 20px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 30px;
-        }
-
-        .btn-secondary {
-            background: #95a5a6;
-            padding: 10px 20px;
-            font-size: 13px;
-        }
-
-        /* FILTER */
-        .filters {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
             margin-bottom: 25px;
         }
 
-        .filter-card {
-            background: white;
-            border: 2px solid var(--mint);
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-card:hover {
-            border-color: var(--sage);
-        }
-
-        .filter-card.active {
-            background: linear-gradient(135deg, var(--sage) 0%, var(--mint) 100%);
-            color: white;
-            border-color: var(--sage);
-        }
-
-        .filter-card p {
+        .close-modal {
+            float: right;
             font-size: 28px;
-            font-weight: 700;
-            margin: 0;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--text);
         }
 
-        .filter-card span {
-            font-size: 12px;
-            opacity: 0.8;
+        .close-modal:hover {
+            color: var(--dark);
         }
 
-        @media (max-width: 768px) {
-            .section-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-
+        @media (max-width: 900px) {
             .grupo-item {
                 grid-template-columns: 1fr;
             }
 
             .header {
                 flex-direction: column;
-                text-align: left;
+                gap: 15px;
+                text-align: center;
             }
 
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-report {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -524,123 +490,114 @@
             <h1>Laura & Felipe</h1>
             <form id="loginForm">
                 <div class="form-group">
-                    <label>Contraseña</label>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
                     <input type="password" id="password" required>
                 </div>
-                <button class="btn" style="width: 100%;">Ingresar</button>
+                <button type="submit" class="btn" style="width: 100%;">Ingresar</button>
+                <div class="error-message" id="errorMessage"></div>
             </form>
-            <div class="error-message" id="errorMessage"></div>
         </div>
     </div>
 
     <!-- DASHBOARD -->
     <div class="dashboard" id="dashboard">
         <div class="header">
-            <h1>💍 Laura & Felipe - Admin</h1>
+            <h1>Panel de Control</h1>
             <div class="header-right">
-                <p id="userStatus">Bienvenido</p>
-                <button class="btn btn-logout" onclick="logout()">Cerrar Sesión</button>
+                <p>Usuario: <strong id="userEmail"></strong></p>
+                <button class="btn btn-logout" id="logoutBtn">Cerrar Sesión</button>
             </div>
         </div>
 
         <div class="main-content">
-            <!-- ESTADÍSTICAS PRINCIPALES -->
-            <div class="section-title">
-                <span>📊 Resumen General</span>
+            <!-- CREAR GRUPO (ARRIBA) -->
+            <div class="section-title">Crear Nuevo Grupo</div>
+            <div class="form-section">
+                <form id="newGroupForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre del Grupo</label>
+                            <input type="text" id="groupName" required placeholder="Ej: Alberto Calle">
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="submit" class="btn" style="width: 100%; margin-top: 5px;">➕ Crear Grupo</button>
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Miembros (uno por línea)</label>
+                            <textarea id="groupMembers" required placeholder="Alberto Calle&#10;Esposa Alberto&#10;Hijo Alberto" rows="4"></textarea>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="stats-container" id="statsContainer">
-                <div class="stat-card">
-                    <h3>Total de Invitados</h3>
-                    <div class="number" id="totalInvitados">0</div>
+
+            <!-- BOTÓN LIMPIAR FIREBASE (TESTING) -->
+            <button class="btn" onclick="clearAllConfirmations()" style="margin-bottom: 30px; background: #e74c3c;">🔄 Limpiar todas las confirmaciones (TESTING)</button>
+
+            <!-- TOTAL INVITADOS -->
+            <div style="background: linear-gradient(135deg, rgba(212, 175, 106, 0.15) 0%, rgba(197, 221, 213, 0.15) 100%); padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--gold);">
+                <p style="font-size: 13px; color: var(--text); margin-bottom: 8px; font-weight: 600; text-transform: uppercase;">👥 Total de Invitados (Todos los Grupos)</p>
+                <div style="font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--gold);" id="totalInvitados">0</div>
+            </div>
+
+            <!-- FILTROS COMO REPORTE (ARRIBA - VISIBLES) -->
+            <div class="filter-report">
+                <div class="filter-card active" data-filter="todos" onclick="setFilter('todos', this)">
+                    <div class="filter-number" id="filterTodos">0</div>
+                    <div class="filter-label">📋 Todos</div>
                 </div>
-                <div class="stat-card">
-                    <h3>Confirmados</h3>
-                    <div class="number" id="totalConfirmados">0</div>
+                <div class="filter-card" data-filter="pending" onclick="setFilter('pending', this)">
+                    <div class="filter-number" id="filterPending">0</div>
+                    <div class="filter-label">⏳ Pendientes</div>
                 </div>
-                <div class="stat-card">
-                    <h3>Pendientes</h3>
-                    <div class="number" id="totalPendientes">0</div>
+                <div class="filter-card" data-filter="confirmed" onclick="setFilter('confirmed', this)">
+                    <div class="filter-number" id="filterConfirmed">0</div>
+                    <div class="filter-label">✓ Confirmados</div>
                 </div>
-                <div class="stat-card">
-                    <h3>Rechazados</h3>
-                    <div class="number" id="totalRechazados">0</div>
+                <div class="filter-card" data-filter="rejected" onclick="setFilter('rejected', this)">
+                    <div class="filter-number" id="filterRejected">0</div>
+                    <div class="filter-label">✗ No Asisten</div>
                 </div>
+            </div>
+
+            <!-- BÚSQUEDA -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre de grupo...">
             </div>
 
             <!-- TABS -->
-            <div style="margin-bottom: 25px; border-bottom: 1px solid var(--mint);">
-                <button class="tab-btn active" onclick="switchTab('grupos')">Grupos</button>
-                <button class="tab-btn" onclick="switchTab('asistentes')">Asistentes Confirmados</button>
-                <button class="tab-btn" onclick="switchTab('admin')">Admin</button>
+            <div style="display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid var(--mint); padding-bottom: 15px;">
+                <button type="button" class="tab-btn active" data-tab="grupos">Grupos</button>
+                <button type="button" class="tab-btn" data-tab="asistentes">Asistentes por Persona</button>
             </div>
 
-            <!-- TAB: GRUPOS -->
-            <div class="tab-content active" id="gruposTab">
-                <div class="form-section">
-                    <div class="form-row">
-                        <div>
-                            <label class="form-group"><strong>Crear nuevo grupo</strong></label>
-                            <div class="form-row full">
-                                <input type="text" id="groupName" placeholder="Nombre del grupo" required>
-                            </div>
-                            <div class="form-row full">
-                                <textarea id="groupMembers" placeholder="Miembros (uno por línea)" style="min-height: 120px;"></textarea>
-                            </div>
-                            <div class="form-row full">
-                                <button class="btn" onclick="createGroup()" style="width: 100%;">Crear Grupo</button>
-                            </div>
-                        </div>
-                    </div>
+            <!-- TAB GRUPOS -->
+            <div id="tabGrupos" class="tab-content active">
+                <div class="grupos-list" id="gruposList">
+                    <p style="text-align: center; color: var(--text);">Cargando grupos...</p>
                 </div>
+            </div>
 
-                <!-- FILTROS -->
-                <div class="filters">
-                    <div class="filter-card active" onclick="setFilter('all', this)">
-                        <p id="countAll">0</p>
-                        <span>Todos</span>
+            <!-- TAB ASISTENTES -->
+            <div id="tabAsistentes" class="tab-content">
+                <div style="margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <p style="font-size: 14px; color: var(--text); margin-bottom: 15px;">Total de asistentes confirmados:</p>
+                        <div style="font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; color: var(--sage);" id="totalAsistentes">0</div>
                     </div>
-                    <div class="filter-card" onclick="setFilter('pending', this)">
-                        <p id="countPending">0</p>
-                        <span>Pendientes</span>
-                    </div>
-                    <div class="filter-card" onclick="setFilter('confirmed', this)">
-                        <p id="countConfirmed">0</p>
-                        <span>Confirmados</span>
-                    </div>
-                    <div class="filter-card" onclick="setFilter('rejected', this)">
-                        <p id="countRejected">0</p>
-                        <span>Rechazados</span>
-                    </div>
+                    <button type="button" class="btn-action" onclick="exportarExcel()" style="height: fit-content;">📊 Descargar Excel</button>
                 </div>
-
-                <!-- BUSCAR -->
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Buscar grupo..." onkeyup="filterGroups()">
+                    <input type="text" id="searchAsistentes" placeholder="🔍 Buscar por nombre de persona...">
                 </div>
-
-                <!-- LISTA DE GRUPOS -->
-                <div class="grupos-list" id="gruposList"></div>
-            </div>
-
-            <!-- TAB: ASISTENTES -->
-            <div class="tab-content" id="asistentesTab">
-                <div style="margin-bottom: 20px;">
-                    <button class="btn btn-export" onclick="exportarExcel()">📥 Exportar a Excel</button>
-                </div>
-                <div class="asistentes-list" id="asistentesList"></div>
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--mint); text-align: center;">
-                    <strong style="font-size: 18px; color: var(--sage);">Total de Asistentes Confirmados: <span id="totalAsistentes">0</span></strong>
-                </div>
-            </div>
-
-            <!-- TAB: ADMIN -->
-            <div class="tab-content" id="adminTab">
-                <div class="form-section">
-                    <h3 style="margin-bottom: 20px; color: var(--dark);">Opciones de Administración</h3>
-                    <div style="display: grid; gap: 10px;">
-                        <button class="btn" onclick="importDefault44Groups()" style="width: 100%; background: #3498db;">Importar 44 Grupos Originales</button>
-                        <button class="btn" onclick="clearAllConfirmations()" style="width: 100%; background: #e74c3c;">Limpiar Todas las Confirmaciones</button>
-                    </div>
+                <div class="asistentes-list" id="asistentesList">
+                    <p style="text-align: center; color: var(--text);">Cargando asistentes...</p>
                 </div>
             </div>
         </div>
@@ -649,150 +606,259 @@
     <!-- MODAL EDITAR -->
     <div class="modal" id="editModal">
         <div class="modal-content">
-            <h2>Editar Grupo</h2>
-            <div class="form-group">
-                <label>Nombre del Grupo</label>
-                <input type="text" id="editGroupName">
-            </div>
-            <div class="form-group">
-                <label>Miembros (uno por línea)</label>
-                <textarea id="editGroupMembers" style="min-height: 150px;"></textarea>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
-                <button class="btn" onclick="saveEditGroup()">Guardar</button>
-            </div>
+            <span class="close-modal" onclick="closeEditModal()">&times;</span>
+            <div class="modal-title">Editar Grupo</div>
+            <form id="editGroupForm">
+                <div class="form-group">
+                    <label>Nombre del Grupo</label>
+                    <input type="text" id="editGroupName" required>
+                </div>
+                <div class="form-group">
+                    <label>Miembros (uno por línea)</label>
+                    <textarea id="editGroupMembers" required rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Guardar Cambios</button>
+            </form>
         </div>
     </div>
 
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
-        import { getDatabase, ref, set, remove, onValue } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js';
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+        import { getDatabase, ref, onValue, set, remove } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
 
-        // Firebase config
         const firebaseConfig = {
-            apiKey: "AIzaSyB2x4qWHhDGCHlGhFMx-d6jXCbMGGGz0P0",
-            authDomain: "bodalaurafelipe-e39d1.firebaseapp.com",
-            databaseURL: "https://bodalaurafelipe-e39d1-default-rtdb.firebaseio.com",
-            projectId: "bodalaurafelipe-e39d1",
-            storageBucket: "bodalaurafelipe-e39d1.appspot.com",
-            messagingSenderId: "903888647819",
-            appId: "1:903888647819:web:64a0e3621d5ce4f5c1e9f7"
+            apiKey: "AIzaSyCMR0rQ-destxyhyXw56LSMf9HPX0NwaLg",
+            authDomain: "laurafelipeboda-3bb11.firebaseapp.com",
+            databaseURL: "https://laurafelipeboda-3bb11-default-rtdb.firebaseio.com",
+            projectId: "laurafelipeboda-3bb11",
+            storageBucket: "laurafelipeboda-3bb11.firebasestorage.app",
+            messagingSenderId: "364429589081",
+            appId: "1:364429589081:web:6805d468e88774b2fb8f48",
+            measurementId: "G-L699XCYWCL"
         };
 
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         const database = getDatabase(app);
 
         let groups = {};
         let confirmations = {};
-        let currentFilter = 'all';
         let editingGroupId = null;
-        let allInvitados = [];
+        let currentFilter = 'todos';
+        let currentSearch = '';
 
-        const loginForm = document.getElementById('loginForm');
+        function generateHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash).toString(36).substring(0, 8);
+        }
+
+        // DOM
         const loginContainer = document.getElementById('loginContainer');
         const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const userEmail = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const newGroupForm = document.getElementById('newGroupForm');
+        const gruposList = document.getElementById('gruposList');
         const editModal = document.getElementById('editModal');
-        const password = "Laura2025";
+        const editGroupForm = document.getElementById('editGroupForm');
+        const searchInput = document.getElementById('searchInput');
+        const searchAsistentes = document.getElementById('searchAsistentes');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
 
-        loginForm.addEventListener('submit', (e) => {
+        // LOGIN
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (document.getElementById('password').value === password) {
-                loginContainer.classList.add('hidden');
-                dashboard.classList.add('active');
-                loadData();
-            } else {
-                const errorMsg = document.getElementById('errorMessage');
-                errorMsg.textContent = 'Contraseña incorrecta';
-                errorMsg.classList.add('show');
+            try {
+                await signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value);
+                errorMessage.classList.remove('show');
+            } catch (error) {
+                errorMessage.textContent = 'Email o contraseña incorrectos';
+                errorMessage.classList.add('show');
             }
         });
 
-        function loadData() {
-            onValue(ref(database, 'groups'), (snapshot) => {
-                groups = snapshot.val() || {};
-                renderGroups();
-                updateFilterNumbers();
-                loadConfirmations();
-                updateStats();
-            });
-        }
+        // LOGOUT
+        logoutBtn.addEventListener('click', async () => {
+            await signOut(auth);
+        });
 
-        function loadConfirmations() {
-            onValue(ref(database, 'confirmations'), (snapshot) => {
-                confirmations = snapshot.val() || {};
-                renderAsistentes();
-                updateFilterNumbers();
-                updateStats();
-            });
-        }
-
-        window.createGroup = async function() {
-            const name = document.getElementById('groupName').value;
-            const membersText = document.getElementById('groupMembers').value;
-            
-            if (!name || !membersText) {
-                alert('Completa todos los campos');
-                return;
+        // AUTH STATE
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginContainer.classList.add('hidden');
+                dashboard.classList.add('active');
+                userEmail.textContent = user.email;
+                loadData();
+            } else {
+                loginContainer.classList.remove('hidden');
+                dashboard.classList.remove('active');
             }
+        });
 
-            const members = membersText.split('\n').filter(m => m.trim());
-            const groupId = Date.now();
+        // CREAR GRUPO
+        newGroupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('groupName').value;
+            const members = document.getElementById('groupMembers').value.split('\n').map(m => m.trim()).filter(m => m);
+            const id = Math.max(...Object.keys(groups).map(k => parseInt(k) || 0), 0) + 1;
 
             try {
-                await set(ref(database, `groups/${groupId}`), {
-                    id: groupId,
-                    name,
-                    members
-                });
-                document.getElementById('groupName').value = '';
-                document.getElementById('groupMembers').value = '';
-                updateFilterNumbers();
+                await set(ref(database, `groups/${id}`), { id, name, members });
+                newGroupForm.reset();
             } catch (error) {
                 alert('Error: ' + error.message);
             }
-        };
+        });
 
-        window.switchTab = function(tab) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tab + 'Tab').classList.add('active');
-            event.target.classList.add('active');
-        };
+        // EDITAR GRUPO
+        editGroupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('editGroupName').value;
+            const members = document.getElementById('editGroupMembers').value.split('\n').map(m => m.trim()).filter(m => m);
 
-        window.filterGroups = function() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const gruposList = document.getElementById('gruposList');
-            const items = gruposList.querySelectorAll('.grupo-item');
+            try {
+                await set(ref(database, `groups/${editingGroupId}`), { id: editingGroupId, name, members });
+                closeEditModal();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
 
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(searchTerm) ? 'grid' : 'none';
+        // BÚSQUEDA
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            renderGroups();
+        });
+
+        // TABS
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                const tabId = 'tab' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1);
+                document.getElementById(tabId).classList.add('active');
+                if (btn.dataset.tab === 'asistentes') {
+                    renderAsistentes();
+                }
             });
-        };
+        });
 
+        // BÚSQUEDA ASISTENTES
+        searchAsistentes.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.asistente-item');
+            items.forEach(item => {
+                const name = item.querySelector('h3').textContent.toLowerCase();
+                item.style.display = name.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // CARGAR DATOS
+        function loadData() {
+            onValue(ref(database, 'groups'), (snapshot) => {
+                groups = {};
+                Object.entries(snapshot.val() || {}).forEach(([key, value]) => {
+                    groups[value.id] = value;
+                });
+                renderGroups();
+                updateFilterNumbers();
+                updateTotalInvitados();
+            });
+
+            onValue(ref(database, 'confirmations'), (snapshot) => {
+                confirmations = snapshot.val() || {};
+                renderGroups();
+                updateFilterNumbers();
+            });
+        }
+
+        // ACTUALIZAR NÚMEROS DE FILTROS
+        function updateFilterNumbers() {
+            const confs = Object.values(confirmations);
+            const total = Object.keys(groups).length;
+            const confirmed = confs.filter(c => c.status === 'confirmed').length;
+            const rejected = confs.filter(c => c.status === 'rejected').length;
+            const pending = total - confirmed - rejected;
+
+            document.getElementById('filterTodos').textContent = total;
+            document.getElementById('filterConfirmed').textContent = confirmed;
+            document.getElementById('filterRejected').textContent = rejected;
+            document.getElementById('filterPending').textContent = pending;
+        }
+
+        // RENDERIZAR GRUPOS
         function renderGroups() {
-            const gruposList = document.getElementById('gruposList');
-            const groupsArray = Object.values(groups).sort((a, b) => b.id - a.id);
+            if (Object.keys(groups).length === 0) {
+                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos. Crea uno o importa los 44 originales.</p>';
+                return;
+            }
 
-            gruposList.innerHTML = groupsArray
+            let gruposToShow = Object.values(groups)
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .filter(group => {
-                    const status = getGroupStatus(group.id);
-                    if (currentFilter === 'pending') return status === 'pending';
-                    if (currentFilter === 'confirmed') return status === 'confirmed';
-                    if (currentFilter === 'rejected') return status === 'rejected';
+                    // FILTRO POR BÚSQUEDA
+                    if (currentSearch && !group.name.toLowerCase().includes(currentSearch)) {
+                        return false;
+                    }
+
+                    // FILTRO POR ESTADO
+                    if (currentFilter !== 'todos') {
+                        const groupConfs = Object.values(confirmations).filter(c => c.groupId === group.id);
+                        const groupConfirmed = groupConfs.filter(c => c.status === 'confirmed').length;
+                        const groupTotal = groupConfs.length;
+
+                        if (currentFilter === 'pending' && groupTotal === 0) return true; // Mostrar solo si NO hay confirmaciones
+                        else if (currentFilter === 'pending') return false;
+                        
+                        if (currentFilter === 'confirmed' && groupConfirmed === groupTotal && groupTotal > 0) return true; // Mostrar solo si TODOS confirmaron
+                        else if (currentFilter === 'confirmed') return false;
+                        
+                        if (currentFilter === 'rejected' && groupConfirmed === 0 && groupTotal > 0) return true; // Mostrar solo si NADIE confirmó
+                        else if (currentFilter === 'rejected') return false;
+                    }
+
                     return true;
-                })
+                });
+
+            if (gruposToShow.length === 0) {
+                gruposList.innerHTML = '<p style="text-align: center; color: var(--text);">No hay grupos que coincidan con tu búsqueda.</p>';
+                return;
+            }
+
+            gruposList.innerHTML = gruposToShow
                 .map(group => {
-                    const status = getGroupStatus(group.id);
-                    const statusClass = `status-${status}`;
-                    const statusText = {
-                        pending: 'Pendiente',
-                        confirmed: 'Confirmado',
-                        rejected: 'Rechazado',
-                        partial: 'Parcial'
-                    }[status];
+                    const hash = generateHash(group.id + group.name);
+                    const groupConfs = Object.values(confirmations).filter(c => c.groupId === group.id);
+                    const groupConfirmed = groupConfs.filter(c => c.status === 'confirmed').length;
+                    const groupTotal = groupConfs.length;
+
+                    let statusClass = 'status-pending';
+                    let statusText = 'Pendiente';
+
+                    if (groupTotal > 0) {
+                        if (groupConfirmed === groupTotal) {
+                            statusClass = 'status-confirmed';
+                            statusText = '✓ Confirmado';
+                        } else if (groupConfirmed === 0) {
+                            statusClass = 'status-rejected';
+                            statusText = '✗ No Asiste';
+                        } else {
+                            statusClass = 'status-partial';
+                            statusText = `${groupConfirmed}/${groupTotal} Confirman`;
+                        }
+                    }
+
+                    const link = `${window.location.origin}/invitacion.html?group=${hash}`;
 
                     return `
                         <div class="grupo-item">
@@ -801,9 +867,11 @@
                                 <div class="grupo-members">${group.members.join(', ')}</div>
                             </div>
                             <div class="grupo-status ${statusClass}">${statusText}</div>
+                            <button type="button" class="btn-action" onclick="abrirLink('${link}')">🔗 Link</button>
+                            <button type="button" class="btn-action" onclick="enviarInvitacion('${link}', '${group.name}')">📧 Enviar invitación</button>
                             <div class="grupo-actions">
-                                <button class="btn-action" onclick="openEditModal(${group.id})">✏️</button>
-                                <button class="btn-action delete" onclick="deleteGroup(${group.id})">🗑️</button>
+                                <button type="button" class="btn-action" onclick="openEditModal(${group.id})">✏️ Editar</button>
+                                <button type="button" class="btn-action delete" onclick="deleteGroup(${group.id})">🗑️ Eliminar</button>
                             </div>
                         </div>
                     `;
@@ -811,51 +879,12 @@
                 .join('');
         }
 
-        function getGroupStatus(groupId) {
-            const group = groups[groupId];
-            const memberStatuses = group.members.map(member => {
-                const conf = Object.values(confirmations).find(c => c.groupId == groupId && c.memberName === member);
-                return conf ? conf.status : 'pending';
-            });
-
-            const hasConfirmed = memberStatuses.includes('confirmed');
-            const hasRejected = memberStatuses.includes('rejected');
-            const hasPending = memberStatuses.includes('pending');
-
-            if (hasPending && !hasConfirmed && !hasRejected) return 'pending';
-            if (hasConfirmed && !hasRejected && !hasPending) return 'confirmed';
-            if (hasRejected && !hasConfirmed && !hasPending) return 'rejected';
-            return 'partial';
-        }
-
-        function updateFilterNumbers() {
-            const pending = Object.values(groups).filter(g => getGroupStatus(g.id) === 'pending').length;
-            const confirmed = Object.values(groups).filter(g => getGroupStatus(g.id) === 'confirmed').length;
-            const rejected = Object.values(groups).filter(g => getGroupStatus(g.id) === 'rejected').length;
-            const all = Object.values(groups).length;
-
-            document.getElementById('countAll').textContent = all;
-            document.getElementById('countPending').textContent = pending;
-            document.getElementById('countConfirmed').textContent = confirmed;
-            document.getElementById('countRejected').textContent = rejected;
-        }
-
-        function updateStats() {
-            const totalInvitados = Object.values(groups).reduce((sum, group) => sum + group.members.length, 0);
-            const totalConfirmados = Object.values(confirmations).filter(c => c.status === 'confirmed').length;
-            const totalPendientes = totalInvitados - totalConfirmados - Object.values(confirmations).filter(c => c.status === 'rejected').length;
-            const totalRechazados = Object.values(confirmations).filter(c => c.status === 'rejected').length;
-
-            document.getElementById('totalInvitados').textContent = totalInvitados;
-            document.getElementById('totalConfirmados').textContent = totalConfirmados;
-            document.getElementById('totalPendientes').textContent = totalPendientes;
-            document.getElementById('totalRechazados').textContent = totalRechazados;
-        }
-
+        // RENDERIZAR ASISTENTES POR PERSONA
         function renderAsistentes() {
             const asistentesList = document.getElementById('asistentesList');
             const asistentes = [];
 
+            // Extraer personas confirmadas de los grupos
             Object.values(confirmations).forEach(conf => {
                 if (conf.status === 'confirmed') {
                     const group = groups[conf.groupId];
@@ -875,10 +904,10 @@
                 return;
             }
 
+            // Ordenar alfabéticamente
             asistentes.sort((a, b) => a.name.localeCompare(b.name));
 
             document.getElementById('totalAsistentes').textContent = asistentes.length;
-            allInvitados = asistentes;
 
             asistentesList.innerHTML = asistentes
                 .map(asistente => `
@@ -893,12 +922,32 @@
                 .join('');
         }
 
+        // ACTUALIZAR TOTAL DE INVITADOS
+        function updateTotalInvitados() {
+            const total = Object.values(groups).reduce((sum, group) => sum + group.members.length, 0);
+            document.getElementById('totalInvitados').textContent = total;
+        }
+
+        // FUNCIONES GLOBALES
         window.setFilter = function(filter, element) {
             const cards = document.querySelectorAll('.filter-card');
             cards.forEach(c => c.classList.remove('active'));
             element.classList.add('active');
             currentFilter = filter;
             renderGroups();
+        };
+
+        window.abrirLink = function(link) {
+            window.open(link, '_blank');
+        };
+
+        window.enviarInvitacion = function(link, groupName) {
+            const texto = `Con mucho amor queremos invitarte a compartir una cena muy especial para celebrar nuestra unión. Será una noche íntima, tranquila y llena de significado, junto a personas que han sido importantes en nuestra historia.
+Aquí puedes ver todos los detalles: ${link}
+Con cariño, Laura & Felipe`;
+            
+            navigator.clipboard.writeText(texto);
+            alert('✓ Invitación copiada!\n\nAhora puedes pegarla en tu mensaje.');
         };
 
         window.openEditModal = function(groupId) {
@@ -912,29 +961,6 @@
         window.closeEditModal = function() {
             editModal.classList.remove('show');
             editingGroupId = null;
-        };
-
-        window.saveEditGroup = async function() {
-            const name = document.getElementById('editGroupName').value;
-            const membersText = document.getElementById('editGroupMembers').value;
-            
-            if (!name || !membersText) {
-                alert('Completa todos los campos');
-                return;
-            }
-
-            const members = membersText.split('\n').filter(m => m.trim());
-
-            try {
-                await set(ref(database, `groups/${editingGroupId}`), {
-                    id: editingGroupId,
-                    name,
-                    members
-                });
-                closeEditModal();
-            } catch (error) {
-                alert('Error: ' + error.message);
-            }
         };
 
         window.deleteGroup = async function(groupId) {
@@ -1025,55 +1051,39 @@
 
         // EXPORTAR EXCEL
         window.exportarExcel = function() {
-            if (allInvitados.length === 0) {
+            const asistentesList = document.getElementById('asistentesList');
+            const items = asistentesList.querySelectorAll('.asistente-item');
+            
+            if (items.length === 0) {
                 alert('No hay asistentes para exportar');
                 return;
             }
-
-            // Preparar datos para Excel
-            const data = [
-                ['LISTA DE ASISTENTES - Laura & Felipe'],
-                [''],
-                ['Nombre', 'Grupo', 'Estado', 'Fecha de Confirmación']
-            ];
-
-            const now = new Date().toLocaleDateString('es-CO');
             
-            allInvitados.forEach(asistente => {
-                data.push([
-                    asistente.name,
-                    asistente.groupName,
-                    'Confirmado',
-                    now
-                ]);
+            // Crear array de datos
+            const datos = [['Nombre', 'Grupo', 'Estado', 'Fecha']];
+            const hoy = new Date().toLocaleDateString('es-CO');
+            
+            items.forEach(item => {
+                const nombre = item.querySelector('.asistente-info h3')?.textContent || '';
+                const grupo = item.querySelector('.asistente-grupo')?.textContent?.replace('Grupo: ', '') || '';
+                const estado = 'Confirmado';
+                
+                datos.push([nombre, grupo, estado, hoy]);
             });
-
-            data.push(['']);
-            data.push(['TOTAL DE ASISTENTES', allInvitados.length, '', '']);
-
-            // Crear workbook
-            const ws = XLSX.utils.aoa_to_sheet(data);
             
-            // Estilos básicos
-            ws['!cols'] = [
-                { wch: 30 },
-                { wch: 25 },
-                { wch: 15 },
-                { wch: 20 }
-            ];
-
+            // Agregar total
+            datos.push(['']);
+            datos.push(['TOTAL DE ASISTENTES', items.length, '', '']);
+            
+            // Crear Excel
+            const ws = XLSX.utils.aoa_to_sheet(datos);
+            ws['!cols'] = [{ wch: 30 }, { wch: 25 }, { wch: 15 }, { wch: 15 }];
+            
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Asistentes');
-
-            // Descargar
-            const fileName = `Asistentes_Boda_Laura_Felipe_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            
+            const fileName = `Asistentes_Boda_${new Date().toISOString().slice(0, 10)}.xlsx`;
             XLSX.writeFile(wb, fileName);
-        };
-
-        window.logout = function() {
-            loginContainer.classList.remove('hidden');
-            dashboard.classList.remove('active');
-            document.getElementById('password').value = '';
         };
     </script>
 </body>
