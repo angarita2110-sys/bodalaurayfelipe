@@ -62,7 +62,7 @@
             height: 590px;
             background:
                 linear-gradient(180deg, rgba(20,20,20,.08) 0%, rgba(20,20,20,.12) 36%, rgba(20,20,20,.66) 100%),
-                url('IMG_8452.jpg');
+                url('https://bodalaurayfelipe.vercel.app/IMG_8452.jpg');
             background-size: cover;
             background-position: center 32%;
             display: flex;
@@ -682,6 +682,613 @@
             .reserved-note-soft p { font-size: 10.8px; }
             .footer { margin-left: -20px; margin-right: -20px; }
         }
+
+        /* --- PREVIEW LOCAL: ITINERARIO + LLUVIA DE SOBRES --- */
+        .itinerary-section {
+            padding-top: 46px;
+            padding-bottom: 46px;
+        }
+        .itinerary-intro {
+            display: none;
+        }
+        .timeline {
+            position: relative;
+            width: min(560px, 100%);
+            margin: 0 auto;
+            padding: 8px 0 2px;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 18px;
+            bottom: 18px;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(159,184,173,.8) 8%, rgba(200,160,97,.55) 50%, rgba(159,184,173,.8) 92%, transparent);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 58px 1fr;
+            align-items: center;
+            min-height: 104px;
+        }
+        .timeline-copy {
+            background: rgba(255,253,249,.8);
+            border: 1px solid rgba(200,160,97,.18);
+            border-radius: 18px;
+            padding: 14px 16px;
+            box-shadow: 0 9px 24px rgba(70,70,70,.045);
+        }
+        .timeline-item:nth-child(odd) .timeline-copy { grid-column: 1; text-align: right; }
+        .timeline-item:nth-child(even) .timeline-copy { grid-column: 3; text-align: left; }
+        .timeline-dot {
+            grid-column: 2;
+            width: 52px;
+            height: 52px;
+            margin: 0 auto;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, rgba(255,253,249,.98), rgba(245,241,231,.96));
+            border: 1px solid rgba(95,99,64,.28);
+            color: var(--olive-deep);
+            z-index: 2;
+            box-shadow: 0 10px 24px rgba(65,67,47,.10);
+            overflow: hidden;
+        }
+        .timeline-dot .timeline-emoji {
+            display: block;
+            font-size: 24px;
+            line-height: 1;
+            transform: translateY(1px);
+        }
+        .timeline-time {
+            color: var(--gold);
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--charcoal);
+            font-size: 19px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .timeline-note {
+            margin-top: 5px;
+            font-size: 11px;
+            line-height: 1.45;
+            color: var(--text);
+        }
+        .gift-section {
+            text-align: center;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(220,235,230,.46), transparent 31%),
+                radial-gradient(circle at 90% 78%, rgba(200,160,97,.11), transparent 28%),
+                rgba(255,253,249,.78);
+        }
+        .gift-seal {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            margin: -2px auto 24px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(200,160,97,.42);
+            background: radial-gradient(circle at 35% 30%, #efdcae, #c8a061 62%, #97723b 100%);
+            color: #fffaf0;
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            letter-spacing: -3px;
+            box-shadow: inset 0 0 0 5px rgba(255,255,255,.16), 0 12px 28px rgba(111,83,43,.18);
+        }
+        .gift-copy {
+            max-width: 505px;
+            margin: 0 auto;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            line-height: 1.65;
+            font-style: italic;
+            color: var(--charcoal);
+        }
+        .gift-envelope {
+            width: 178px;
+            height: 116px;
+            margin: 28px auto 4px;
+            position: relative;
+            border: 1px solid rgba(159,184,173,.55);
+            border-radius: 8px;
+            background: linear-gradient(145deg, #fffdf7, #f2eadb);
+            box-shadow: 0 16px 34px rgba(70,70,70,.11);
+            overflow: hidden;
+        }
+        .gift-envelope::before,
+        .gift-envelope::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,253,249,.92);
+            border-top: 1px solid rgba(159,184,173,.42);
+        }
+        .gift-envelope::before { left: -58px; transform: rotate(35deg); }
+        .gift-envelope::after { right: -58px; transform: rotate(-35deg); }
+        .gift-flap {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            top: -42px;
+            height: 92px;
+            background: #f5eddf;
+            border: 1px solid rgba(159,184,173,.42);
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        .gift-mini-seal {
+            position: absolute;
+            left: 50%;
+            top: 47px;
+            transform: translateX(-50%);
+            width: 42px;
+            height: 42px;
+            z-index: 3;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--gold);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            box-shadow: 0 6px 14px rgba(111,83,43,.18);
+        }
+        .gift-leaf {
+            position: absolute;
+            width: 72px;
+            height: 18px;
+            border-top: 2px solid rgba(91,120,103,.5);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        .gift-leaf.a { left: 6px; top: 29px; transform: rotate(18deg); }
+        .gift-leaf.b { right: 4px; top: 76px; transform: rotate(-18deg); }
+
+        @media (max-width: 640px) {
+            .itinerary-section {
+                padding-top: 34px;
+                padding-bottom: 34px;
+            }
+            .itinerary-section::after {
+                display: none;
+            }
+            .timeline {
+                width: 100%;
+                padding: 2px 0 0;
+                margin-top: 8px;
+            }
+            .timeline::before {
+                display: none;
+            }
+            .timeline-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-height: 0;
+                margin-bottom: 14px;
+            }
+            .timeline-dot {
+                order: 1;
+                flex: 0 0 44px;
+                width: 44px;
+                height: 44px;
+                margin: 0;
+                grid-column: auto;
+            }
+            .timeline-copy {
+                order: 2;
+                flex: 1 1 auto;
+                padding: 14px 16px;
+                border-radius: 16px;
+            }
+            .timeline-item:nth-child(odd) .timeline-copy,
+            .timeline-item:nth-child(even) .timeline-copy {
+                grid-column: auto;
+                text-align: left;
+            }
+            .timeline-time {
+                font-size: 10px;
+                margin-bottom: 5px;
+            }
+            .timeline-title {
+                font-size: 17px;
+                line-height: 1.18;
+            }
+            .timeline-dot .timeline-emoji { font-size: 20px; }
+            .gift-copy { font-size: 18px; line-height: 1.6; }
+            .gift-seal { width: 78px; height: 78px; font-size: 24px; }
+        }
+
+        /* === Identidad visual oficial Lau & Pipe === */
+        :root {
+            --olive: #5f6340;
+            --olive-deep: #44482d;
+            --olive-soft: #8a8d67;
+            --ivory: #f7f3ea;
+            --ivory-2: #fbf8f1;
+            --sage: #727755;
+            --sage-soft: #ebe9dd;
+            --mint: #e7e6d8;
+            --cream: var(--ivory);
+            --cream-2: var(--ivory-2);
+            --gold: var(--olive);
+            --gold-soft: rgba(95,99,64,.22);
+            --charcoal: #41432f;
+            --text: #676652;
+            --white: #fdfbf6;
+        }
+        body { background: #e7e4da; }
+        .container {
+            background: var(--ivory);
+            box-shadow: 0 22px 70px rgba(48,50,35,.16);
+        }
+        .container::before,
+        .container::after {
+            border-color: rgba(95,99,64,.16);
+        }
+        .section {
+            background: rgba(251,248,241,.78);
+            border: 1px solid rgba(95,99,64,.24);
+            border-radius: 24px;
+            box-shadow: 0 14px 36px rgba(65,67,47,.055);
+        }
+        .section::before {
+            border-color: rgba(95,99,64,.19);
+            border-radius: 18px;
+        }
+        .section h2 {
+            color: var(--olive-deep);
+            letter-spacing: .4px;
+        }
+        .section h2::after {
+            background: var(--olive);
+            opacity: .68;
+        }
+        .section-subtitle,
+        .event-label,
+        .countdown-label,
+        .countdown-text,
+        .timeline-time {
+            color: var(--olive);
+        }
+        .wedding-mark {
+            width: min(360px, 82%);
+            margin: 10px auto 36px;
+            position: relative;
+            text-align: center;
+        }
+        .wedding-mark::before,
+        .wedding-mark::after {
+            content: "";
+            position: absolute;
+            left: 7%; right: 7%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(95,99,64,.5), transparent);
+        }
+        .wedding-mark::before { top: -14px; }
+        .wedding-mark::after { bottom: -14px; }
+        .wedding-mark img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border: 0;
+            padding: 0;
+            margin: 0 auto;
+            filter: none;
+            opacity: 1;
+        }
+        .countdown-section {
+            background: rgba(251,248,241,.97);
+            border-color: rgba(95,99,64,.26);
+        }
+        .countdown-section::before { border-color: rgba(95,99,64,.48); }
+        .countdown-section::after { border-color: rgba(95,99,64,.20); }
+        .event-detail {
+            background: linear-gradient(180deg, rgba(253,251,246,.98), rgba(247,243,234,.92));
+            border-color: rgba(95,99,64,.22);
+        }
+        .event-detail::after { border-color: rgba(95,99,64,.14); }
+        .event-icon {
+            color: var(--olive);
+            border-color: rgba(95,99,64,.28);
+            background: radial-gradient(circle, #fdfbf6 0%, #f3efe5 100%);
+        }
+        .reserved-color { border-color: rgba(95,99,64,.42); }
+        .rsvp-deadline {
+            background: linear-gradient(135deg, rgba(247,243,234,.98), rgba(253,251,246,.94));
+            border-color: rgba(95,99,64,.30);
+        }
+        .rsvp-deadline strong,
+        .rsvp-deadline span { color: var(--olive); }
+        .member {
+            background: linear-gradient(135deg, rgba(235,233,221,.92), rgba(253,251,246,.96));
+            border-color: rgba(95,99,64,.24);
+        }
+        .member-btn {
+            border-color: rgba(95,99,64,.36);
+            color: var(--olive);
+        }
+        .member-btn.active,
+        .member-btn:hover,
+        .modal-btn.confirm {
+            background: var(--olive);
+            border-color: var(--olive);
+        }
+        .btn-submit { background: var(--olive-deep); }
+        .btn-submit:hover { background: var(--olive); }
+        .success { background: var(--olive); }
+        .footer { background: var(--olive-deep); }
+
+        /* Itinerario: línea botánica fina inspirada en el monograma */
+        .itinerary-section {
+            background:
+                radial-gradient(circle at 7% 9%, rgba(95,99,64,.055), transparent 25%),
+                radial-gradient(circle at 91% 88%, rgba(95,99,64,.05), transparent 25%),
+                rgba(251,248,241,.82);
+        }
+        .itinerary-section::after {
+            content: "";
+            position: absolute;
+            width: 78%;
+            height: 86%;
+            left: 11%; top: 7%;
+            border: 1px solid rgba(95,99,64,.12);
+            border-radius: 50% / 44%;
+            pointer-events: none;
+        }
+        .timeline::before {
+            background: linear-gradient(180deg, transparent, rgba(95,99,64,.62) 9%, rgba(95,99,64,.62) 91%, transparent);
+        }
+        .timeline-dot {
+            color: var(--olive);
+            border-color: rgba(95,99,64,.38);
+            background: #faf7ef;
+            box-shadow: 0 7px 18px rgba(95,99,64,.12);
+        }
+        .timeline-title { color: var(--olive-deep); }
+        .timeline-note { color: #74715f; }
+
+        /* Lluvia de sobres: misma paleta, sin reinterpretar el logo */
+        .gift-section {
+            background:
+                linear-gradient(rgba(251,248,241,.88), rgba(251,248,241,.88)),
+                radial-gradient(circle at center, rgba(95,99,64,.07), transparent 58%);
+        }
+        .gift-seal,
+        .gift-mini-seal {
+            background: var(--olive-deep);
+            border-color: #777a55;
+            color: #f7f3ea;
+            box-shadow: 0 10px 26px rgba(65,67,47,.18);
+        }
+        .gift-copy { color: var(--olive-deep); }
+        .gift-envelope {
+            background: #f2ecdf;
+            border-color: rgba(95,99,64,.30);
+            box-shadow: 0 14px 34px rgba(65,67,47,.10);
+        }
+        .gift-envelope::before,
+        .gift-envelope::after,
+        .gift-leaf { background: #7d825d; }
+        .gift-flap { border-top-color: #e6dece; }
+
+        @media (max-width: 640px) {
+            .wedding-mark { width: min(300px, 88%); margin-bottom: 30px; }
+            .section { border-radius: 20px; }
+            .section::before { border-radius: 15px; }
+        }
+
+    
+        /* Ajuste puntual: usar el logo aprobado, sin alterarlo */
+        .gift-logo {
+            width: min(180px, 48vw);
+            height: auto;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            display: block;
+            margin: 0 auto 22px;
+            padding: 0;
+        }
+        .gift-logo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: none;
+        }
+        .gift-mini-logo {
+            width: 54px;
+            height: 54px;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            overflow: visible;
+            display: block;
+            padding: 0;
+        }
+        .gift-mini-logo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: none;
+        }
+    
+
+        /* === FOTOS PROTAGONISTAS - PREVIEW LOCAL === */
+        .hero {
+            height: 680px;
+            background:
+                linear-gradient(180deg, rgba(18,22,14,.04) 0%, rgba(18,22,14,.10) 48%, rgba(18,22,14,.72) 100%),
+                url("wedding-photo-01.jpg") center 54% / cover no-repeat;
+        }
+        .hero::before {
+            border-color: rgba(255,255,255,.44);
+        }
+        .hero-inner {
+            bottom: 116px;
+        }
+
+        .photo-feature,
+        .photo-family,
+        .photo-portrait {
+            position: relative;
+            margin: 0 0 34px;
+            overflow: hidden;
+            border-radius: 28px;
+            border: 1px solid rgba(95,99,64,.18);
+            background: #ede9df;
+            box-shadow: 0 18px 44px rgba(49,51,35,.11);
+        }
+        .photo-feature img,
+        .photo-family img,
+        .photo-portrait img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-feature {
+            height: 470px;
+        }
+        .photo-feature img { object-position: center 44%; }
+        .photo-feature::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 58%, rgba(24,27,17,.36) 100%);
+            pointer-events: none;
+        }
+        .photo-feature-caption {
+            position: absolute;
+            z-index: 2;
+            left: 28px;
+            right: 28px;
+            bottom: 23px;
+            text-align: center;
+            color: #fffdf7;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-style: italic;
+            text-shadow: 0 3px 18px rgba(0,0,0,.52);
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 0 0 34px;
+        }
+        .photo-gallery figure {
+            margin: 0;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(95,99,64,.18);
+            box-shadow: 0 14px 34px rgba(49,51,35,.09);
+            background: #ede9df;
+        }
+        .photo-gallery img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-gallery .walk img { object-position: center center; }
+        .photo-gallery .brick img { object-position: center center; }
+
+        .photo-family { height: 430px; }
+        .photo-family img { object-position: center 50%; }
+        .photo-portrait {
+            width: min(430px, 86%);
+            height: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .photo-portrait img { object-position: center 42%; }
+
+        .photo-divider-label {
+            text-align: center;
+            margin: 4px 0 18px;
+            color: var(--olive);
+            text-transform: uppercase;
+            letter-spacing: 2.6px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                height: 690px;
+                background-position: center 54%;
+            }
+            .hero-inner { bottom: 120px; }
+
+            .photo-feature,
+            .photo-family {
+                margin-left: -20px;
+                margin-right: -20px;
+                width: calc(100% + 40px);
+                border-radius: 0;
+                border-left: 0;
+                border-right: 0;
+            }
+            .photo-feature { height: 560px; }
+            .photo-feature img { object-position: center 46%; }
+            .photo-feature-caption {
+                left: 24px;
+                right: 24px;
+                bottom: 24px;
+                font-size: 17px;
+            }
+
+            .photo-gallery {
+                grid-template-columns: 1fr;
+                gap: 18px;
+                margin-left: -20px;
+                margin-right: -20px;
+                width: calc(100% + 40px);
+            }
+            .photo-gallery figure {
+                height: 500px;
+                border-radius: 0;
+                border-left: 0;
+                border-right: 0;
+            }
+            .photo-gallery .walk img { object-position: center 50%; }
+            .photo-gallery .brick img { object-position: center 50%; }
+
+            .photo-family { height: 520px; }
+            .photo-family img { object-position: center 50%; }
+
+            .photo-portrait {
+                width: 100%;
+                height: 620px;
+                border-radius: 22px;
+                margin-top: 6px;
+                margin-bottom: 34px;
+            }
+            .photo-portrait img { object-position: center 42%; }
+        }
+
     </style>
 </head>
 <body>
@@ -719,6 +1326,17 @@
 
             <div class="ornament-line"></div>
 
+            <div class="wedding-mark" aria-label="Monograma oficial de Laura y Felipe">
+                <img src="wedding-photo-02.png" alt="Logo oficial Lau & Pipe 12.12.26">
+            </div>
+
+
+            <div class="photo-divider-label"></div>
+            <div class="photo-feature">
+                <img src="wedding-photo-03.png" alt="Laura y Felipe" loading="eager">
+                <div class="photo-feature-caption">Nuestra historia, nuestra familia.</div>
+            </div>
+
             <div class="section invitation-section">
                 <div class="section-subtitle">Tenemos el honor de invitarte a:</div>
                 <h2>Nuestra Cena de Matrimonio</h2>
@@ -731,7 +1349,7 @@
                             </svg>
                         </div>
                         <div class="event-label">Día y hora</div>
-                        <div class="event-content">Sábado, 12 de diciembre<br><span class="time-range">6:00 PM a 2:00 AM</span></div>
+                        <div class="event-content">Sábado, 12 de diciembre</div>
                     </div>
                     <div class="event-detail">
                         <div class="event-icon" aria-hidden="true">
@@ -770,8 +1388,67 @@
                 </div>
             </div>
 
+
+
+            <div class="photo-gallery" aria-label="Galería de Laura y Felipe">
+                <figure class="walk"><img src="wedding-photo-04.jpg" alt="Laura y Felipe caminando con Lucca" loading="lazy"></figure>
+                <figure class="brick"><img src="wedding-photo-05.jpg" alt="Laura y Felipe caminando con Lucca junto al muro de ladrillo" loading="lazy"></figure>
+            </div>
+
+            <div class="section itinerary-section">
+                <div class="section-subtitle">Así viviremos la noche</div>
+                <h2>Itinerario</h2>
+                <div class="itinerary-intro"></div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-copy">
+                            <div class="timeline-time">6:00 PM – 7:00 PM</div>
+                            <div class="timeline-title">Recepción</div>
+                        </div>
+                        <div class="timeline-dot" aria-hidden="true"><span class="timeline-emoji">🥂</span></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"><span class="timeline-emoji">📷</span></div>
+                        <div class="timeline-copy">
+                            <div class="timeline-time">7:00 PM – 7:30 PM</div>
+                            <div class="timeline-title">Fotos</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-copy">
+                            <div class="timeline-time">7:30 PM – 7:45 PM</div>
+                            <div class="timeline-title">Brindis</div>
+                        </div>
+                        <div class="timeline-dot" aria-hidden="true"><span class="timeline-emoji">🥂</span></div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot" aria-hidden="true"><span class="timeline-emoji">🍰</span></div>
+                        <div class="timeline-copy">
+                            <div class="timeline-time">7:45 PM – 9:00 PM</div>
+                            <div class="timeline-title">Cena</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-copy">
+                            <div class="timeline-time">9:00 PM – 3:00 AM</div>
+                            <div class="timeline-title">Fiesta</div>
+                        </div>
+                        <div class="timeline-dot" aria-hidden="true"><span class="timeline-emoji">🎉</span></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="photo-family">
+                <img src="wedding-photo-06.jpg" alt="Laura, Felipe y Lucca" loading="lazy">
+            </div>
+
             <div class="section rsvp-section">
-                <div class="section-subtitle">Confirma tu lugar</div>
                 <h2>Confirmación de asistencia</h2>
                 <div class="rsvp-deadline"><span>⏰</span><strong>Confirma antes del 12 de noviembre de 2026.</strong><small>Después de esta fecha no podremos garantizar tu lugar en la cena.</small></div>
                 
@@ -779,6 +1456,24 @@
 
                 <button class="btn-submit" onclick="confirmarAsistencia()">Registrar confirmación</button>
                 <div class="success" id="success"></div>
+            </div>
+
+
+
+            <div class="photo-portrait">
+                <img src="wedding-photo-07.jpg" alt="Laura y Felipe con Lucca" loading="lazy">
+            </div>
+
+            <div class="section gift-section">
+                <h2>Lluvia de sobres</h2>
+                <div class="gift-seal gift-logo" aria-hidden="true"><img src="wedding-photo-02.png" alt=""></div>
+                <div class="gift-copy">Su presencia es nuestro mejor regalo. Si desean tener un detalle adicional con nosotros, tendremos lluvia de sobres.</div>
+                <div class="gift-envelope" aria-hidden="true">
+                    <div class="gift-flap"></div>
+                    <div class="gift-leaf a"></div>
+                    <div class="gift-leaf b"></div>
+                    <div class="gift-mini-seal gift-mini-logo"><img src="wedding-photo-02.png" alt=""></div>
+                </div>
             </div>
 
             <div class="footer">
