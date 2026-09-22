@@ -1139,14 +1139,15 @@
         .hero {
             height: 680px;
             background:
-                linear-gradient(180deg, rgba(18,22,14,.04) 0%, rgba(18,22,14,.10) 48%, rgba(18,22,14,.72) 100%),
-                url("wedding-photo-01.jpg") center 54% / cover no-repeat;
+                linear-gradient(180deg, rgba(18,22,14,.68) 0%, rgba(18,22,14,.46) 20%, rgba(18,22,14,.18) 32%, rgba(18,22,14,0) 42%, rgba(18,22,14,0) 100%),
+                url("wedding-photo-01.jpg") 50% 46% / cover no-repeat;
         }
         .hero::before {
             border-color: rgba(255,255,255,.44);
         }
         .hero-inner {
-            bottom: 116px;
+            top: 110px;
+            bottom: auto;
         }
 
         .photo-feature,
@@ -1240,7 +1241,7 @@
         @media (max-width: 640px) {
             .hero {
                 height: 772px;
-                background-position: center 40%;
+                background-position: 50% 46%;
                 background-image:
                     linear-gradient(180deg, rgba(18,22,14,.68) 0%, rgba(18,22,14,.46) 20%, rgba(18,22,14,.18) 32%, rgba(18,22,14,0) 42%, rgba(18,22,14,0) 100%),
                     url("wedding-photo-01.jpg");
